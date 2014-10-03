@@ -53,6 +53,7 @@ POSSIBILITY OF SUCH DAMAGE.
 import os
 import sys
 import argparse
+import hashlib
 from tabulate import tabulate  # pip install tabulate
 from datetime import datetime
 from thirdparty.color.termcolor import colored
@@ -172,10 +173,6 @@ def main():
     # Get results line parser.
     results = parser.parse_args()
 
-    # Print options selected
-    #print((colored('\nOptions Selected:', 'red')))
-    #print(results)
-
     #---------------------------------------------------------------------------
     # Sections
     #---------------------------------------------------------------------------
@@ -230,7 +227,7 @@ def main():
     if not os.path.exists(outputdirectory):
         os.makedirs(outputdirectory)
     datenow = datetime.now()
-    outputdate = datenow.strftime('%Y-%m-%d-%H%M%S')
+    outputdate = datenow.strftime('%Y-%m-%d@%H_%M_%S')
     outputdirectory = 'output'+'/'+ outputdate
     os.makedirs(outputdirectory)
     os.makedirs(outputdirectory+'/css')
@@ -253,7 +250,7 @@ def main():
     #---------------------------------------------------------------------------
 
     # Auditor Operating System Information
-    os_output, htmlAuditreport = common.auditor_info()
+    os_output, htmlAuditreport = common.auditor_info(outputdate)
     # Create html output
     print_audit_txt(AUDIT,AUDIT_LINE, os_output, results.txt_file, outputdirectory)
     print_title_console(AUDIT, AUDIT_LINE, table0)
@@ -321,6 +318,8 @@ def main():
 
     if results.filesystem or results.all:
         print_titles(FILESYSTEM, FILESYSTEM_LINE, 'filesystem', results.txt_file, results.html_file, outputdirectory, table3)
+
+        filesystem.defpath()
 
         command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.diskspace(results.host, fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
@@ -428,8 +427,11 @@ def main():
 
     print(os.linesep * 2  + (colored(REPORTS, 'white')))
     print((colored(REPORTS_LINE + os.linesep, 'white')))
-    print((colored(' - HTML report: ./' + outputdirectory +'/' + results.html_file, 'yellow')))
-    print((colored(' - Text report: ./' + outputdirectory +'/' + results.txt_file + os.linesep, 'yellow')))
+    hashhtmlreport = hashlib.sha224(results.html_file).hexdigest()
+    hashtxtreport = hashlib.sha224(results.txt_file).hexdigest()
+    print((colored(' - HTML report (%s): ./' % hashhtmlreport + outputdirectory +'/' + results.html_file, 'yellow')))
+    print((colored(' - Text report (%s): ./' % hashtxtreport + outputdirectory +'/' + results.txt_file, 'yellow')))
+    print os.linesep
 
     #---------------------------------------------------------------------------
     # The End

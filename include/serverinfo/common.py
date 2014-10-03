@@ -56,6 +56,7 @@ import socket
 import struct
 import fcntl
 import re
+from datetime import datetime
 from thirdparty.color.termcolor import colored
 from platform import system
 from netifaces import interfaces, ifaddresses, AF_INET
@@ -126,7 +127,7 @@ def ip4_addresses():
       for interface in interfaces():
         #print interface
         #if interface == 'wlan0':
-        #    print "ERROR Interface sin IP"
+        #    print "ERROR Interface without IP"
         #else:
         #    for link in ifaddresses(interface)[AF_INET]:
         #        ip_list.append(link['addr'])
@@ -140,16 +141,16 @@ def ip4_addresses():
 def execute_cmd(cmd, host, user_fabric, passwd_fabric, port_fabric):
 
     if host == 'localhost':
-       #print "%s  es una ip local" % host
+       #print "%s local IP" % host
        __cmd_local__ = True
     elif host not in ip4_addresses():
-       #print "%s no es una ip local --> SSH" % host
+       #print "%s NOT local IP --> SSH" % host
        #__status__, __output_cmd__ = execute(do_something(cmd), hosts=[host])
        __cmd_local__ = False
     else:
-       #print "%s  es una ip local" % host
+       #print "%s local IP" % host
        __cmd_local__ = True
-       #execute(do_something, hosts=[host])
+
 
     __output_cmd__ = cmd
     __command_check__ = CHECKRESULTERROR
@@ -171,9 +172,7 @@ def execute_cmd(cmd, host, user_fabric, passwd_fabric, port_fabric):
         else:
             __command_check__ = CHECKRESULTERROR
     elif __cmd_local__ == False:
-        #with settings(host_string=host,user="root",password="miguel"):
         with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
-            #print run(cmd,shell=True,warn_only=True, quiet=True)
             try:
                 __output_cmd__ = run(cmd,shell=True,warn_only=True, quiet=True)
                 if __output_cmd__.failed:
@@ -272,13 +271,15 @@ def OS_processor(__host__, __user__, __passwd__, __port__):
 
 #------------------------------------------------------------------------------
 
-def auditor_info():
+def auditor_info(date):
     __htmlreport__ = {}
     __dist__ ="%s %s %s" % (str(platform.linux_distribution()[0]), str(platform.linux_distribution()[1]), str(platform.linux_distribution()[2]))
     __htmlreport__={'System':platform.system(), 'Distribution':__dist__, 'Architecture':platform.machine(), 'Processor':platform.processor(), 'Platform':platform.platform(),'Release':platform.release(),'Hostname':os.uname()[1],'Python version':sys.version}
+    __date__ = date
 
+    __output__ =' - ' + "Date: %s" % __date__ + os.linesep
     if platform.system() == 'Linux':
-        __output__ =' - ' + "System: %s" % platform.system() + os.linesep
+        __output__ +=' - ' + "System: %s" % platform.system() + os.linesep
         __output__ +=' - ' + "Distribution: %s %s %s" % (str(platform.linux_distribution()[0]), str(platform.linux_distribution()[1]), str(platform.linux_distribution()[2]))  + os.linesep
         __output__ +=' - ' + "Architecture: %s" % platform.machine() + os.linesep
         __output__ +=' - ' + "Processor: %s" % platform.processor() + os.linesep

@@ -78,6 +78,8 @@ RESULTOKTHRESHOLD = 50
 RESULTWARNINGTHRESHOLD = 90
 RESULTCRITICALTHRESHOLD = 99
 #------------------------------------------------------------------------------
+directory =''
+#------------------------------------------------------------------------------
 
 def diskspace(__host__, __user__, __passwd__, __port__):
     """
@@ -186,6 +188,12 @@ def inodespace(__host__, __user__, __passwd__, __port__):
 
 #------------------------------------------------------------------------------
 
+def defpath():
+    # Get path for all search (find) functions
+    directory = raw_input("Enter path to search files \"incorrect\" permissions: ")
+
+#------------------------------------------------------------------------------
+
 def setuid(__host__, __user__, __passwd__, __port__):
     """
     :returns: Files with setuid permissions.
@@ -196,7 +204,7 @@ def setuid(__host__, __user__, __passwd__, __port__):
     __help_result__ += ' permissions of the executables owner or group respectively and to change behaviour in directories.'
     __help_result__ += os.linesep
     __command__ = "Files with setuid permissions"
-    __cmd__= "find /tmp -type f -perm -4000 -print 2>/dev/null"
+    __cmd__= "find %s -type f -perm -4000 -print 2>/dev/null" % directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''
@@ -225,7 +233,7 @@ def setgid(__host__, __user__, __passwd__, __port__):
     __help_result__ += ' permissions of the executables owner or group respectively and to change behaviour in directories.'
     __help_result__ += os.linesep
     __command__ = "Files with setgid permissions"
-    __cmd__= "find /tmp -type f -perm -2000 -print 2>/dev/null"
+    __cmd__= "find %s -type f -perm -2000 -print 2>/dev/null" %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''
@@ -254,7 +262,7 @@ def rhosts(__host__, __user__, __passwd__, __port__):
     __help_result__ += 'The machines and users writen in these files they will have allowed to access without password using some r-service, like rlogin'
     __help_result__ += os.linesep
     __command__ = ".rhosts files"
-    __cmd__= "find /tmp -type f -name .rhosts -print 2>/dev/null"
+    __cmd__= "find %s -type f -name .rhosts -print 2>/dev/null" % directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''
@@ -282,7 +290,7 @@ def writefiles(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Files with write access for all users"
-    __cmd__= "find /tmp -type f -perm -2 -print 2>/dev/null"
+    __cmd__= "find %s -type f -perm -2 -print 2>/dev/null" % directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''
@@ -309,7 +317,7 @@ def allpermissionsfiles(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Files with 777 permissions"
-    __cmd__= "find /tmp -type f -perm 777"
+    __cmd__= "find %s -type f -perm 777"  %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''
@@ -336,7 +344,7 @@ def allpermissionsdir(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Folders with 777 permissions"
-    __cmd__= "find /tmp -type d -perm 777"
+    __cmd__= "find %s-type d -perm 777"  %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''
@@ -363,7 +371,7 @@ def runFilesNoGroup(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Files without group"
-    __cmd__= "find /tmp  -nouser -o -nogroup"
+    __cmd__= "find %s  -nouser -o -nogroup" %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''
