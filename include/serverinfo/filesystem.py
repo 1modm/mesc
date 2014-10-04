@@ -12,11 +12,11 @@ __license__ = """
 
 MESC: Minimun Essential Security Checks
 
-Author: 1_mod_m
+Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2014, Miguel Morillo Iruela.
+Copyright (c) 2014, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -60,6 +60,7 @@ __all__ = [
     "inodespace",
     "setuid",
     "setgid",
+    "defpath",
     "rhosts",
     "runFilesNoGroup",
     "allpermissionsdir",
@@ -78,7 +79,7 @@ RESULTOKTHRESHOLD = 50
 RESULTWARNINGTHRESHOLD = 90
 RESULTCRITICALTHRESHOLD = 99
 #------------------------------------------------------------------------------
-directory =''
+directory ='/tmp'
 #------------------------------------------------------------------------------
 
 def diskspace(__host__, __user__, __passwd__, __port__):
@@ -190,7 +191,8 @@ def inodespace(__host__, __user__, __passwd__, __port__):
 
 def defpath():
     # Get path for all search (find) functions
-    directory = raw_input("Enter path to search files \"incorrect\" permissions: ")
+    directory = raw_input("Enter path to search files \"insecure\" permissions (default /tmp): ")
+    print os.linesep
 
 #------------------------------------------------------------------------------
 

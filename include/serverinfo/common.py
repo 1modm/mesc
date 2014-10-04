@@ -12,11 +12,11 @@ __license__ = """
 
 MESC: Minimun Essential Security Checks
 
-Author: 1_mod_m
+Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2014, Miguel Morillo Iruela.
+Copyright (c) 2014, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -271,13 +271,15 @@ def OS_processor(__host__, __user__, __passwd__, __port__):
 
 #------------------------------------------------------------------------------
 
-def auditor_info(date):
+def auditor_info(date, auditorname):
     __htmlreport__ = {}
     __dist__ ="%s %s %s" % (str(platform.linux_distribution()[0]), str(platform.linux_distribution()[1]), str(platform.linux_distribution()[2]))
-    __htmlreport__={'System':platform.system(), 'Distribution':__dist__, 'Architecture':platform.machine(), 'Processor':platform.processor(), 'Platform':platform.platform(),'Release':platform.release(),'Hostname':os.uname()[1],'Python version':sys.version}
+    __htmlreport__={'Date':date, 'System':platform.system(), 'Distribution':__dist__, 'Architecture':platform.machine(), 'Processor':platform.processor(), 'Platform':platform.platform(),'Release':platform.release(),'Hostname':os.uname()[1],'Python version':sys.version, 'Auditor':auditorname}
     __date__ = date
 
     __output__ =' - ' + "Date: %s" % __date__ + os.linesep
+    __output__ +=' - ' + "Auditor: %s" % auditorname + os.linesep
+
     if platform.system() == 'Linux':
         __output__ +=' - ' + "System: %s" % platform.system() + os.linesep
         __output__ +=' - ' + "Distribution: %s %s %s" % (str(platform.linux_distribution()[0]), str(platform.linux_distribution()[1]), str(platform.linux_distribution()[2]))  + os.linesep

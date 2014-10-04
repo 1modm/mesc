@@ -12,11 +12,11 @@ __license__ = """
 
 MESC: Minimun Essential Security Checks
 
-Author: 1_mod_m
+Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2014, Miguel Morillo Iruela.
+Copyright (c) 2014, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -268,7 +268,7 @@ def body(htmldatareport):
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="www.educawol.com" class="navbar-brand">MICCCC</a> <!-- CAMBIAR -->
+          <a href="#home" class="navbar-brand">MESC</a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -298,7 +298,7 @@ def body(htmldatareport):
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="http://builtwithbootstrap.com/" target="_blank">Enlace repositorio!!!!!</a></li>
+            <li><a href="https://github.com/1modm/mesc" target="_blank">Github</a></li>
 
           </ul>
 
@@ -308,17 +308,18 @@ def body(htmldatareport):
 
 
     <div class="container">
-
+    <a name="home"></a>
       <div class="page-header" id="banner">
         <div class="row">
           <div class="col-lg-12 col-md-7 col-sm-6">
-            <h1>Auditor device: %s</h1> <!-- Hostname -->
+            <h1>Auditor: %s</h1>
             <p class="lead">%s</p>
 
             <table class="table table-striped table-hover ">
               <tbody>
+
                 <tr>
-                  <td>Python version</td>
+                  <td>Date</td>
                   <td>%s</td>
                 </tr>
                 <tr>
@@ -349,6 +350,10 @@ def body(htmldatareport):
                   <td>Hostname</td>
                   <td>%s</td>
                 </tr>
+                <tr>
+                  <td>Python version</td>
+                  <td>%s</td>
+                </tr>
               </tbody>
             </table>
 
@@ -356,7 +361,7 @@ def body(htmldatareport):
         </div>
       </div>
 
-    """) % (htmldatareport['Hostname'], htmldatareport['Distribution'], htmldatareport['Python version'], htmldatareport['System'], htmldatareport['Distribution'], htmldatareport['Architecture'], htmldatareport['Processor'], htmldatareport['Platform'], htmldatareport['Release'], htmldatareport['Hostname'])
+    """) % (htmldatareport['Auditor'], htmldatareport['Distribution'], htmldatareport['Date'], htmldatareport['System'], htmldatareport['Distribution'], htmldatareport['Architecture'], htmldatareport['Processor'], htmldatareport['Platform'], htmldatareport['Release'], htmldatareport['Hostname'],htmldatareport['Python version'])
 
     return (__body__)
 
@@ -371,14 +376,9 @@ def bodyend():
 
             <ul class="list-unstyled">
               <li class="pull-right"><a href="#top">Back to top</a></li>
-              <li><a href="https://github.com/thomaspark/bootswatch/">GitHub</a></li>
-              <li><a href="../help/#api">API</a></li>
-              <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=F22JEM3Q78JC2">Donate</a></li>
             </ul>
-            <p>Made by <a href="http://thomaspark.me" rel="nofollow">Thomas Park</a>. Contact him at <a href="mailto:thomas@bootswatch.com">thomas@bootswatch.com</a>.</p>
-            <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/gh-pages/LICENSE">MIT License</a>.</p>
-            <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
-
+            <br><br><br><br><br><br>
+            <p>Theme by <a href="http://thomaspark.me" rel="nofollow">Thomas Park</a>.</p>
           </div>
         </div>
 

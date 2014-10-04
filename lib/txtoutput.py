@@ -12,11 +12,11 @@ __license__ = """
 
 MESC: Minimun Essential Security Checks
 
-Author: 1_mod_m
+Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2014, Miguel Morillo Iruela.
+Copyright (c) 2014, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -83,7 +83,7 @@ def print_result_txt(helpresult, outputresult, checkresult, checkmessage, comman
     __file__ = open(__file__, 'a')
     __file__.write('- ' +commandresult + ': ')
     __file__.write(helpresult)
-    __file__.write('- # ' +cmdresults + os.linesep)
+    __file__.write('- # ' + cmdresults + os.linesep)
     if checkresult != CHECKRESULTOK: __file__.write(' * Issue: ' + checkmessage + os.linesep)
     if checkresult != CHECKRESULTOK: __file__.write(' * Evidence: '+ os.linesep + outputresult + os.linesep* 4)
     else: __file__.write(outputresult + os.linesep* 4)

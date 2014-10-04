@@ -12,11 +12,11 @@ __license__ = """
 
 MESC: Minimun Essential Security Checks
 
-Author: 1_mod_m
+Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2014, Miguel Morillo Iruela.
+Copyright (c) 2014, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -101,6 +101,10 @@ def cmdline_parser():
     parser.add_argument('-a', '--all', action='store_true', default=False,
         dest='all',
         help='Set all options to true')
+
+    parser.add_argument('-n', '--name', action='store', default='Auditor',
+        dest='auditorname',
+        help='Auditor name')
 
     parser.add_argument('-txt', action='store', default='results.log',
         dest='txt_file',
@@ -250,13 +254,14 @@ def main():
     #---------------------------------------------------------------------------
 
     # Auditor Operating System Information
-    os_output, htmlAuditreport = common.auditor_info(outputdate)
-    # Create html output
+    os_output, htmlAuditreport = common.auditor_info(outputdate, results.auditorname)
+    # Output
     print_audit_txt(AUDIT,AUDIT_LINE, os_output, results.txt_file, outputdirectory)
+    htmlaudit(results.html_file, htmlAuditreport, outputdirectory)
+
     print_title_console(AUDIT, AUDIT_LINE, table0)
     print tabulate(table0, tablefmt="plain")# print out the results
     print((colored(os_output + os.linesep, 'white')))
-    htmlaudit(results.html_file, htmlAuditreport, outputdirectory)
 
 
     #---------------------------------------------------------------------------
