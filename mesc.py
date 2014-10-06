@@ -246,10 +246,10 @@ def main():
 
     # Create the html results file
     if results.html_file:
-        create_html_file (results.html_file,outputdirectory)
+        create_html_file (results.html_file,outputdirectory, outputdate)
     else:
         results.html_file='results.html'
-        create_html_file (results.html_file,outputdirectory)
+        create_html_file (results.html_file,outputdirectory, outputdate)
 
     #---------------------------------------------------------------------------
 

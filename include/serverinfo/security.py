@@ -52,7 +52,8 @@ POSSIBILITY OF SUCH DAMAGE.
 import os
 import commands
 import platform
-from common import execute_cmd
+import StringIO
+from common import execute_cmd, check_file, exists_file, exists_read_file
 
 
 __all__ = [
@@ -79,24 +80,24 @@ def checkShells(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Valid shells status"
-    __cmd__= "/etc/shells"
+    __file__= "/etc/shells"
     __cmdfile__ = "cat /etc/shells"
-    badshell=os.linesep
-    badshellhtml='<br>'
-    check_count=0
+    check_count = 0
+    badshell = os.linesep
+    badshellhtml = '<br>'
     __command_check__ = CHECKRESULTERROR
     __output__, __command_check__ = execute_cmd(__cmdfile__, __host__, __user__, __passwd__, __port__)
 
-    if (os.path.isfile(__cmd__)):
-        __command_check__ = CHECKRESULTOK
-        f = open(__cmd__,'r')
-        out = f.readlines()
-        for line in out:
+    s = StringIO.StringIO(__output__)
+
+    if __command_check__ == CHECKRESULTOK:
+        for line in s:
             if not (line.startswith("#")):
-                if not (os.path.isfile(line.strip())):
+                if not (exists_file(line.strip(),__host__, __user__, __passwd__, __port__)):
                     check_count += 1
                     badshell+=line
                     badshellhtml+=line+'<br>'
+
     if check_count > 0:
         __command_check__ = CHECKRESULTWARNING
 
@@ -107,12 +108,12 @@ def checkShells(__host__, __user__, __passwd__, __port__):
         __check_message__ = 'Unable to load the configuration file: ' + __cmd__
         __check_html_message__ = 'Unable to load the configuration file: '  + __cmd__
     elif __command_check__ == CHECKRESULTWARNING:
-        __check_message__ = 'The shell ' + badshell + os.linesep + 'Not exists in the system but is allowed their usage, it is included in /etc/shells !!!'
-        __check_html_message__ = 'The shell <br>' + badshellhtml + '<br>Not exists in the system but is allowed their usage, it is included in /etc/shells !!!'
+        __check_message__ = 'These shells ' + badshell + os.linesep + 'does not exist in the system but is allowed their use, are included in /etc/shells !!!'
+        __check_html_message__ = 'These shells <br>' + badshellhtml + '<br>does not exist in the system but is allowed their use, are included in /etc/shells !!!'
     elif __command_check__ == CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__file__)
 #------------------------------------------------------------------------------
 
 
@@ -124,40 +125,32 @@ def checkSSH(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Check ssh service"
-    __cmd__= "/etc/ssh/sshd_config"
+    __file__= "/etc/ssh/sshd_config"
     __cmdfile__ = "cat /etc/ssh/sshd_config"
-    bad=os.linesep
-    badhtml='<br>'
-    check_count=0
-    check=['#PermitRootLogin no','PermitRootLogin yes','#PermitEmptyPasswords no','PermitEmptyPasswords yes']
+    __check__=['#PermitRootLogin yes','PermitRootLogin no','#PermitEmptyPasswords yes','PermitEmptyPasswords no']
+
     __command_check__ = CHECKRESULTERROR
     __output__, __command_check__ = execute_cmd(__cmdfile__, __host__, __user__, __passwd__, __port__)
-    if (os.path.isfile(__cmd__)):
-        __command_check__ = CHECKRESULTOK
-        f = open(__cmd__,'r')
-        out = f.readlines()
-        for line in out:
-            for c in check:
-                if c in line:
-                    check_count += 1
-                    bad+=line
-                    badhtml+=line+'<br>'
-    if check_count > 0:
+
+    if (__command_check__ == CHECKRESULTOK):
+        __command_check__, __line__, __linehtml__, __check_count__ = check_file(__file__, __check__, __host__, __user__, __passwd__, __port__)
+
+    if (__check_count__ < 2 ):
         __command_check__ = CHECKRESULTWARNING
 
     if __command_check__ == CHECKRESULTOK:
-        __check_message__ = 'The next file ' + __cmd__ + ' does not contain any of the following chains:' + check
-        __check_html_message__ = 'The next file ' + __cmd__ + ' does not contain any of the following chains:' + check
+        __check_message__ = 'The next file ' + __file__ + ' contains any of the following chains:' + __line__
+        __check_html_message__ = 'The next file ' + __file__ + ' contains any of the following chains:' + __line__
     elif __command_check__ == CHECKRESULTERROR:
-        __check_message__ = 'Unable to load the configuration file: ' + __cmd__
-        __check_html_message__ = 'Unable to load the configuration file: ' + __cmd__
+        __check_message__ = 'Unable to load the configuration file: ' + __file__
+        __check_html_message__ = 'Unable to load the configuration file: ' + __file__
     elif __command_check__ == CHECKRESULTWARNING:
-        __check_message__ = 'ssh root login or null passwords are allowed: ' + bad + os.linesep
-        __check_html_message__ = 'ssh root login or null passwords are allowed: ' + badhtml + '<br>'
+        __check_message__ = 'ssh service has an insecure configuration: ' + os.linesep
+        __check_html_message__ = 'ssh service has an insecure configuration: ' + '<br>'
     elif __command_check__ == CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__file__)
 
 #------------------------------------------------------------------------------
 
@@ -170,42 +163,31 @@ def checkDisabledCtrlAltDel(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "ctrl+alt+del reboot check"
-    __cmd__= "/etc/inittab"
+    __file__= "/etc/inittab"
     __cmdfile__ = "cat /etc/inittab"
-    okline=os.linesep
-    oklinehtml='<br>'
-    check_count=0
+
     # Check that exists one of this:
     # #ca::ctrlaltdel:/sbin/shutdown -t3 -r now, #ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
-    check=['#ca::ctrlaltdel:', '#ca:12345:ctrlaltdel:']
+    __check__=['#ca::ctrlaltdel:', '#ca:12345:ctrlaltdel:']
     __command_check__ = CHECKRESULTERROR
     __output__, __command_check__ = execute_cmd(__cmdfile__, __host__, __user__, __passwd__, __port__)
-    if (os.path.isfile(__cmd__)):
-        __command_check__ = CHECKRESULTWARNING
-        f = open(__cmd__,'r')
-        out = f.readlines()
-        for line in out:
-            for c in check:
-                if c in line:
-                    check_count += 1
-                    okline+=line
-                    oklinehtml+=line+'<br>'
-    if check_count > 0:
-        __command_check__ = CHECKRESULTOK
+
+    if (__command_check__ == CHECKRESULTOK):
+        __command_check__, __line__, __linehtml__, __check_count__ = check_file(__file__, __check__, __host__, __user__, __passwd__, __port__)
 
     if __command_check__ == CHECKRESULTOK:
-        __check_message__ = 'The next file ' + __cmd__ + ' contains the chain that comment ctrl+alt+del. It is not allowed reboot the system with ctrl+alt+del'
-        __check_html_message__ = 'The next file ' + __cmd__ + ' contains the chain that comment ctrl+alt+del. It is not allowed reboot the system with ctrl+alt+del'
+        __check_message__ = 'The next file ' + __file__ + ' contains the chain that comment ctrl+alt+del. It is not allowed reboot the system with ctrl+alt+del' + __line__
+        __check_html_message__ = 'The next file ' + __file__ + ' contains the chain that comment ctrl+alt+del. It is not allowed reboot the system with ctrl+alt+del' + __linehtml__
     elif __command_check__ == CHECKRESULTERROR:
-        __check_message__ = 'Unable to load the configuration file: ' + __cmd__
-        __check_html_message__ = 'Unable to load the configuration file: ' + __cmd__
+        __check_message__ = 'Unable to load the configuration file: ' + __file__
+        __check_html_message__ = 'Unable to load the configuration file: ' + __file__
     elif __command_check__ == CHECKRESULTWARNING:
-        __check_message__ = 'The next file ' + __cmd__ + ' does not containt: ' + okline + os.linesep
-        __check_html_message__ = 'The next file ' + __cmd__ + ' does not containt: ' + oklinehtml + '<br>'
+        __check_message__ = 'It is allowed to reboot the system with ctrl+alt+del!' + os.linesep
+        __check_html_message__ = 'It is allowed to reboot the system with ctrl+alt+del!' + '<br>'
     elif __command_check__ == CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__, __file__)
 
 
 #------------------------------------------------------------------------------
@@ -219,41 +201,29 @@ def checkCrontab(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Users allowed to use the crontab"
-    __cmd__= "/etc/cron.allow"
+    __file__= "/etc/cron.allow"
     __cmdfile__ = "cat /etc/cron.allow"
-    okline=os.linesep
-    oklinehtml='<br>'
-    check_count=0
     # Check that exists at least the root user:
-    check=['root']
+    __check__=['root']
     __command_check__ = CHECKRESULTERROR
     __output__, __command_check__ = execute_cmd(__cmdfile__, __host__, __user__, __passwd__, __port__)
-    if (os.path.isfile(__cmd__)):
-        __command_check__ = CHECKRESULTWARNING
-        f = open(__cmd__,'r')
-        out = f.readlines()
-        for line in out:
-            for c in check:
-                if c in line:
-                    check_count += 1
-                    okline+=line
-                    oklinehtml+=line+'<br>'
-    if check_count > 0:
-        __command_check__ = CHECKRESULTOK
+
+    if (__command_check__ == CHECKRESULTOK):
+        __command_check__, __line__, __linehtml__, __check_count__ = check_file(__file__, __check__, __host__, __user__, __passwd__, __port__)
 
     if __command_check__ == CHECKRESULTOK:
-        __check_message__ = 'The next file exists and contais the root user: ' + __cmd__ + ', so the crontab it is only allowed their use for root user'
-        __check_html_message__ = 'The next file exists and contais the root user: ' + __cmd__ + ', so the crontab it is only allowed their use for root user'
+        __check_message__ = 'The next file exists and contais the root user: ' + __file__ + ', so the crontab it is only allowed their use for root user'
+        __check_html_message__ = 'The next file exists and contais the root user: ' + __file__ + ', so the crontab it is only allowed their use for root user'
     elif __command_check__ == CHECKRESULTERROR:
-        __check_message__ = 'Unable to load the configuration file: ' + __cmd__ + ' - It is allowed the crontab use for all users  !!!!'
-        __check_html_message__ = 'Unable to load the configuration file: ' + __cmd__ + ' - It is allowed the crontab use for all users  !!!!'
+        __check_message__ = 'Unable to load the configuration file: ' + __file__ + ' - It is allowed the crontab use for all users  !!!!'
+        __check_html_message__ = 'Unable to load the configuration file: ' + __file__ + ' - It is allowed the crontab use for all users  !!!!'
     elif __command_check__ == CHECKRESULTWARNING:
-        __check_message__ = 'The next file ' + __cmd__ + ' does not containt: ' + okline + os.linesep + ' - It is allowed the crontab use for all users  !!!!'
-        __check_html_message__ = 'The next file ' + __cmd__ + ' does not containt: ' + oklinehtml + '<br>' + 'It is allowed the crontab use for all users  !!!!'
+        __check_message__ = 'The next file ' + __file__ + ' does not containt: ' + __line__ + os.linesep + ' - It is allowed the crontab use for all users  !!!!'
+        __check_html_message__ = 'The next file ' + __file__ + ' does not containt: ' + __linehtml__ + '<br>' + 'It is allowed the crontab use for all users  !!!!'
     elif __command_check__ == CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__file__)
 
 
 #------------------------------------------------------------------------------
@@ -272,20 +242,26 @@ def checkApache(__host__, __user__, __passwd__, __port__):
     apache2="/etc/apache2/apache2.conf";
     apache3="/etc/apache/apache.conf";
     __command_check__ = CHECKRESULTERROR
+    __check_message__ = os.linesep
+    __check_html_message__ = '<br>'
 
-    if (os.path.isfile(apache1)):
+    __cmd_check__, __out__= exists_read_file(apache1, __host__, __user__, __passwd__, __port__)
+    if (__cmd_check__):
         __command_check__ = CHECKRESULTOK
-        f = open(apache1,'r')
-        out = f.read()
-    elif (os.path.isfile(apache2)):
+        __output__ = __out__
+        __cmd__ = apache1
+
+    __cmd_check__, __out__= exists_read_file(apache2, __host__, __user__, __passwd__, __port__)
+    if (__cmd_check__):
         __command_check__ = CHECKRESULTOK
-        f = open(apache2,'r')
-        out = f.read()
-    elif (os.path.isfile(apache3)):
+        __output__ = __out__
+        __cmd__ = apache2
+
+    __cmd_check__, __out__= exists_read_file(apache3, __host__, __user__, __passwd__, __port__)
+    if (__cmd_check__):
         __command_check__ = CHECKRESULTOK
-        f = open(apache3,'r')
-        out = f.read()
-    else: __command_check__ = CHECKRESULTERROR
+        __output__ = __out__
+        __cmd__ = apache3
 
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = 'Apache configuration loaded'
@@ -299,4 +275,4 @@ def checkApache(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (out, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__, __cmd__)

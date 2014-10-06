@@ -61,8 +61,8 @@ from thirdparty.color.termcolor import colored
 from platform import system
 from netifaces import interfaces, ifaddresses, AF_INET
 from fabric.api import settings
-from fabric.operations import run
-
+from fabric.operations import run, get
+from fabric.contrib.files import exists, contains
 
 __all__ = [
     "OS_ver",
@@ -71,6 +71,9 @@ __all__ = [
     "OS_machine",
     "OS_processor",
     "auditor_info",
+    "check_file",
+    "exists_file",
+    "exists_read_file",
     "uptime",
     "free",
     "who",
@@ -103,7 +106,6 @@ CHECKRESULTERROR = 'ERROR'
 RESULTOKTHRESHOLD = 50
 RESULTWARNINGTHRESHOLD = 90
 RESULTCRITICALTHRESHOLD = 99
-
 #------------------------------------------------------------------------------
 
 def get_ip_address(ifname):
@@ -185,6 +187,124 @@ def execute_cmd(cmd, host, user_fabric, passwd_fabric, port_fabric):
     return (__output_cmd__, __command_check__)
 
 #------------------------------------------------------------------------------
+
+def check_file(filecheck, check, host, user_fabric, passwd_fabric, port_fabric):
+
+    if host == 'localhost':
+       __cmd_local__ = True
+    elif host not in ip4_addresses():
+       __cmd_local__ = False
+    else:
+       __cmd_local__ = True
+
+    __file__ = filecheck
+    __command_check__ = CHECKRESULTERROR
+    __okline__=os.linesep
+    __oklinehtml__='<br>'
+    __check_count__=0
+
+    if __cmd_local__ == True:
+        if (os.path.isfile(__file__)):
+            __command_check__ = CHECKRESULTWARNING
+            f = open(__file__,'r')
+            out = f.readlines()
+            for line in out:
+                for c in check:
+                    if c in line:
+                        __check_count__ += 1
+                        __okline__+=line
+                        __oklinehtml__+=line+'<br>'
+        if __check_count__ > 0:
+            __command_check__ = CHECKRESULTOK
+        else: __command_check__ = CHECKRESULTWARNING
+    elif __cmd_local__ == False:
+        with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
+            try:
+                if (exists(__file__, use_sudo=False, verbose=False)):
+                    for c in check:
+                        __output_cmd__ = contains(__file__, c, exact=False, use_sudo=False)
+                        if __output_cmd__ == True:
+                            __command_check__ = CHECKRESULTOK
+                            __okline__+=c
+                            __oklinehtml__+=c+'<br>'
+                        else:
+                            __command_check__ = CHECKRESULTWARNING
+                else:
+                    __command_check__ = CHECKRESULTERROR
+
+            except:
+                print((colored('*** Warning *** Host {host} on port {port} is down or file can not be read.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
+                sys.exit(0)
+    return (__command_check__, __okline__, __oklinehtml__, __check_count__)
+
+#------------------------------------------------------------------------------
+
+def exists_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
+
+    if host == 'localhost':
+       __cmd_local__ = True
+    elif host not in ip4_addresses():
+       __cmd_local__ = False
+    else:
+       __cmd_local__ = True
+
+    __file__ = filecheck
+    __command_check__ = False
+
+    if __cmd_local__ == True:
+        if (os.path.isfile(__file__)):
+            __command_check__ = True
+        else:
+            __command_check__ = False
+    elif __cmd_local__ == False:
+        with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
+            try:
+                if (exists(__file__, use_sudo=False, verbose=False)):
+                    __command_check__ = True
+                else:
+                    __command_check__ = False
+            except:
+                print((colored('*** Warning *** Host {host} on port {port} is down or file can not be read.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
+                sys.exit(0)
+    return (__command_check__)
+
+#------------------------------------------------------------------------------
+def exists_read_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
+
+    if host == 'localhost':
+       __cmd_local__ = True
+    elif host not in ip4_addresses():
+       __cmd_local__ = False
+    else:
+       __cmd_local__ = True
+
+    __file__ = filecheck
+    __command_check__ = False
+    __out__ = ''
+
+    if __cmd_local__ == True:
+        if (os.path.isfile(__file__)):
+            __command_check__ = True
+            __f__ = open(__file__,'r')
+            __out__ = __f__.read()
+        else:
+            __command_check__ = False
+    elif __cmd_local__ == False:
+        with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
+            try:
+                if (exists(__file__, use_sudo=False, verbose=False)):
+                    __cmd__ = 'cat ' + __file__
+                    __out__ = run(__cmd__,shell=True,warn_only=True, quiet=True)
+                    __command_check__ = True
+                else:
+                    __command_check__ = False
+            except:
+                print((colored('*** Warning *** Host {host} on port {port} is down or file can not be read.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
+                sys.exit(0)
+    return (__command_check__, __out__)
+
+#------------------------------------------------------------------------------
+
 
 def OS_ver(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}

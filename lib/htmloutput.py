@@ -50,7 +50,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #------------------------------------------------------------------------------
 
 import os
-from datetime import date
 import shutil
 from thirdparty.color.termcolor import colored
 
@@ -69,7 +68,7 @@ CHECKRESULTCRITICAL = 'CRITICAL'
 CHECKRESULTERROR = 'ERROR'
 
 #------------------------------------------------------------------------------
-def create_html_file(file_name, outputdir):
+def create_html_file(file_name, outputdir, outputdate):
 
     # Copy css and js
     cssoutput = outputdir+'/css'
@@ -86,7 +85,7 @@ def create_html_file(file_name, outputdir):
     shutil.copy2('lib/html/bootstrap.min.js', jsoutput)
 
 
-    __title__ = date.today()
+    __title__ = outputdate
     __file__ = outputdir +'/'+file_name
     __htmFile__ = open(__file__, 'w')
     __htmFile__.write(head(__title__))
@@ -96,7 +95,6 @@ def create_html_file(file_name, outputdir):
 
 #------------------------------------------------------------------------------
 def htmlaudit(file_name, html_report, outputdir):
-    __title__ = date.today()
     __file__ = outputdir +'/'+file_name
     __htmFile__ = open(__file__, 'a')
     __htmFile__.write(body(html_report))

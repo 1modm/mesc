@@ -100,7 +100,7 @@ def rc3(__host__, __user__, __passwd__, __port__):
     __help_result__ = 'Started applications in the rc3.d level'
     __help_result__ += os.linesep
     __command__ = "rc3.d level"
-    __cmd__= "ls /etc/rc3.d/S*"
+    __cmd__= "ls -ltr /etc/rc3.d/S*"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''

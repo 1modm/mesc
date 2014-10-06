@@ -191,7 +191,7 @@ def inodespace(__host__, __user__, __passwd__, __port__):
 
 def defpath():
     # Get path for all search (find) functions
-    directory = raw_input("Enter path to search files \"insecure\" permissions (default /tmp): ")
+    directory = raw_input("Enter path to search files with \"insecure\" permissions (default /tmp): ")
     print os.linesep
 
 #------------------------------------------------------------------------------
@@ -346,7 +346,7 @@ def allpermissionsdir(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Folders with 777 permissions"
-    __cmd__= "find %s-type d -perm 777"  %  directory
+    __cmd__= "find %s -type d -perm 777"  %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
     if __command_check__ == CHECKRESULTOK:
         __check_message__ = ''
