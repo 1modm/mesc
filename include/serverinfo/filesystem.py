@@ -52,7 +52,8 @@ POSSIBILITY OF SUCH DAMAGE.
 import os
 import commands
 import re
-from common import execute_cmd
+import config
+from operations import execute_cmd, check_file, exists_file, exists_read_file
 
 
 __all__ = [
@@ -69,15 +70,7 @@ __all__ = [
     "tmpcontent"
 ]
 
-#------------------------------------------------------------------------------
-CHECKRESULTOK = 'CHECKED'
-CHECKRESULTWARNING = 'WARNING'
-CHECKRESULTCRITICAL = 'CRITICAL'
-CHECKRESULTERROR = 'ERROR'
-#------------------------------------------------------------------------------
-RESULTOKTHRESHOLD = 50
-RESULTWARNINGTHRESHOLD = 90
-RESULTCRITICALTHRESHOLD = 99
+
 #------------------------------------------------------------------------------
 directory ='/tmp'
 #------------------------------------------------------------------------------
@@ -92,7 +85,7 @@ def diskspace(__host__, __user__, __passwd__, __port__):
     __command__ = "File system disk space usage"
     __cmd__= "df -h"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
         pattern = re.compile(r'\s+')
@@ -106,29 +99,29 @@ def diskspace(__host__, __user__, __passwd__, __port__):
         mounted=split_text[12]
         int_use = use[:-1]
         percentage_used = (int(int_use));
-        if (percentage_used < RESULTOKTHRESHOLD):
+        if (percentage_used < config.RESULTOKTHRESHOLD):
             __check_message__ = 'Disk space usage: ' + str(percentage_used) + '%'+ os.linesep
             __check_html_message__ = ''
-        elif (percentage_used < RESULTWARNINGTHRESHOLD ):
-            __command_check__= CHECKRESULTWARNING
+        elif (percentage_used < config.RESULTWARNINGTHRESHOLD ):
+            __command_check__= config.CHECKRESULTWARNING
             __check_message__ = 'Disk space usage: ' + str(percentage_used) + '%' + os.linesep
             __check_message__ += 'Space: ' + str(space) + ' - ' + 'Free: ' + str(free)
             __check_html_message__ = 'Disk space usage: ' + str(percentage_used) + '%'
             __check_html_message__ += '<br>Space: ' + str(space) + ' - ' + 'Free: ' + str(free)
         else:
-            __command_check__ = CHECKRESULTCRITICAL
+            __command_check__ = config.CHECKRESULTCRITICAL
             __check_message__ = 'Disk space usage: ' + str(percentage_used) + '%' + os.linesep
             __check_message__ += 'Space: ' + str(space) + ' - ' + 'Free: ' + str(free)
             __check_html_message__ = 'Disk space usage: ' + str(percentage_used) + '%'
             __check_html_message__ += '<br>Space: ' + str(space) + ' - ' + 'Free: ' + str(free)
 
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -146,7 +139,7 @@ def inodespace(__host__, __user__, __passwd__, __port__):
     __command__ = "File system disk inode space usage"
     __cmd__= "df -i"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
         pattern = re.compile(r'\s+')
@@ -160,29 +153,29 @@ def inodespace(__host__, __user__, __passwd__, __port__):
         mounted=split_text[12]
         int_use = use[:-1]
         percentage_used = (int(int_use));
-        if (percentage_used < RESULTOKTHRESHOLD):
+        if (percentage_used < config.RESULTOKTHRESHOLD):
             __check_message__ = 'Disk space usage: ' + str(percentage_used) + '%'+ os.linesep
             __check_html_message__ = ''
-        elif (percentage_used < RESULTWARNINGTHRESHOLD ):
-            __command_check__= CHECKRESULTWARNING
+        elif (percentage_used < config.RESULTWARNINGTHRESHOLD ):
+            __command_check__= config.CHECKRESULTWARNING
             __check_message__ = 'Disk space usage: ' + str(percentage_used) + '%' + os.linesep
             __check_message__ += 'Space: ' + str(inode) + ' - ' + 'Free: ' + str(free)
             __check_html_message__ = 'Disk space usage: ' + str(percentage_used) + '%'
             __check_html_message__ += '<br>Space: ' + str(inode) + ' - ' + 'Free: ' + str(free)
         else:
-            __command_check__ = CHECKRESULTCRITICAL
+            __command_check__ = config.CHECKRESULTCRITICAL
             __check_message__ = 'Disk space usage: ' + str(percentage_used) + '%' + os.linesep
             __check_message__ += 'Space: ' + str(inode) + ' - ' + 'Free: ' + str(free)
             __check_html_message__ = 'Disk space usage: ' + str(percentage_used) + '%'
             __check_html_message__ += '<br>Space: ' + str(inode) + ' - ' + 'Free: ' + str(free)
 
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -208,16 +201,16 @@ def setuid(__host__, __user__, __passwd__, __port__):
     __command__ = "Files with setuid permissions"
     __cmd__= "find %s -type f -perm -4000 -print 2>/dev/null" % directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'You must be root'
         __check_html_message__ = 'You must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
 
@@ -237,16 +230,16 @@ def setgid(__host__, __user__, __passwd__, __port__):
     __command__ = "Files with setgid permissions"
     __cmd__= "find %s -type f -perm -2000 -print 2>/dev/null" %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'You must be root'
         __check_html_message__ = 'You must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -266,16 +259,16 @@ def rhosts(__host__, __user__, __passwd__, __port__):
     __command__ = ".rhosts files"
     __cmd__= "find %s -type f -name .rhosts -print 2>/dev/null" % directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'You must be root'
         __check_html_message__ = 'You must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -294,16 +287,16 @@ def writefiles(__host__, __user__, __passwd__, __port__):
     __command__ = "Files with write access for all users"
     __cmd__= "find %s -type f -perm -2 -print 2>/dev/null" % directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'You must be root'
         __check_html_message__ = 'You must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -321,16 +314,16 @@ def allpermissionsfiles(__host__, __user__, __passwd__, __port__):
     __command__ = "Files with 777 permissions"
     __cmd__= "find %s -type f -perm 777"  %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'You must be root'
         __check_html_message__ = 'You must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -348,16 +341,16 @@ def allpermissionsdir(__host__, __user__, __passwd__, __port__):
     __command__ = "Folders with 777 permissions"
     __cmd__= "find %s -type d -perm 777"  %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'You must be root'
         __check_html_message__ = 'You must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -375,16 +368,16 @@ def runFilesNoGroup(__host__, __user__, __passwd__, __port__):
     __command__ = "Files without group"
     __cmd__= "find %s  -nouser -o -nogroup" %  directory
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'You must be root'
         __check_html_message__ = 'You must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -402,16 +395,16 @@ def tmpcontent(__host__, __user__, __passwd__, __port__):
     __command__ = "/tmp content"
     __cmd__= "ls -ltr /tmp"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'You must be root'
         __check_html_message__ = 'You must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)

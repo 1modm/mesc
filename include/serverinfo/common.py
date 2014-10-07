@@ -50,19 +50,14 @@ POSSIBILITY OF SUCH DAMAGE.
 #------------------------------------------------------------------------------
 import os
 import commands
-import platform
 import sys
-import socket
-import struct
-import fcntl
+import platform
 import re
+import config
+from operations import execute_cmd, check_file, exists_file, exists_read_file
 from datetime import datetime
 from thirdparty.color.termcolor import colored
 from platform import system
-from netifaces import interfaces, ifaddresses, AF_INET
-from fabric.api import settings
-from fabric.operations import run, get
-from fabric.contrib.files import exists, contains
 
 __all__ = [
     "OS_ver",
@@ -71,9 +66,6 @@ __all__ = [
     "OS_machine",
     "OS_processor",
     "auditor_info",
-    "check_file",
-    "exists_file",
-    "exists_read_file",
     "uptime",
     "free",
     "who",
@@ -82,240 +74,16 @@ __all__ = [
 ]
 
 
-#------------------------------------------------------------------------------
-# From bits/ioctls.h
-SIOCGIFHWADDR  = 0x8927          # Get hardware address
-SIOCGIFADDR    = 0x8915          # get PA address
-SIOCGIFNETMASK = 0x891b          # get network PA mask
-SIOCGIFNAME    = 0x8910          # get iface name
-SIOCSIFLINK    = 0x8911          # set iface channel
-SIOCGIFCONF    = 0x8912          # get iface list
-SIOCGIFFLAGS   = 0x8913          # get flags
-SIOCSIFFLAGS   = 0x8914          # set flags
-SIOCGIFINDEX   = 0x8933          # name -> if_index mapping
-SIOCGIFCOUNT   = 0x8938          # get number of devices
-SIOCGSTAMP     = 0x8906          # get packet timestamp (as a timeval)
-#------------------------------------------------------------------------------
-
-CHECKRESULTOK = 'CHECKED'
-CHECKRESULTWARNING = 'WARNING'
-CHECKRESULTCRITICAL = 'CRITICAL'
-CHECKRESULTERROR = 'ERROR'
-
-#------------------------------------------------------------------------------
-RESULTOKTHRESHOLD = 50
-RESULTWARNINGTHRESHOLD = 90
-RESULTCRITICALTHRESHOLD = 99
-#------------------------------------------------------------------------------
-
-def get_ip_address(ifname):
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        #ifreq = ioctl(s, SIOCGIFADDR,struct.pack("16s16x",iff))
-        ifreq = fcntl.ioctl(s.fileno(), SIOCGIFADDR, struct.pack('256s', ifname[:15]))
-    except IOError: # interface is present in routing tables but does not have any assigned IP
-        ifaddr="0.0.0.0"
-    else:
-        addrfamily = struct.unpack("h",ifreq[16:18])[0]
-        if addrfamily == socket.AF_INET:
-            ifaddr = socket.inet_ntoa(fcntl.ioctl(s.fileno(),SIOCGIFADDR, struct.pack('256s', ifname[:15]))[20:24])
-        else:
-            warning("Interface %s: unkown address family (%i)"%(ifname, addrfamily))
-            #continue
-    return ifaddr
-
-def ip4_addresses():
-      ip_list = []
-      for interface in interfaces():
-        #print interface
-        #if interface == 'wlan0':
-        #    print "ERROR Interface without IP"
-        #else:
-        #    for link in ifaddresses(interface)[AF_INET]:
-        #        ip_list.append(link['addr'])
-        addr = get_ip_address(interface)
-        if addr is not None:
-                ip_list.append(addr)
-      return ip_list
-
-
-#------------------------------------------------------------------------------
-def execute_cmd(cmd, host, user_fabric, passwd_fabric, port_fabric):
-
-    if host == 'localhost':
-       #print "%s local IP" % host
-       __cmd_local__ = True
-    elif host not in ip4_addresses():
-       #print "%s NOT local IP --> SSH" % host
-       #__status__, __output_cmd__ = execute(do_something(cmd), hosts=[host])
-       __cmd_local__ = False
-    else:
-       #print "%s local IP" % host
-       __cmd_local__ = True
-
-
-    __output_cmd__ = cmd
-    __command_check__ = CHECKRESULTERROR
-
-    if __cmd_local__ == True:
-        __status__, __output_cmd__ = commands.getstatusoutput(cmd)
-        #__status__, __output_cmd__ = subprocess.getstatusoutput(cmd)
-        __exit_code__ = __status__ >> 8
-        __signal_num__ = __status__ % 256
-        #print 'Status: x%04x' % __status__
-        __status__ ='x%04x' % __status__
-        #print 'Signal: x%02x (%d)' % (__signal_num__, __signal_num__)
-        #print 'Exit  : x%02x (%d)' % (__exit_code__, __exit_code__)
-        #print __status__, __signal_num__, __exit_code__
-        if __exit_code__ == 0 and __signal_num__ == 0 and __status__ == 'x0000':
-            __command_check__ = CHECKRESULTOK
-        elif __exit_code__ == 1 and __signal_num__ == 0 and __status__ == 'x0100':
-            __command_check__ = CHECKRESULTWARNING
-        else:
-            __command_check__ = CHECKRESULTERROR
-    elif __cmd_local__ == False:
-        with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
-            try:
-                __output_cmd__ = run(cmd,shell=True,warn_only=True, quiet=True)
-                if __output_cmd__.failed:
-                    __command_check__ = CHECKRESULTERROR
-                else:
-                    __command_check__ = CHECKRESULTOK
-            except:
-                print((colored('*** Warning *** Host {host} on port {port} is down.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
-                sys.exit(0)
-    return (__output_cmd__, __command_check__)
-
-#------------------------------------------------------------------------------
-
-def check_file(filecheck, check, host, user_fabric, passwd_fabric, port_fabric):
-
-    if host == 'localhost':
-       __cmd_local__ = True
-    elif host not in ip4_addresses():
-       __cmd_local__ = False
-    else:
-       __cmd_local__ = True
-
-    __file__ = filecheck
-    __command_check__ = CHECKRESULTERROR
-    __okline__=os.linesep
-    __oklinehtml__='<br>'
-    __check_count__=0
-
-    if __cmd_local__ == True:
-        if (os.path.isfile(__file__)):
-            __command_check__ = CHECKRESULTWARNING
-            f = open(__file__,'r')
-            out = f.readlines()
-            for line in out:
-                for c in check:
-                    if c in line:
-                        __check_count__ += 1
-                        __okline__+=line
-                        __oklinehtml__+=line+'<br>'
-        if __check_count__ > 0:
-            __command_check__ = CHECKRESULTOK
-        else: __command_check__ = CHECKRESULTWARNING
-    elif __cmd_local__ == False:
-        with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
-            try:
-                if (exists(__file__, use_sudo=False, verbose=False)):
-                    for c in check:
-                        __output_cmd__ = contains(__file__, c, exact=False, use_sudo=False)
-                        if __output_cmd__ == True:
-                            __command_check__ = CHECKRESULTOK
-                            __okline__+=c
-                            __oklinehtml__+=c+'<br>'
-                        else:
-                            __command_check__ = CHECKRESULTWARNING
-                else:
-                    __command_check__ = CHECKRESULTERROR
-
-            except:
-                print((colored('*** Warning *** Host {host} on port {port} is down or file can not be read.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
-                sys.exit(0)
-    return (__command_check__, __okline__, __oklinehtml__, __check_count__)
-
-#------------------------------------------------------------------------------
-
-def exists_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
-
-    if host == 'localhost':
-       __cmd_local__ = True
-    elif host not in ip4_addresses():
-       __cmd_local__ = False
-    else:
-       __cmd_local__ = True
-
-    __file__ = filecheck
-    __command_check__ = False
-
-    if __cmd_local__ == True:
-        if (os.path.isfile(__file__)):
-            __command_check__ = True
-        else:
-            __command_check__ = False
-    elif __cmd_local__ == False:
-        with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
-            try:
-                if (exists(__file__, use_sudo=False, verbose=False)):
-                    __command_check__ = True
-                else:
-                    __command_check__ = False
-            except:
-                print((colored('*** Warning *** Host {host} on port {port} is down or file can not be read.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
-                sys.exit(0)
-    return (__command_check__)
-
-#------------------------------------------------------------------------------
-def exists_read_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
-
-    if host == 'localhost':
-       __cmd_local__ = True
-    elif host not in ip4_addresses():
-       __cmd_local__ = False
-    else:
-       __cmd_local__ = True
-
-    __file__ = filecheck
-    __command_check__ = False
-    __out__ = ''
-
-    if __cmd_local__ == True:
-        if (os.path.isfile(__file__)):
-            __command_check__ = True
-            __f__ = open(__file__,'r')
-            __out__ = __f__.read()
-        else:
-            __command_check__ = False
-    elif __cmd_local__ == False:
-        with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
-            try:
-                if (exists(__file__, use_sudo=False, verbose=False)):
-                    __cmd__ = 'cat ' + __file__
-                    __out__ = run(__cmd__,shell=True,warn_only=True, quiet=True)
-                    __command_check__ = True
-                else:
-                    __command_check__ = False
-            except:
-                print((colored('*** Warning *** Host {host} on port {port} is down or file can not be read.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
-                sys.exit(0)
-    return (__command_check__, __out__)
-
-#------------------------------------------------------------------------------
-
-
 def OS_ver(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
     __help_result__ = '' + os.linesep
     __command__ = "Operating System Version"
     __cmd__= "uname -o"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
     __osreport__={'Operating System Version':__output__}
@@ -329,10 +97,10 @@ def OS_kernel(__host__, __user__, __passwd__, __port__):
     __command__ = "Kernel Name"
     __cmd__= "uname -s"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
     __osreport__={'Kernel Name':__output__}
@@ -346,10 +114,10 @@ def OS_kernelver(__host__, __user__, __passwd__, __port__):
     __command__ = "Kernel Version"
     __cmd__= "uname -r"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
     __osreport__={'Kernel Version':__output__}
@@ -363,10 +131,10 @@ def OS_machine(__host__, __user__, __passwd__, __port__):
     __command__ = "Machine"
     __cmd__= "uname -m"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
     __osreport__={'Machine':__output__}
@@ -379,10 +147,10 @@ def OS_processor(__host__, __user__, __passwd__, __port__):
     __command__ = "Processor"
     __cmd__= "uname -p"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
     __osreport__={'Processor':__output__}
@@ -432,16 +200,16 @@ def uptime(__host__, __user__, __passwd__, __port__):
     __command__ = "System Uptime"
     __cmd__= "uptime"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
@@ -460,7 +228,7 @@ def free(__host__, __user__, __passwd__, __port__):
     __cmd__= "free -o"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
 
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         pattern = re.compile(r'\s+')
         sentence = re.sub(pattern, ' ', __output__)
         sentence = sentence.lstrip(' ')
@@ -478,10 +246,10 @@ def free(__host__, __user__, __passwd__, __port__):
         percentage_swap_used = (int(swap_used)*100)/(int(swap_total));
         __check_message__ = ''
         __check_html_message__ = ''
-        if (percentage_used < RESULTOKTHRESHOLD):
+        if (percentage_used < config.RESULTOKTHRESHOLD):
             __check_message__ = 'RAM memory used: ' + str(percentage_used) + '%'+ os.linesep
-        elif (percentage_used < RESULTWARNINGTHRESHOLD ):
-            __command_check__= CHECKRESULTWARNING
+        elif (percentage_used < config.RESULTWARNINGTHRESHOLD ):
+            __command_check__= config.CHECKRESULTWARNING
             __check_message__ = os.linesep + '   - Release memory '
             __check_message__ += os.linesep + '   - RAM memory used: ' + str(percentage_used) + '%' + ' | Swap memory used: ' + str(percentage_swap_used) + '%'
             __check_message__ += os.linesep + '   - Total Memory: ' + str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
@@ -489,7 +257,7 @@ def free(__host__, __user__, __passwd__, __port__):
             __check_html_message__ += '<br> RAM memory used: ' + str(percentage_used) + '%' + ' | Swap memory used: ' + str(percentage_swap_used) + '%'
             __check_html_message__ += '<br> Total Memory: ' + str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
         else:
-            __command_check__ = CHECKRESULTCRITICAL
+            __command_check__ = config.CHECKRESULTCRITICAL
             __check_message__ = os.linesep + '   - Release memory '
             __check_message__ += os.linesep + '   - RAM memory used: ' + str(percentage_used) + '%' + ' | Swap memory used: ' + str(percentage_swap_used) + '%'
             __check_message__ += os.linesep + '   - Total Memory: ' + str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
@@ -497,13 +265,13 @@ def free(__host__, __user__, __passwd__, __port__):
             __check_html_message__ += '<br> RAM memory used: ' + str(percentage_used) + '%' + ' | Swap memory used: ' + str(percentage_swap_used) + '%'
             __check_html_message__ += '<br> Total Memory: ' + str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
 
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
@@ -521,16 +289,16 @@ def who(__host__, __user__, __passwd__, __port__):
     __command__ = "Users logged"
     __cmd__= "w"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
@@ -548,16 +316,16 @@ def tail_root(__host__, __user__, __passwd__, __port__):
     __command__ = "Last 100 root commands executed"
     __cmd__= "tail -100 /root/.bash_history"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command, you must be root'
         __check_html_message__ = 'Unable to execute the command, you must be root'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'Unable to execute the command, you must be root'
         __check_html_message__ = 'Unable to execute the command, you must be root'
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
@@ -575,16 +343,16 @@ def last(__host__, __user__, __passwd__, __port__):
     __command__ = 'Last logged in users'
     __cmd__= "last"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
@@ -603,16 +371,16 @@ def shells(__host__, __user__, __passwd__, __port__):
     __command__ = 'Active users in the system with an active shell'
     __cmd__= "cat /etc/passwd | grep -v \/false | grep -v \/nologin | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)

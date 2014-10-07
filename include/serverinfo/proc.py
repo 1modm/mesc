@@ -52,7 +52,8 @@ POSSIBILITY OF SUCH DAMAGE.
 import os
 import commands
 import platform
-from common import execute_cmd
+import config
+from operations import execute_cmd, check_file, exists_file, exists_read_file
 
 
 __all__ = [
@@ -60,13 +61,6 @@ __all__ = [
     "packages",
     "top"
 ]
-
-#------------------------------------------------------------------------------
-CHECKRESULTOK = 'CHECKED'
-CHECKRESULTWARNING = 'WARNING'
-CHECKRESULTCRITICAL = 'CRITICAL'
-CHECKRESULTERROR = 'ERROR'
-#------------------------------------------------------------------------------
 
 def proc(__host__, __user__, __passwd__, __port__):
     """
@@ -78,16 +72,16 @@ def proc(__host__, __user__, __passwd__, __port__):
     __command__ = "Processes running in the system"
     __cmd__= "ps aux | sort -rn"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -114,16 +108,16 @@ def packages(__host__, __user__, __passwd__, __port__):
     else: __cmd__= ""
     #print __platform__
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
@@ -141,16 +135,16 @@ def top(__host__, __user__, __passwd__, __port__):
     __command__ = "Running system information"
     __cmd__= "top -n1 -b1"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == CHECKRESULTOK:
+    if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
         __check_html_message__ = 'Unable to execute the command'
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTCRITICAL:
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)

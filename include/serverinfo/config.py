@@ -45,68 +45,27 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 """
 
+
 #------------------------------------------------------------------------------
-# Modules
+# From bits/ioctls.h
+SIOCGIFHWADDR  = 0x8927          # Get hardware address
+SIOCGIFADDR    = 0x8915          # get PA address
+SIOCGIFNETMASK = 0x891b          # get network PA mask
+SIOCGIFNAME    = 0x8910          # get iface name
+SIOCSIFLINK    = 0x8911          # set iface channel
+SIOCGIFCONF    = 0x8912          # get iface list
+SIOCGIFFLAGS   = 0x8913          # get flags
+SIOCSIFFLAGS   = 0x8914          # set flags
+SIOCGIFINDEX   = 0x8933          # name -> if_index mapping
+SIOCGIFCOUNT   = 0x8938          # get number of devices
+SIOCGSTAMP     = 0x8906          # get packet timestamp (as a timeval)
 #------------------------------------------------------------------------------
-
-import os
-import commands
-import config
-from operations import execute_cmd, check_file, exists_file, exists_read_file
-
-
-__all__ = [
-    "grub",
-    "rc3"
-]
-
-
-def grub(__host__, __user__, __passwd__, __port__):
-    """
-    :returns: grub configuration.
-    :param host: Target.
-    """
-    __help_result__ = ''
-    __help_result__ += os.linesep
-    __command__ = "Grub configuration"
-    __cmd__= "cat /boot/grub/grub.cfg"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == config.CHECKRESULTOK:
-        __check_message__ = ''
-        __check_html_message__ = ''
-    elif __command_check__ == config.CHECKRESULTERROR:
-        __check_message__ = 'Unable to load configuration'
-        __check_html_message__ = 'Unable to load configuration'
-    elif __command_check__ == config.CHECKRESULTWARNING:
-        __check_message__ = ''
-        __check_html_message__ = ''
-    elif __command_check__ == config.CHECKRESULTCRITICAL:
-        __check_message__ = ''
-        __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+CHECKRESULTOK = 'CHECKED'
+CHECKRESULTWARNING = 'WARNING'
+CHECKRESULTCRITICAL = 'CRITICAL'
+CHECKRESULTERROR = 'ERROR'
 #------------------------------------------------------------------------------
-
-
-def rc3(__host__, __user__, __passwd__, __port__):
-    """
-    :returns: rc3 level.
-    :param host: Target.
-    """
-    __help_result__ = 'Started applications in the rc3.d level'
-    __help_result__ += os.linesep
-    __command__ = "rc3.d level"
-    __cmd__= "ls -ltr /etc/rc3.d/S*"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
-    if __command_check__ == config.CHECKRESULTOK:
-        __check_message__ = ''
-        __check_html_message__ = ''
-    elif __command_check__ == config.CHECKRESULTERROR:
-        __check_message__ = 'Unable to load configuration'
-        __check_html_message__ = 'Unable to load configuration'
-    elif __command_check__ == config.CHECKRESULTWARNING:
-        __check_message__ = ''
-        __check_html_message__ = ''
-    elif __command_check__ == config.CHECKRESULTCRITICAL:
-        __check_message__ = ''
-        __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+RESULTOKTHRESHOLD = 50
+RESULTWARNINGTHRESHOLD = 90
+RESULTCRITICALTHRESHOLD = 99
+#------------------------------------------------------------------------------
