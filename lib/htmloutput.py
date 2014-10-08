@@ -52,6 +52,8 @@ POSSIBILITY OF SUCH DAMAGE.
 import os
 import shutil
 from thirdparty.color.termcolor import colored
+import include.serverinfo.config as config
+
 
 __all__ = [
     "create_html_file",
@@ -60,12 +62,6 @@ __all__ = [
     "htmlend",
     "htmltile"
 ]
-
-
-CHECKRESULTOK = 'CHECKED'
-CHECKRESULTWARNING = 'WARNING'
-CHECKRESULTCRITICAL = 'CRITICAL'
-CHECKRESULTERROR = 'ERROR'
 
 #------------------------------------------------------------------------------
 def create_html_file(file_name, outputdir, outputdate):
@@ -139,7 +135,7 @@ def bodytitle(title, href):
 
 def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cmdresults):
 
-    if commandcheck == CHECKRESULTOK:
+    if commandcheck == config.CHECKRESULTOK:
         __bodyinfo__=("""
             <div class="row">
               <div class="col-lg-12">
@@ -162,7 +158,7 @@ def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cm
           </div>
         """) % (command, helpcommand, commandcheck, cmdresults, checkmessage, commandoutput)
 
-    elif commandcheck == CHECKRESULTERROR :
+    elif commandcheck == config.CHECKRESULTERROR :
         __bodyinfo__=("""
             <div class="row">
               <div class="col-lg-12">
@@ -185,7 +181,7 @@ def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cm
           </div>
         """) % (command, helpcommand, commandcheck, cmdresults, checkmessage, commandoutput)
 
-    elif commandcheck == CHECKRESULTWARNING :
+    elif commandcheck == config.CHECKRESULTWARNING :
         __bodyinfo__=("""
             <div class="row">
               <div class="col-lg-12">
@@ -209,7 +205,7 @@ def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cm
         """) % (command, helpcommand, commandcheck, cmdresults, checkmessage, commandoutput)
 
 
-    elif commandcheck == CHECKRESULTCRITICAL :
+    elif commandcheck == config.CHECKRESULTCRITICAL :
         __bodyinfo__=("""
             <div class="row">
               <div class="col-lg-12">

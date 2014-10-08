@@ -78,6 +78,7 @@ from include import show_banner, get_banner
 from lib.htmloutput import htmlaudit, htmlend, create_html_file
 from lib.txtoutput import create_txt_file, print_audit_txt
 from lib.output import print_results, print_titles, print_title_console
+import include.log as log
 import include.serverinfo.common as common
 import include.serverinfo.boot as boot
 import include.serverinfo.filesystem as filesystem
@@ -430,6 +431,10 @@ def main():
 
     htmlend(results.html_file, outputdirectory)
 
+    hashhtmlreport = hashlib.sha224(results.html_file).hexdigest()
+    hashtxtreport = hashlib.sha224(results.txt_file).hexdigest()
+    log.create_log(REPORTS, REPORTS_LINE, hashhtmlreport, hashtxtreport, outputdirectory, results.html_file, results.txt_file, 'audit_mesc.log', outputdate, results.host)
+    '''
     print(os.linesep * 2  + (colored(REPORTS, 'white')))
     print((colored(REPORTS_LINE + os.linesep, 'white')))
     hashhtmlreport = hashlib.sha224(results.html_file).hexdigest()
@@ -437,7 +442,7 @@ def main():
     print((colored(' - HTML report (%s): ./' % hashhtmlreport + outputdirectory +'/' + results.html_file, 'yellow')))
     print((colored(' - Text report (%s): ./' % hashtxtreport + outputdirectory +'/' + results.txt_file, 'yellow')))
     print os.linesep
-
+    '''
     #---------------------------------------------------------------------------
     # The End
     #---------------------------------------------------------------------------

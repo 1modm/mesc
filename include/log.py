@@ -17,7 +17,6 @@ Author: https://twitter.com/1_mod_m/
 Project site: https://github.com/1modm/mesc
 
 Copyright (c) 2014, Miguel Morillo
-
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -51,29 +50,33 @@ POSSIBILITY OF SUCH DAMAGE.
 #------------------------------------------------------------------------------
 
 import os
-from datetime import date
 from thirdparty.color.termcolor import colored
-import include.serverinfo.config as config
-
+from include import show_banner, get_banner
 
 __all__ = [
-    "print_result_console",
-    "print_title_console"
+    "create_log"
 ]
 
+def create_log(report, reportline, hashhtmlreport, hashtxtreport, outputdirectory, html_file, txt_file, log_file_name, outputdate, host):
+    __file__ = log_file_name
+    if (os.path.isfile(__file__)):
+        __create_file__ = open(__file__, 'a')
+    else:
+        __create_file__ = open(__file__, 'w')
+        __create_file__.write(get_banner())
+        __create_file__.write(os.linesep)
+    __create_file__.write('# Audit date: %s' % outputdate)
+    __create_file__.write(os.linesep)
+    __create_file__.write('# Audit target: %s' % host)
+    __create_file__.write(os.linesep)
+    __create_file__.write('- HTML report (%s): ./' % hashhtmlreport + outputdirectory +'/' + html_file)
+    __create_file__.write(os.linesep)
+    __create_file__.write('- Text report (%s): ./' % hashtxtreport + outputdirectory +'/' + txt_file)
+    __create_file__.write(os.linesep*4)
+    __create_file__.close()
 
-#------------------------------------------------------------------------------
-
-def print_result_console(helpresult, outputresult, checkresult, checkmessage, commandresult, cmdresults, tableresult):
-    __color_font__ = ''
-    if checkresult == config.CHECKRESULTOK: __color_font__ = 'green'
-    elif checkresult == config.CHECKRESULTWARNING: __color_font__ = 'yellow'
-    elif checkresult == config.CHECKRESULTCRITICAL: __color_font__ = 'red'
-    elif checkresult == config.CHECKRESULTERROR: __color_font__ = 'red'
-    else: __color_font__ = 'blue'
-    tableresult.append([(colored(' - ' +commandresult + '', 'blue')),'[ ' + (colored(checkresult, __color_font__)) + ' ]'])
-
-def print_title_console(title_name, hr_title, tableresult):
-    tableresult.append([(colored(title_name + '                                ', 'white')),'' + (colored('', 'blue')) + ''])
-    tableresult.append([(colored(hr_title + '                                ', 'white')),'' + (colored('', 'blue')) + ''])
-
+    print(os.linesep * 2  + (colored(report, 'white')))
+    print((colored(reportline + os.linesep, 'white')))
+    print((colored(' - HTML report (%s): ./' % hashhtmlreport + outputdirectory +'/' + html_file, 'yellow')))
+    print((colored(' - Text report (%s): ./' % hashtxtreport + outputdirectory +'/' + txt_file, 'yellow')))
+    print os.linesep

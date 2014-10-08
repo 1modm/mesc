@@ -53,6 +53,7 @@ import os
 from datetime import date
 from thirdparty.color.termcolor import colored
 from include import show_banner, get_banner
+import include.serverinfo.config as config
 
 
 __all__ = [
@@ -62,11 +63,6 @@ __all__ = [
     "create_txt_file"
 ]
 
-
-CHECKRESULTOK = 'CHECKED'
-CHECKRESULTWARNING = 'WARNING'
-CHECKRESULTCRITICAL = 'CRITICAL'
-CHECKRESULTERROR = 'ERROR'
 
 #------------------------------------------------------------------------------
 
@@ -84,8 +80,8 @@ def print_result_txt(helpresult, outputresult, checkresult, checkmessage, comman
     __file__.write('- ' +commandresult + ': ')
     __file__.write(helpresult)
     __file__.write('- # ' + cmdresults + os.linesep)
-    if checkresult != CHECKRESULTOK: __file__.write(' * Issue: ' + checkmessage + os.linesep)
-    if checkresult != CHECKRESULTOK: __file__.write(' * Evidence: '+ os.linesep + outputresult + os.linesep* 4)
+    if checkresult != config.CHECKRESULTOK: __file__.write(' * Issue: ' + checkmessage + os.linesep)
+    if checkresult != config.CHECKRESULTOK: __file__.write(' * Evidence: '+ os.linesep + outputresult + os.linesep* 4)
     else: __file__.write(outputresult + os.linesep* 4)
     __file__.close()
 
