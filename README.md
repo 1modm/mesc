@@ -68,6 +68,12 @@ Dependencies
 * python commands module
 * python fabric module
 
+Ubuntu
+------
+```
+# apt-get install python python-pip
+# pip install tabulate interfaces netifaces fabric
+```
 
 Usage
 =====

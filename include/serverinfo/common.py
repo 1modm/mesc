@@ -243,7 +243,10 @@ def free(__host__, __user__, __passwd__, __port__):
         swap_used=split_text[15]
         swap_free=split_text[16]
         percentage_used = (int(used)*100)/(int(total));
-        percentage_swap_used = (int(swap_used)*100)/(int(swap_total));
+        if (swap_used != "0"):
+            percentage_swap_used = (int(swap_used)*100)/(int(swap_total))
+        else:
+            percentage_swap_used = 0
         __check_message__ = ''
         __check_html_message__ = ''
         if (percentage_used < config.RESULTOKTHRESHOLD):

@@ -51,13 +51,16 @@ POSSIBILITY OF SUCH DAMAGE.
 
 import os
 from thirdparty.color.termcolor import colored
-from include import show_banner, get_banner
+from include import get_banner
 
 __all__ = [
     "create_log"
 ]
 
-def create_log(report, reportline, hashhtmlreport, hashtxtreport, outputdirectory, html_file, txt_file, log_file_name, outputdate, host):
+
+def create_log(report, reportline, hashhtmlreport, hashtxtreport,
+               outputdirectory, html_file, txt_file, log_file_name,
+               outputdate, host):
     __file__ = log_file_name
     if (os.path.isfile(__file__)):
         __create_file__ = open(__file__, 'a')
@@ -69,14 +72,18 @@ def create_log(report, reportline, hashhtmlreport, hashtxtreport, outputdirector
     __create_file__.write(os.linesep)
     __create_file__.write('# Audit target: %s' % host)
     __create_file__.write(os.linesep)
-    __create_file__.write('- HTML report (%s): ./' % hashhtmlreport + outputdirectory +'/' + html_file)
+    __create_file__.write('- HTML report (%s): ./' % hashhtmlreport +
+                          outputdirectory + '/' + html_file)
     __create_file__.write(os.linesep)
-    __create_file__.write('- Text report (%s): ./' % hashtxtreport + outputdirectory +'/' + txt_file)
-    __create_file__.write(os.linesep*4)
+    __create_file__.write('- Text report (%s): ./' % hashtxtreport +
+                          outputdirectory + '/' + txt_file)
+    __create_file__.write(os.linesep * 3)
     __create_file__.close()
 
-    print(os.linesep * 2  + (colored(report, 'white')))
+    print((os.linesep * 2 + (colored(report, 'white'))))
     print((colored(reportline + os.linesep, 'white')))
-    print((colored(' - HTML report (%s): ./' % hashhtmlreport + outputdirectory +'/' + html_file, 'yellow')))
-    print((colored(' - Text report (%s): ./' % hashtxtreport + outputdirectory +'/' + txt_file, 'yellow')))
+    print((colored(' - HTML report (%s): ./' % hashhtmlreport + outputdirectory
+                    + '/' + html_file, 'yellow')))
+    print((colored(' - Text report (%s): ./' % hashtxtreport + outputdirectory
+                   + '/' + txt_file, 'yellow')))
     print os.linesep

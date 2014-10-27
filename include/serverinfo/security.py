@@ -123,6 +123,7 @@ def checkSSH(__host__, __user__, __passwd__, __port__):
     __file__= "/etc/ssh/sshd_config"
     __cmdfile__ = "cat /etc/ssh/sshd_config"
     __check__=['#PermitRootLogin yes','PermitRootLogin no','#PermitEmptyPasswords yes','PermitEmptyPasswords no']
+    __check_count__ = 0
 
     __command_check__ = config.CHECKRESULTERROR
     __output__, __command_check__ = execute_cmd(__cmdfile__, __host__, __user__, __passwd__, __port__)
@@ -198,6 +199,8 @@ def checkCrontab(__host__, __user__, __passwd__, __port__):
     __command__ = "Users allowed to use the crontab"
     __file__= "/etc/cron.allow"
     __cmdfile__ = "cat /etc/cron.allow"
+    __line__ = ""
+    __linehtml__ = ""
     # Check that exists at least the root user:
     __check__=['root']
     __command_check__ = config.CHECKRESULTERROR
@@ -239,6 +242,7 @@ def checkApache(__host__, __user__, __passwd__, __port__):
     __command_check__ = config.CHECKRESULTERROR
     __check_message__ = os.linesep
     __check_html_message__ = '<br>'
+    __output__ = ""
 
     __cmd_check__, __out__= exists_read_file(apache1, __host__, __user__, __passwd__, __port__)
     if (__cmd_check__):
@@ -261,7 +265,7 @@ def checkApache(__host__, __user__, __passwd__, __port__):
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = 'Apache configuration loaded'
         __check_html_message__ = 'Apache configuration loaded'
-    elif __command_check__ == CHECKRESULTERROR:
+    elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to load configuration, Apache web server is not installed'
         __check_html_message__ = 'Unable to load configuration, Apache web server is not installed'
     elif __command_check__ == config.CHECKRESULTWARNING:
