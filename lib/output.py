@@ -61,12 +61,19 @@ __all__ = [
 
 #------------------------------------------------------------------------------
 
-def print_results(help_command, outputresult, checkresult, checkmessage, checkhtmlmessage, commandresult, cmdresults, tableresult, txtfile, htmlfile, outputdirectory):
-    print_result_txt(help_command, outputresult, checkresult, checkmessage, commandresult, cmdresults, txtfile, outputdirectory)
-    print_result_console(help_command, outputresult, checkresult, checkmessage, commandresult, cmdresults, tableresult)
-    htmlinfo(htmlfile, outputdirectory, help_command, outputresult, checkresult, checkhtmlmessage, commandresult, cmdresults)
+def print_results(help_command, outputresult, checkresult, checkmessage,
+     checkhtmlmessage, commandresult, cmdresults, tableresult, txtfile,
+      htmlfile, outputdirectory):
+    print_result_txt(help_command, outputresult, checkresult, checkmessage,
+         commandresult, cmdresults, txtfile, outputdirectory)
+    print_result_console(help_command, outputresult, checkresult,
+         checkmessage, commandresult, cmdresults, tableresult)
+    htmlinfo(htmlfile, outputdirectory, help_command, outputresult,
+         checkresult, checkhtmlmessage, commandresult, cmdresults)
 
-def print_titles(title_name, hr_title, hrefsection, txtfile, htmlfile, outputdirectory, tableresult):
+
+def print_titles(title_name, hr_title, hrefsection, txtfile, htmlfile,
+     outputdirectory, tableresult):
     print_title_txt(title_name, hr_title, txtfile, outputdirectory)
     print_title_console(title_name, hr_title, tableresult)
     htmltitle(htmlfile, outputdirectory, title_name, hrefsection)

@@ -50,9 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #------------------------------------------------------------------------------
 
 import os
-from datetime import date
-from thirdparty.color.termcolor import colored
-from include import show_banner, get_banner
+from include import get_banner
 import include.serverinfo.config as config
 
 
@@ -67,34 +65,43 @@ __all__ = [
 #------------------------------------------------------------------------------
 
 def create_txt_file(file_name, outputdirectory):
-    __file__ = outputdirectory +'/'+file_name
+    __file__ = outputdirectory + '/' + file_name
     __create_file__ = open(__file__, 'w')
     __create_file__.write(get_banner())
     __create_file__.write(os.linesep)
     __create_file__.close()
     #print((colored('Report created in the file ' + __file__, 'yellow')))
 
-def print_result_txt(helpresult, outputresult, checkresult, checkmessage, commandresult, cmdresults, file_name, outputdirectory):
-    __file__ = outputdirectory +'/'+file_name
+
+def print_result_txt(helpresult, outputresult, checkresult, checkmessage,
+     commandresult, cmdresults, file_name, outputdirectory):
+    __file__ = outputdirectory + '/' + file_name
     __file__ = open(__file__, 'a')
-    __file__.write('- ' +commandresult + ': ')
+    __file__.write('- ' + commandresult + ': ')
     __file__.write(helpresult)
     __file__.write('- # ' + cmdresults + os.linesep)
-    if checkresult != config.CHECKRESULTOK: __file__.write(' * Issue: ' + checkmessage + os.linesep)
-    if checkresult != config.CHECKRESULTOK: __file__.write(' * Evidence: '+ os.linesep + outputresult + os.linesep* 4)
-    else: __file__.write(outputresult + os.linesep* 4)
+    if checkresult != config.CHECKRESULTOK:
+        __file__.write(' * Issue: ' + checkmessage + os.linesep)
+    if checkresult != config.CHECKRESULTOK:
+        __file__.write(' * Evidence: ' + os.linesep + outputresult
+            + os.linesep * 4)
+    else:
+        __file__.write(outputresult + os.linesep * 4)
     __file__.close()
 
-def print_audit_txt(commandresult,line, outputresult, file_name, outputdirectory):
-    __file__ = outputdirectory +'/'+file_name
+
+def print_audit_txt(commandresult, line, outputresult, file_name,
+     outputdirectory):
+    __file__ = outputdirectory + '/' + file_name
     __file__ = open(__file__, 'a')
-    __file__.write(commandresult+ os.linesep)
-    __file__.write(line+ os.linesep)
-    __file__.write(outputresult + os.linesep* 4)
+    __file__.write(commandresult + os.linesep)
+    __file__.write(line + os.linesep)
+    __file__.write(outputresult + os.linesep * 4)
     __file__.close()
+
 
 def print_title_txt(title_name, hr_title, file_name, outputdirectory):
-    __file__ = outputdirectory +'/'+file_name
+    __file__ = outputdirectory + '/' + file_name
     __file__ = open(__file__, 'a')
     __file__.write(title_name + os.linesep)
     __file__.write(hr_title + os.linesep * 2)

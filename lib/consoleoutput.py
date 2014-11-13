@@ -64,16 +64,27 @@ __all__ = [
 
 #------------------------------------------------------------------------------
 
-def print_result_console(helpresult, outputresult, checkresult, checkmessage, commandresult, cmdresults, tableresult):
+def print_result_console(helpresult, outputresult, checkresult, checkmessage,
+     commandresult, cmdresults, tableresult):
     __color_font__ = ''
-    if checkresult == config.CHECKRESULTOK: __color_font__ = 'green'
-    elif checkresult == config.CHECKRESULTWARNING: __color_font__ = 'yellow'
-    elif checkresult == config.CHECKRESULTCRITICAL: __color_font__ = 'red'
-    elif checkresult == config.CHECKRESULTERROR: __color_font__ = 'red'
-    else: __color_font__ = 'blue'
-    tableresult.append([(colored(' - ' +commandresult + '', 'blue')),'[ ' + (colored(checkresult, __color_font__)) + ' ]'])
+    if checkresult == config.CHECKRESULTOK:
+        __color_font__ = 'green'
+    elif checkresult == config.CHECKRESULTWARNING:
+        __color_font__ = 'yellow'
+    elif checkresult == config.CHECKRESULTCRITICAL:
+        __color_font__ = 'red'
+    elif checkresult == config.CHECKRESULTERROR:
+        __color_font__ = 'red'
+    else:
+        __color_font__ = 'blue'
+    tableresult.append([(colored(' - ' + commandresult + '', 'blue')), '[ '
+        + (colored(checkresult, __color_font__)) + ' ]'])
+
 
 def print_title_console(title_name, hr_title, tableresult):
-    tableresult.append([(colored(title_name + '                                ', 'white')),'' + (colored('', 'blue')) + ''])
-    tableresult.append([(colored(hr_title + '                                ', 'white')),'' + (colored('', 'blue')) + ''])
+    tableresult.append([(colored(title_name
+        + '                                ', 'white')), ''
+        + (colored('', 'blue')) + ''])
+    tableresult.append([(colored(hr_title + '                                ',
+         'white')), '' + (colored('', 'blue')) + ''])
 

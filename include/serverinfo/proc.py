@@ -50,10 +50,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #------------------------------------------------------------------------------
 
 import os
-import commands
 import platform
-import config
-from operations import execute_cmd, check_file, exists_file, exists_read_file
+from . import config
+from .operations import execute_cmd
 
 
 __all__ = [
@@ -61,6 +60,7 @@ __all__ = [
     "packages",
     "top"
 ]
+
 
 def proc(__host__, __user__, __passwd__, __port__):
     """
@@ -70,8 +70,9 @@ def proc(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Processes running in the system"
-    __cmd__= "ps aux | sort -rn"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "ps aux | sort -rn"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -84,7 +85,9 @@ def proc(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
 #------------------------------------------------------------------------------
 
 
@@ -98,16 +101,18 @@ def packages(__host__, __user__, __passwd__, __port__):
     __command__ = "Installed packages in the system"
     __platform__ = platform.dist()[0]
     if (__platform__ == 'SuSE'):
-        __cmd__= "rpm -qa"
+        __cmd__ = "rpm -qa"
     elif (__platform__ == 'debian'):
-        __cmd__= "dpkg -l"
+        __cmd__ = "dpkg -l"
     elif (__platform__ == 'Ubuntu'):
-        __cmd__= "dpkg -l"
+        __cmd__ = "dpkg -l"
     elif (__platform__ == 'fedora' or 'redhat' or 'centos'):
-        __cmd__= "rpm -qa"
-    else: __cmd__= ""
+        __cmd__ = "rpm -qa"
+    else:
+        __cmd__ = ""
     #print __platform__
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -120,7 +125,8 @@ def packages(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -133,8 +139,9 @@ def top(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Running system information"
-    __cmd__= "top -n1 -b1"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "top -n1 -b1"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -147,4 +154,5 @@ def top(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)

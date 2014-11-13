@@ -49,15 +49,12 @@ POSSIBILITY OF SUCH DAMAGE.
 # Modules
 #------------------------------------------------------------------------------
 import os
-import commands
 import sys
 import platform
 import re
-import config
-from operations import execute_cmd, check_file, exists_file, exists_read_file
-from datetime import datetime
-from thirdparty.color.termcolor import colored
-from platform import system
+from . import config
+from .operations import execute_cmd
+
 
 __all__ = [
     "OS_ver",
@@ -78,114 +75,139 @@ def OS_ver(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
     __help_result__ = '' + os.linesep
     __command__ = "Operating System Version"
-    __cmd__= "uname -o"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "uname -o"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
-    __osreport__={'Operating System Version':__output__}
-    __OSout__=__osreport__['Operating System Version']
-    return (__OSout__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    __osreport__ = {'Operating System Version': __output__}
+    __OSout__ = __osreport__['Operating System Version']
+    return (__OSout__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 
 def OS_kernel(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
     __help_result__ = '' + os.linesep
     __command__ = "Kernel Name"
-    __cmd__= "uname -s"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "uname -s"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__,
+         __user__, __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
-    __osreport__={'Kernel Name':__output__}
-    __OSout__=__osreport__['Kernel Name']
-    return (__OSout__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    __osreport__ = {'Kernel Name': __output__}
+    __OSout__ = __osreport__['Kernel Name']
+    return (__OSout__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__,__cmd__)
 
 
 def OS_kernelver(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
     __help_result__ = '' + os.linesep
     __command__ = "Kernel Version"
-    __cmd__= "uname -r"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "uname -r"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
-    __osreport__={'Kernel Version':__output__}
-    __OSout__=__osreport__['Kernel Version']
-    return (__OSout__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    __osreport__ = {'Kernel Version': __output__}
+    __OSout__ = __osreport__['Kernel Version']
+    return (__OSout__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__,__cmd__)
 
 
 def OS_machine(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
     __help_result__ = '' + os.linesep
     __command__ = "Machine"
-    __cmd__= "uname -m"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "uname -m"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
-    __osreport__={'Machine':__output__}
-    __OSout__=__osreport__['Machine']
-    return (__OSout__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    __osreport__ = {'Machine': __output__}
+    __OSout__ = __osreport__['Machine']
+    return (__OSout__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
 
 def OS_processor(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
     __help_result__ = '' + os.linesep
     __command__ = "Processor"
-    __cmd__= "uname -p"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "uname -p"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
-    __osreport__={'Processor':__output__}
-    __OSout__=__osreport__['Processor']
-    return (__OSout__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    __osreport__ = {'Processor': __output__}
+    __OSout__ = __osreport__['Processor']
+    return (__OSout__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
+
 
 def auditor_info(date, auditorname):
     __htmlreport__ = {}
-    __dist__ ="%s %s %s" % (str(platform.linux_distribution()[0]), str(platform.linux_distribution()[1]), str(platform.linux_distribution()[2]))
-    __htmlreport__={'Date':date, 'System':platform.system(), 'Distribution':__dist__, 'Architecture':platform.machine(), 'Processor':platform.processor(), 'Platform':platform.platform(),'Release':platform.release(),'Hostname':os.uname()[1],'Python version':sys.version, 'Auditor':auditorname}
+    __dist__ = "%s %s %s" % (str(platform.linux_distribution()[0]),
+         str(platform.linux_distribution()[1]),
+          str(platform.linux_distribution()[2]))
+    __htmlreport__ = {'Date': date, 'System': platform.system(),
+         'Distribution': __dist__, 'Architecture': platform.machine(),
+          'Processor': platform.processor(), 'Platform': platform.platform(),
+          'Release': platform.release(), 'Hostname': os.uname()[1],
+          'Python version': sys.version, 'Auditor': auditorname}
     __date__ = date
 
-    __output__ =' - ' + "Date: %s" % __date__ + os.linesep
-    __output__ +=' - ' + "Auditor: %s" % auditorname + os.linesep
+    __output__ = ' - ' + "Date: %s" % __date__ + os.linesep
+    __output__ += ' - ' + "Auditor: %s" % auditorname + os.linesep
 
     if platform.system() == 'Linux':
-        __output__ +=' - ' + "System: %s" % platform.system() + os.linesep
-        __output__ +=' - ' + "Distribution: %s %s %s" % (str(platform.linux_distribution()[0]), str(platform.linux_distribution()[1]), str(platform.linux_distribution()[2]))  + os.linesep
-        __output__ +=' - ' + "Architecture: %s" % platform.machine() + os.linesep
-        __output__ +=' - ' + "Processor: %s" % platform.processor() + os.linesep
-        __output__ +=' - ' + "Platform: %s" % platform.platform() + os.linesep
-        __output__ +=' - ' + "Release: %s" % platform.release() + os.linesep
-        __output__ +=' - ' + "Hostname: %s" % os.uname()[1] + os.linesep
+        __output__ += ' - ' + "System: %s" % platform.system() + os.linesep
+        __output__ += ' - ' + "Distribution: %s %s %s" %\
+         (str(platform.linux_distribution()[0]),
+         str(platform.linux_distribution()[1]),
+         str(platform.linux_distribution()[2])) + os.linesep
+        __output__ += ' - ' + "Architecture: %s" %\
+             platform.machine() + os.linesep
+        __output__ += ' - ' + "Processor: %s" %\
+             platform.processor() + os.linesep
+        __output__ += ' - ' + "Platform: %s" % platform.platform() + os.linesep
+        __output__ += ' - ' + "Release: %s" % platform.release() + os.linesep
+        __output__ += ' - ' + "Hostname: %s" % os.uname()[1] + os.linesep
     elif platform.system() == 'Windows':
-        __output__ +=' - ' + "System: %s" % platform.system() + os.linesep
+        __output__ += ' - ' + "System: %s" % platform.system() + os.linesep
     elif platform.system() == 'Darwin':
-        __output__ +=' - ' + "Mac: %s" % platform.mac_ver() + os.linesep
+        __output__ += ' - ' + "Mac: %s" % platform.mac_ver() + os.linesep
     elif platform.system() == 'FreeBSD':
-        __output__ +=' - ' + "System: %s" % platform.system() + os.linesep
-    __output__ +=' - ' + "Python version: %s" % sys.version.split('\n') + os.linesep
+        __output__ += ' - ' + "System: %s" % platform.system() + os.linesep
+    __output__ += ' - ' + "Python version: %s" %\
+         sys.version.split('\n') + os.linesep
     return (__output__, __htmlreport__)
 
 #------------------------------------------------------------------------------
+
 
 def uptime(__host__, __user__, __passwd__, __port__):
     """
@@ -198,23 +220,26 @@ def uptime(__host__, __user__, __passwd__, __port__):
     __help_result__ += 'and the system load averages for the past 1, 5, and 15 '
     __help_result__ += 'minutes' + os.linesep
     __command__ = "System Uptime"
-    __cmd__= "uptime"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "uptime"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
         __check_html_message__ = ''
-    elif __command_check__ == CHECKRESULTWARNING:
+    elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
+
 
 def free(__host__, __user__, __passwd__, __port__):
     """
@@ -225,48 +250,64 @@ def free(__host__, __user__, __passwd__, __port__):
     __help_result__ += 'physical and swap memory in the system, as well as the '
     __help_result__ += 'buffers used by the kernel' + os.linesep
     __command__ = "Free and used memory"
-    __cmd__= "free -o"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "free -o"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
 
     if __command_check__ == config.CHECKRESULTOK:
         pattern = re.compile(r'\s+')
         sentence = re.sub(pattern, ' ', __output__)
         sentence = sentence.lstrip(' ')
-        split_text=sentence.split(' ')
-        total=split_text[7]
-        used=split_text[8]
-        freemem=split_text[9]
-        sharedmem=split_text[10]
-        buffers=split_text[11]
-        cached=split_text[12]
-        swap_total=split_text[14]
-        swap_used=split_text[15]
-        swap_free=split_text[16]
-        percentage_used = (int(used)*100)/(int(total));
+        split_text = sentence.split(' ')
+        total = split_text[7]
+        used = split_text[8]
+        freemem = split_text[9]
+        sharedmem = split_text[10]
+        buffers = split_text[11]
+        cached = split_text[12]
+        swap_total = split_text[14]
+        swap_used = split_text[15]
+        swap_free = split_text[16]
+        percentage_used = (int(used) * 100) / (int(total))
         if (swap_used != "0"):
-            percentage_swap_used = (int(swap_used)*100)/(int(swap_total))
+            percentage_swap_used = (int(swap_used) * 100) / (int(swap_total))
         else:
             percentage_swap_used = 0
         __check_message__ = ''
         __check_html_message__ = ''
         if (percentage_used < config.RESULTOKTHRESHOLD):
-            __check_message__ = 'RAM memory used: ' + str(percentage_used) + '%'+ os.linesep
-        elif (percentage_used < config.RESULTWARNINGTHRESHOLD ):
-            __command_check__= config.CHECKRESULTWARNING
+            __check_message__ = 'RAM memory used: ' + str(percentage_used) +\
+             '%' + os.linesep
+        elif (percentage_used < config.RESULTWARNINGTHRESHOLD):
+            __command_check__ = config.CHECKRESULTWARNING
             __check_message__ = os.linesep + '   - Release memory '
-            __check_message__ += os.linesep + '   - RAM memory used: ' + str(percentage_used) + '%' + ' | Swap memory used: ' + str(percentage_swap_used) + '%'
-            __check_message__ += os.linesep + '   - Total Memory: ' + str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
+            __check_message__ += os.linesep + '   - RAM memory used: ' +\
+             str(percentage_used) + '%' + ' | Swap memory used: ' +\
+             str(percentage_swap_used) + '%'
+            __check_message__ += os.linesep + '   - Total Memory: ' +\
+             str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' +\
+             str(freemem) + ' Kbytes'
             __check_html_message__ = 'Release memory'
-            __check_html_message__ += '<br> RAM memory used: ' + str(percentage_used) + '%' + ' | Swap memory used: ' + str(percentage_swap_used) + '%'
-            __check_html_message__ += '<br> Total Memory: ' + str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
+            __check_html_message__ += '<br> RAM memory used: ' +\
+             str(percentage_used) + '%' + ' | Swap memory used: ' +\
+             str(percentage_swap_used) + '%'
+            __check_html_message__ += '<br> Total Memory: ' + str(total) +\
+             ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
         else:
             __command_check__ = config.CHECKRESULTCRITICAL
             __check_message__ = os.linesep + '   - Release memory '
-            __check_message__ += os.linesep + '   - RAM memory used: ' + str(percentage_used) + '%' + ' | Swap memory used: ' + str(percentage_swap_used) + '%'
-            __check_message__ += os.linesep + '   - Total Memory: ' + str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
+            __check_message__ += os.linesep + '   - RAM memory used: ' +\
+             str(percentage_used) + '%' + ' | Swap memory used: ' +\
+             str(percentage_swap_used) + '%'
+            __check_message__ += os.linesep + '   - Total Memory: ' +\
+             str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' +\
+             str(freemem) + ' Kbytes'
             __check_html_message__ = 'Release memory'
-            __check_html_message__ += '<br> RAM memory used: ' + str(percentage_used) + '%' + ' | Swap memory used: ' + str(percentage_swap_used) + '%'
-            __check_html_message__ += '<br> Total Memory: ' + str(total) + ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
+            __check_html_message__ += '<br> RAM memory used: ' +\
+             str(percentage_used) + '%' + ' | Swap memory used: ' +\
+              str(percentage_swap_used) + '%'
+            __check_html_message__ += '<br> Total Memory: ' + str(total) +\
+             ' Kbytes ' + ' - ' + 'Free Memory: ' + str(freemem) + ' Kbytes'
 
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'
@@ -277,7 +318,8 @@ def free(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -290,8 +332,9 @@ def who(__host__, __user__, __passwd__, __port__):
     __help_result__ = 'Show who is logged on and what they are doing'
     __help_result__ += os.linesep
     __command__ = "Users logged"
-    __cmd__= "w"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "w"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -304,7 +347,8 @@ def who(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -317,21 +361,23 @@ def tail_root(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Last 100 root commands executed"
-    __cmd__= "tail -100 /root/.bash_history"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "tail -100 /root/.bash_history"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
     elif __command_check__ == config.CHECKRESULTERROR:
-        __check_message__ = 'Unable to execute the command, you must be root'
-        __check_html_message__ = 'Unable to execute the command, you must be root'
+        __check_message__ = 'Unable to execute, you must be root'
+        __check_html_message__ = 'Unable to execute, you must be root'
     elif __command_check__ == config.CHECKRESULTWARNING:
-        __check_message__ = 'Unable to execute the command, you must be root'
-        __check_html_message__ = 'Unable to execute the command, you must be root'
+        __check_message__ = 'Unable to execute, you must be root'
+        __check_html_message__ = 'Unable to execute, you must be root'
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -344,8 +390,9 @@ def last(__host__, __user__, __passwd__, __port__):
     __help_result__ = 'Show listing of last logged in users'
     __help_result__ += os.linesep
     __command__ = 'Last logged in users'
-    __cmd__= "last"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "last"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -358,7 +405,8 @@ def last(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 
 #------------------------------------------------------------------------------
@@ -372,8 +420,10 @@ def shells(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = 'Active users in the system with an active shell'
-    __cmd__= "cat /etc/passwd | grep -v \/false | grep -v \/nologin | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "cat /etc/passwd | grep -v \/false | grep -v \/nologin" +\
+     " | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -386,4 +436,5 @@ def shells(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__ , __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)

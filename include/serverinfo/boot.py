@@ -50,9 +50,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #------------------------------------------------------------------------------
 
 import os
-import commands
-import config
-from operations import execute_cmd, check_file, exists_file, exists_read_file
+from . import config
+from .operations import execute_cmd
 
 
 __all__ = [
@@ -69,8 +68,9 @@ def grub(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Grub configuration"
-    __cmd__= "cat /boot/grub/grub.cfg"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "cat /boot/grub/grub.cfg"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -83,7 +83,9 @@ def grub(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
 #------------------------------------------------------------------------------
 
 
@@ -95,8 +97,9 @@ def rc3(__host__, __user__, __passwd__, __port__):
     __help_result__ = 'Started applications in the rc3.d level'
     __help_result__ += os.linesep
     __command__ = "rc3.d level"
-    __cmd__= "ls -ltr /etc/rc3.d/S*"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "ls -ltr /etc/rc3.d/S*"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -109,4 +112,5 @@ def rc3(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)

@@ -50,9 +50,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #------------------------------------------------------------------------------
 
 import os
-import commands
-import config
-from operations import execute_cmd, check_file, exists_file, exists_read_file
+from . import config
+from .operations import execute_cmd
 
 
 __all__ = [
@@ -63,6 +62,7 @@ __all__ = [
     "ifconfig"
 ]
 
+
 def nmap(__host__, __user__, __passwd__, __port__):
     """
     :returns: Opened ports in the system.
@@ -71,8 +71,9 @@ def nmap(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Opened ports in the system"
-    __cmd__= "nmap localhost"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "nmap localhost"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -85,7 +86,8 @@ def nmap(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -98,8 +100,9 @@ def rpcinfo(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Openned RPC services"
-    __cmd__= "rpcinfo -p localhost"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "rpcinfo -p localhost"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -112,7 +115,8 @@ def rpcinfo(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -125,8 +129,9 @@ def routes(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Routing tables"
-    __cmd__= "netstat -nr"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "netstat -nr"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -139,7 +144,8 @@ def routes(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -152,8 +158,9 @@ def activeconections(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Active Internet connections (servers and established)"
-    __cmd__= "netstat -ta"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "netstat -ta"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -166,7 +173,8 @@ def activeconections(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -179,8 +187,9 @@ def ifconfig(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Status of the currently active interfaces"
-    __cmd__= "ifconfig -a"
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+    __cmd__ = "ifconfig -a"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -193,4 +202,5 @@ def ifconfig(__host__, __user__, __passwd__, __port__):
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
-    return (__output__, __help_result__, __command_check__, __check_message__, __check_html_message__, __command__,__cmd__)
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)

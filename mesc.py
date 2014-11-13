@@ -60,21 +60,10 @@ from thirdparty.color.termcolor import colored
 
 
 #------------------------------------------------------------------------------
-# Python version check.
-#------------------------------------------------------------------------------
-
-if __name__ == "__main__":
-    if sys.version_info < (2, 7) or sys.version_info >= (3, 0):
-        show_banner()
-        print ("[!] You must use Python version 2.7 or above")
-        sys.exit(1)
-
-
-#------------------------------------------------------------------------------
 # Plugins
 #------------------------------------------------------------------------------
 
-from include import show_banner, get_banner
+from include import show_banner
 from lib.htmloutput import htmlaudit, htmlend, create_html_file
 from lib.txtoutput import create_txt_file, print_audit_txt
 from lib.output import print_results, print_titles, print_title_console
@@ -87,13 +76,26 @@ import include.serverinfo.proc as proc
 import include.serverinfo.security as security
 
 #------------------------------------------------------------------------------
+# Python version check.
+#------------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    if sys.version_info < (2, 7) or sys.version_info >= (3, 0):
+        show_banner()
+        print ("[!] You must use Python version 2.7 or above")
+        sys.exit(1)
+
+
+
+#------------------------------------------------------------------------------
 # Command line parser using argparse
 #------------------------------------------------------------------------------
 
 def cmdline_parser():
     parser = argparse.ArgumentParser(conflict_handler='resolve', add_help=True,
-        description='Example: python %(prog)s -a -txt output.txt -html output.html localhost',
-        version='MESC 0.1', usage="python %(prog)s [OPTIONS] HOST")
+        description='Example: python %(prog)s -a -txt output.txt\
+            -html output.html localhost', version='MESC 0.1',
+             usage="python %(prog)s [OPTIONS] HOST")
 
     # Mandatory
     parser.add_argument('host', action="store")
@@ -111,7 +113,7 @@ def cmdline_parser():
         dest='txt_file',
         help='txt file name where is writen the results')
 
-    parser.add_argument('-html', action='store',  default='results.html',
+    parser.add_argument('-html', action='store', default='results.html',
         dest='html_file',
         help='html file name where is writen the results')
 
@@ -145,7 +147,8 @@ def cmdline_parser():
         dest='tcpip',
         help='TCP/IP Information')
 
-    group.add_argument('-proc', '--processes', action='store_true', default=False,
+    group.add_argument('-proc', '--processes', action='store_true',
+        default=False,
         dest='processes',
         help='Processes running in the system')
 
@@ -182,22 +185,22 @@ def main():
     # Sections
     #---------------------------------------------------------------------------
 
-    AUDIT='[0] Auditor information            '
+    AUDIT = '[0] Auditor information            '
     AUDIT_LINE = '-----------------------'
-    GENERAL='[1] System information             '
+    GENERAL = '[1] System information             '
     GENERAL_LINE = '----------------------'
-    BOOT='[2] Boot information               '
-    BOOT_LINE='--------------------'
-    FILESYSTEM='[3] File system information        '
-    FILESYSTEM_LINE='---------------------------'
-    TCPIP='[4] Network Information            '
-    TCPIP_LINE='----------------------'
-    PROCESSES='[5] Processes running in the system'
-    PROCESSES_LINE='-----------------------------------'
-    SECURITY='[6] Security information           '
-    SECURITY_LINE='------------------------'
-    REPORTS='[7] Reports                        '
-    REPORTS_LINE='-----------'
+    BOOT = '[2] Boot information               '
+    BOOT_LINE = '--------------------'
+    FILESYSTEM = '[3] File system information        '
+    FILESYSTEM_LINE = '---------------------------'
+    TCPIP = '[4] Network Information            '
+    TCPIP_LINE = '----------------------'
+    PROCESSES = '[5] Processes running in the system'
+    PROCESSES_LINE = '-----------------------------------'
+    SECURITY = '[6] Security information           '
+    SECURITY_LINE = '------------------------'
+    REPORTS = '[7] Reports                        '
+    REPORTS_LINE = '-----------'
 
     #---------------------------------------------------------------------------
     # Global variables
@@ -213,15 +216,18 @@ def main():
     # Fabric
     if results.port:
         fabric_port = results.port
-    else: fabric_port = '22'
+    else:
+        fabric_port = '22'
 
     if results.user:
         fabric_user = results.user
-    else: fabric_user = 'root'
+    else:
+        fabric_user = 'root'
 
     if results.passwd:
         fabric_passwd = results.passwd
-    else: fabric_passwd = None
+    else:
+        fabric_passwd = None
 
     #---------------------------------------------------------------------------
     # Output
@@ -233,189 +239,342 @@ def main():
         os.makedirs(outputdirectory)
     datenow = datetime.now()
     outputdate = datenow.strftime('%Y-%m-%d@%H_%M_%S')
-    outputdirectory = 'output'+'/'+ outputdate
+    outputdirectory = 'output' + '/' + outputdate
     os.makedirs(outputdirectory)
-    os.makedirs(outputdirectory+'/css')
-    os.makedirs(outputdirectory+'/js')
+    os.makedirs(outputdirectory + '/css')
+    os.makedirs(outputdirectory + '/js')
 
     # Create the txt results file
     if results.txt_file:
-        create_txt_file (results.txt_file,outputdirectory)
+        create_txt_file(results.txt_file, outputdirectory)
     else:
-        results.txt_file='results.log'
-        create_txt_file (results.txt_file,outputdirectory)
+        results.txt_file = 'results.log'
+        create_txt_file(results.txt_file, outputdirectory)
 
     # Create the html results file
     if results.html_file:
-        create_html_file (results.html_file,outputdirectory, outputdate)
+        create_html_file(results.html_file, outputdirectory, outputdate)
     else:
-        results.html_file='results.html'
-        create_html_file (results.html_file,outputdirectory, outputdate)
+        results.html_file = 'results.html'
+        create_html_file(results.html_file, outputdirectory, outputdate)
 
-    #---------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 
     # Auditor Operating System Information
-    os_output, htmlAuditreport = common.auditor_info(outputdate, results.auditorname)
+    os_output, htmlAuditreport = common.auditor_info(outputdate,
+         results.auditorname)
     # Output
-    print_audit_txt(AUDIT,AUDIT_LINE, os_output, results.txt_file, outputdirectory)
+    print_audit_txt(AUDIT, AUDIT_LINE, os_output, results.txt_file,
+         outputdirectory)
     htmlaudit(results.html_file, htmlAuditreport, outputdirectory)
 
     print_title_console(AUDIT, AUDIT_LINE, table0)
-    print tabulate(table0, tablefmt="plain")# print out the results
+    print((tabulate(table0, tablefmt="plain")))  # print out the results
     print((colored(os_output + os.linesep, 'white')))
 
 
-    #---------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
 
     if results.general or results.all:
-        print_titles(GENERAL, GENERAL_LINE, 'general', results.txt_file, results.html_file, outputdirectory, table1)
+        print_titles(GENERAL, GENERAL_LINE, 'general', results.txt_file,
+             results.html_file, outputdirectory, table1)
 
         # Operating System Information
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.OS_ver(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+            check_html_message, command, cmd = common.OS_ver(results.host,
+                 fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.OS_kernel(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+            check_html_message, command, cmd = common.OS_kernel(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.OS_kernelver(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+            check_html_message, command, cmd = common.OS_kernelver(results.host,
+                 fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.OS_machine(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.OS_machine(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.OS_processor(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.OS_processor(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
         # System Information
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.uptime(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.uptime(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.free(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.free(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.who(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.who(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.tail_root(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.tail_root(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.last(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.last(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = common.shells(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table1, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.shells(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, results.html_file, outputdirectory)
 
-        print tabulate(table1, tablefmt="plain")# print out the results
-        print os.linesep
-    #---------------------------------------------------------------------------
+        print((tabulate(table1, tablefmt="plain")))  # print out the results
+        print((os.linesep))
+#------------------------------------------------------------------------------
 
     if results.boot or results.all:
-        print_titles(BOOT, BOOT_LINE, 'boot', results.txt_file, results.html_file, outputdirectory, table2)
+        print_titles(BOOT, BOOT_LINE, 'boot', results.txt_file,
+             results.html_file, outputdirectory, table2)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = boot.grub(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table2, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = boot.grub(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table2,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = boot.rc3(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table2, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = boot.rc3(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table2,
+              results.txt_file, results.html_file, outputdirectory)
 
-        print tabulate(table2, tablefmt="plain") # print out the results
-        print os.linesep
-    #---------------------------------------------------------------------------
+        print((tabulate(table2, tablefmt="plain")))  # print out the results
+        print((os.linesep))
 
+#------------------------------------------------------------------------------
     if results.filesystem or results.all:
-        print_titles(FILESYSTEM, FILESYSTEM_LINE, 'filesystem', results.txt_file, results.html_file, outputdirectory, table3)
+        print_titles(FILESYSTEM, FILESYSTEM_LINE, 'filesystem',
+             results.txt_file, results.html_file, outputdirectory, table3)
 
         filesystem.defpath()
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.diskspace(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = filesystem.diskspace(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.inodespace(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = filesystem.inodespace(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.setuid(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = filesystem.setuid(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.setgid(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = filesystem.setgid(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.rhosts(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = filesystem.rhosts(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.allpermissionsdir(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command,\
+          cmd = filesystem.allpermissionsdir(results.host, fabric_user,
+               fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.allpermissionsfiles(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command,\
+          cmd = filesystem.allpermissionsfiles(results.host,
+               fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.writefiles(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = filesystem.writefiles(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = filesystem.tmpcontent(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table3, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = filesystem.tmpcontent(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, results.html_file, outputdirectory)
 
-        print tabulate(table3, tablefmt="plain") # print out the results
-        print os.linesep
-    #---------------------------------------------------------------------------
-
+        print((tabulate(table3, tablefmt="plain")))  # print out the results
+        print((os.linesep))
+#------------------------------------------------------------------------------
     if results.tcpip or results.all:
-        print_titles(TCPIP, TCPIP_LINE, 'tcpip', results.txt_file, results.html_file, outputdirectory, table4)
+        print_titles(TCPIP, TCPIP_LINE, 'tcpip', results.txt_file,
+             results.html_file, outputdirectory, table4)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = tcpip.nmap(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table4, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = tcpip.nmap(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table4,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = tcpip.rpcinfo(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table4, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = tcpip.rpcinfo(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table4,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = tcpip.routes(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table4, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = tcpip.routes(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table4,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = tcpip.activeconections(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table4, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = tcpip.activeconections(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table4,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = tcpip.ifconfig(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table4, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = tcpip.ifconfig(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table4,
+              results.txt_file, results.html_file, outputdirectory)
 
-        print tabulate(table4, tablefmt="plain") # print out the results
-        print os.linesep
-    #---------------------------------------------------------------------------
-
+        print((tabulate(table4, tablefmt="plain")))  # print out the results
+        print((os.linesep))
+#------------------------------------------------------------------------------
     if results.processes or results.all:
-        print_titles(PROCESSES, PROCESSES_LINE, 'processes', results.txt_file, results.html_file, outputdirectory, table5)
+        print_titles(PROCESSES, PROCESSES_LINE, 'processes',
+             results.txt_file, results.html_file, outputdirectory, table5)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = proc.proc(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table5, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = proc.proc(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table5,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = proc.packages(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table5, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = proc.packages(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table5,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = proc.top(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table5, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = proc.top(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table5,
+              results.txt_file, results.html_file, outputdirectory)
 
-        print tabulate(table5, tablefmt="plain") # print out the results
-        print os.linesep
-    #---------------------------------------------------------------------------
-
+        print((tabulate(table5, tablefmt="plain")))  # print out the results
+        print((os.linesep))
+#------------------------------------------------------------------------------
     if results.security or results.all:
-        print_titles(SECURITY, SECURITY_LINE, 'security', results.txt_file, results.html_file, outputdirectory, table6)
+        print_titles(SECURITY, SECURITY_LINE, 'security', results.txt_file,
+             results.html_file, outputdirectory, table6)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = security.checkShells(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table6, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = security.checkShells(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table6,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = security.checkSSH(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table6, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = security.checkSSH(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table6,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = security.checkDisabledCtrlAltDel(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table6, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command,\
+          cmd = security.checkDisabledCtrlAltDel(results.host, fabric_user,
+               fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table6,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = security.checkCrontab(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table6, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = security.checkCrontab(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table6,
+              results.txt_file, results.html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = security.checkApache(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table6, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = security.checkApache(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table6,
+              results.txt_file, results.html_file, outputdirectory)
         '''
-        command_output, help_command, command_check, check_message, check_html_message, command, cmd = security.recomendations(results.host, fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check, check_message, check_html_message, command, cmd, table6, results.txt_file, results.html_file, outputdirectory)
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.recomendations(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table6,
+              results.txt_file, results.html_file, outputdirectory)
 
         print "<FONT COLOR=$color_cabecera>- chkrootkit: shell script that checks system binaries for rootkit modification</FONT> http://www.chkrootkit.org/<br>";
         print "<FONT COLOR=$color_cabecera>- AIDE (Advanced Intrusion Detection Environment) </FONT>http://www.cs.tut.fi/~rammer/aide.html<br>";
@@ -425,22 +584,25 @@ def main():
         print "<FONT COLOR=$color_cabecera>- HostSentry is a host based intrusion detection tool </FONT><br>";
         print "<FONT COLOR=$color_cabecera>- DenyHosts is a script intended to be run by Linux system administrators to help thwart SSH server attacks  </FONT>http://denyhosts.sourceforge.net/<br>";
         '''
-        print tabulate(table6, tablefmt="plain") # print out the results
+        print((tabulate(table6, tablefmt="plain")))  # print out the results
 
-    #---------------------------------------------------------------------------
-
+#------------------------------------------------------------------------------
     htmlend(results.html_file, outputdirectory)
 
     hashhtmlreport = hashlib.sha224(results.html_file).hexdigest()
     hashtxtreport = hashlib.sha224(results.txt_file).hexdigest()
-    log.create_log(REPORTS, REPORTS_LINE, hashhtmlreport, hashtxtreport, outputdirectory, results.html_file, results.txt_file, 'audit_mesc.log', outputdate, results.host)
+    log.create_log(REPORTS, REPORTS_LINE, hashhtmlreport, hashtxtreport,
+         outputdirectory, results.html_file, results.txt_file, 'audit_mesc.log',
+          outputdate, results.host)
     '''
     print(os.linesep * 2  + (colored(REPORTS, 'white')))
     print((colored(REPORTS_LINE + os.linesep, 'white')))
     hashhtmlreport = hashlib.sha224(results.html_file).hexdigest()
     hashtxtreport = hashlib.sha224(results.txt_file).hexdigest()
-    print((colored(' - HTML report (%s): ./' % hashhtmlreport + outputdirectory +'/' + results.html_file, 'yellow')))
-    print((colored(' - Text report (%s): ./' % hashtxtreport + outputdirectory +'/' + results.txt_file, 'yellow')))
+    print((colored(' - HTML report (%s): ./' % hashhtmlreport
+        + outputdirectory +'/' + results.html_file, 'yellow')))
+    print((colored(' - Text report (%s): ./' % hashtxtreport
+        + outputdirectory +'/' + results.txt_file, 'yellow')))
     print os.linesep
     '''
     #---------------------------------------------------------------------------

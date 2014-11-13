@@ -49,26 +49,24 @@ POSSIBILITY OF SUCH DAMAGE.
 # Modules
 #------------------------------------------------------------------------------
 
-import os
 import shutil
-from thirdparty.color.termcolor import colored
 import include.serverinfo.config as config
 
 
 __all__ = [
     "create_html_file",
-    "htmlreport",
     "htmlinfo",
-    "htmlend",
-    "htmltile"
+    "htmlend"
 ]
 
 #------------------------------------------------------------------------------
+
+
 def create_html_file(file_name, outputdir, outputdate):
 
     # Copy css and js
-    cssoutput = outputdir+'/css'
-    jsoutput = outputdir+'/js'
+    cssoutput = outputdir + '/css'
+    jsoutput = outputdir + '/js'
 
     shutil.copy2('lib/html/bootstrap.css', cssoutput)
     shutil.copy2('lib/html/bootstrap.min.css', cssoutput)
@@ -80,9 +78,8 @@ def create_html_file(file_name, outputdir, outputdate):
     shutil.copy2('lib/html/bootswatch.js', jsoutput)
     shutil.copy2('lib/html/bootstrap.min.js', jsoutput)
 
-
     __title__ = outputdate
-    __file__ = outputdir +'/'+file_name
+    __file__ = outputdir + '/' + file_name
     __htmFile__ = open(__file__, 'w')
     __htmFile__.write(head(__title__))
     __htmFile__.close
@@ -91,25 +88,30 @@ def create_html_file(file_name, outputdir, outputdate):
 
 #------------------------------------------------------------------------------
 def htmlaudit(file_name, html_report, outputdir):
-    __file__ = outputdir +'/'+file_name
+    __file__ = outputdir + '/' + file_name
     __htmFile__ = open(__file__, 'a')
     __htmFile__.write(body(html_report))
     __htmFile__.close
 
+
 def htmltitle(file_name, outputdirectory, title, href):
-    __file__ = outputdirectory +'/'+file_name
+    __file__ = outputdirectory + '/' + file_name
     __htmFile__ = open(__file__, 'a')
     __htmFile__.write(bodytitle(title, href))
     __htmFile__.close
 
-def htmlinfo(file_name, outputdirectory, helpcommand, commandoutput, commandcheck, checkmessage, command, cmdresults):
-    __file__ = outputdirectory +'/'+file_name
+
+def htmlinfo(file_name, outputdirectory, helpcommand, commandoutput,
+     commandcheck, checkmessage, command, cmdresults):
+    __file__ = outputdirectory + '/' + file_name
     __htmFile__ = open(__file__, 'a')
-    __htmFile__.write(bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cmdresults))
+    __htmFile__.write(bodyinfo(helpcommand, commandoutput, commandcheck,
+     checkmessage, command, cmdresults))
     __htmFile__.close
 
+
 def htmlend(file_name, outputdirectory):
-    __file__ = outputdirectory +'/'+file_name
+    __file__ = outputdirectory + '/' + file_name
     __htmFile__ = open(__file__, 'a')
     __htmFile__.write(bodyend())
     __htmFile__.close
@@ -119,7 +121,7 @@ def htmlend(file_name, outputdirectory):
 
 
 def bodytitle(title, href):
-    __title__=("""<a name="%s"></a><br><br>
+    __title__ = ("""<a name="%s"></a><br><br>
     <div class="row">
         <div class="col-lg-12">
               <h3>%s</h3>
@@ -133,10 +135,11 @@ def bodytitle(title, href):
 
 #------------------------------------------------------------------------------
 
-def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cmdresults):
+def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage,
+     command, cmdresults):
 
     if commandcheck == config.CHECKRESULTOK:
-        __bodyinfo__=("""
+        __bodyinfo__ = ("""
             <div class="row">
               <div class="col-lg-12">
                   <div class="panel panel-info">
@@ -156,10 +159,11 @@ def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cm
                   </div>
             </div>
           </div>
-        """) % (command, helpcommand, commandcheck, cmdresults, checkmessage, commandoutput)
+        """) % (command, helpcommand, commandcheck, cmdresults, checkmessage,
+         commandoutput)
 
-    elif commandcheck == config.CHECKRESULTERROR :
-        __bodyinfo__=("""
+    elif commandcheck == config.CHECKRESULTERROR:
+        __bodyinfo__ = ("""
             <div class="row">
               <div class="col-lg-12">
                   <div class="panel panel-info">
@@ -179,10 +183,11 @@ def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cm
                   </div>
             </div>
           </div>
-        """) % (command, helpcommand, commandcheck, cmdresults, checkmessage, commandoutput)
+        """) % (command, helpcommand, commandcheck, cmdresults, checkmessage,
+         commandoutput)
 
-    elif commandcheck == config.CHECKRESULTWARNING :
-        __bodyinfo__=("""
+    elif commandcheck == config.CHECKRESULTWARNING:
+        __bodyinfo__ = ("""
             <div class="row">
               <div class="col-lg-12">
                   <div class="panel panel-info">
@@ -202,11 +207,11 @@ def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cm
                   </div>
             </div>
           </div>
-        """) % (command, helpcommand, commandcheck, cmdresults, checkmessage, commandoutput)
+        """) % (command, helpcommand, commandcheck, cmdresults, checkmessage,
+         commandoutput)
 
-
-    elif commandcheck == config.CHECKRESULTCRITICAL :
-        __bodyinfo__=("""
+    elif commandcheck == config.CHECKRESULTCRITICAL:
+        __bodyinfo__ = ("""
             <div class="row">
               <div class="col-lg-12">
                   <div class="panel panel-info">
@@ -226,7 +231,8 @@ def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cm
                   </div>
             </div>
           </div>
-        """) % (command, helpcommand, commandcheck, cmdresults, checkmessage, commandoutput)
+        """) % (command, helpcommand, commandcheck, cmdresults, checkmessage,
+         commandoutput)
 
     return (__bodyinfo__)
 
@@ -234,10 +240,8 @@ def bodyinfo(helpcommand, commandoutput, commandcheck, checkmessage, command, cm
 
 #------------------------------------------------------------------------------
 
-
 def head(title):
-
-    __head__=("""<!DOCTYPE html>
+    __head__ = ("""<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -257,8 +261,7 @@ def head(title):
 
 
 def body(htmldatareport):
-
-    __body__=("""<body>
+    __body__ = ("""<body>
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -355,15 +358,18 @@ def body(htmldatareport):
         </div>
       </div>
 
-    """) % (htmldatareport['Auditor'], htmldatareport['Distribution'], htmldatareport['Date'], htmldatareport['System'], htmldatareport['Distribution'], htmldatareport['Architecture'], htmldatareport['Processor'], htmldatareport['Platform'], htmldatareport['Release'], htmldatareport['Hostname'],htmldatareport['Python version'])
+    """) % (htmldatareport['Auditor'], htmldatareport['Distribution'],
+     htmldatareport['Date'], htmldatareport['System'],
+      htmldatareport['Distribution'], htmldatareport['Architecture'],
+       htmldatareport['Processor'], htmldatareport['Platform'],
+        htmldatareport['Release'], htmldatareport['Hostname'],
+        htmldatareport['Python version'])
 
     return (__body__)
 
 
-
 def bodyend():
-
-    __bodyend__=("""
+    __bodyend__ = ("""
       <footer>
         <div class="row">
           <div class="col-lg-12">
@@ -390,5 +396,3 @@ def bodyend():
     """)
 
     return (__bodyend__)
-
-
