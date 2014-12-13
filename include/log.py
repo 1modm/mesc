@@ -83,7 +83,7 @@ def create_log(report, reportline, hashhtmlreport, hashtxtreport,
     print((os.linesep * 2 + (colored(report, 'white'))))
     print((colored(reportline + os.linesep, 'white')))
     print((colored(' - HTML report (%s): ./' % hashhtmlreport + outputdirectory
-                    + '/' + html_file, 'yellow')))
+                    + '/html/' + html_file, 'yellow')))
     print((colored(' - Text report (%s): ./' % hashtxtreport + outputdirectory
-                   + '/' + txt_file, 'yellow')))
+                   + '/txt/' + txt_file, 'yellow')))
     print((os.linesep))

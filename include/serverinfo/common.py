@@ -67,13 +67,14 @@ __all__ = [
     "free",
     "who",
     "tail_root",
-    "last"
+    "last",
+    "history"
 ]
 
 
 def OS_ver(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
-    __help_result__ = '' + os.linesep
+    __help_result__ = 'Get name and information about current kernel' + os.linesep
     __command__ = "Operating System Version"
     __cmd__ = "uname -o"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
@@ -92,7 +93,7 @@ def OS_ver(__host__, __user__, __passwd__, __port__):
 
 def OS_kernel(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
-    __help_result__ = '' + os.linesep
+    __help_result__ = 'Get name and information about current kernel' + os.linesep
     __command__ = "Kernel Name"
     __cmd__ = "uname -s"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__,
@@ -106,12 +107,12 @@ def OS_kernel(__host__, __user__, __passwd__, __port__):
     __osreport__ = {'Kernel Name': __output__}
     __OSout__ = __osreport__['Kernel Name']
     return (__OSout__, __help_result__, __command_check__, __check_message__,
-         __check_html_message__, __command__,__cmd__)
+         __check_html_message__, __command__, __cmd__)
 
 
 def OS_kernelver(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
-    __help_result__ = '' + os.linesep
+    __help_result__ = 'Get name and information about current kernel' + os.linesep
     __command__ = "Kernel Version"
     __cmd__ = "uname -r"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
@@ -125,12 +126,12 @@ def OS_kernelver(__host__, __user__, __passwd__, __port__):
     __osreport__ = {'Kernel Version': __output__}
     __OSout__ = __osreport__['Kernel Version']
     return (__OSout__, __help_result__, __command_check__, __check_message__,
-         __check_html_message__, __command__,__cmd__)
+         __check_html_message__, __command__, __cmd__)
 
 
 def OS_machine(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
-    __help_result__ = '' + os.linesep
+    __help_result__ = 'Get name and information about current kernel' + os.linesep
     __command__ = "Machine"
     __cmd__ = "uname -m"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
@@ -149,7 +150,7 @@ def OS_machine(__host__, __user__, __passwd__, __port__):
 
 def OS_processor(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
-    __help_result__ = '' + os.linesep
+    __help_result__ = 'Get name and information about current kernel' + os.linesep
     __command__ = "Processor"
     __cmd__ = "uname -p"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
@@ -358,7 +359,7 @@ def tail_root(__host__, __user__, __passwd__, __port__):
     :returns: tail_root command.
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'root saved history'
     __help_result__ += os.linesep
     __command__ = "Last 100 root commands executed"
     __cmd__ = "tail -100 /root/.bash_history"
@@ -378,6 +379,40 @@ def tail_root(__host__, __user__, __passwd__, __port__):
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__,
          __check_html_message__, __command__, __cmd__)
+
+
+#------------------------------------------------------------------------------
+
+
+def history(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: hsitory command.
+    :param host: Target.
+    """
+    __help_result__ = 'The GNU History library is able to keep track of those'
+    __help_result__ += ' lines, associate arbitrary data with each line, and'
+    __help_result__ += ' utilize information from previous lines in composing'
+    __help_result__ += ' new ones. You should add in bashrc HISTTIMEFORMAT'
+    __help_result__ += os.linesep
+    __command__ = "Current user history"
+    __cmd__ = "export HISTTIMEFORMAT=\'%F %T \' ; bash -i -c \"history -r; history\""
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to execute'
+        __check_html_message__ = 'Unable to execute'
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = 'Unable to execute'
+        __check_html_message__ = 'Unable to execute'
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
 
 #------------------------------------------------------------------------------
 

@@ -1,0 +1,12 @@
+tabulate
+datetime
+argparse
+sys
+platform
+socket
+os
+struct
+fcntl
+re
+commands
+fabric

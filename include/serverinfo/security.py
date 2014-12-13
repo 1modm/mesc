@@ -104,15 +104,20 @@ def checkShells(__host__, __user__, __passwd__, __port__):
         __check_html_message__ = 'Unable to load the configuration file: ' +\
          __cmdfile__
     elif __command_check__ == config.CHECKRESULTWARNING:
-        __check_message__ = 'These shells ' + badshell + os.linesep +\
-         'does not exist in the system but is allowed their use, are included in /etc/shells !!!'
-        __check_html_message__ = 'These shells <br>' + badshellhtml +\
-         '<br>does not exist in the system but is allowed their use, are included in /etc/shells !!!'
+        __check_message__ = 'These shells '
+        __check_message__ += badshell + os.linesep
+        __check_message__ += 'does not exist in the system but is allowed their'
+        __check_message__ += ' use, are included in /etc/shells !!!'
+        __check_html_message__ = 'These shells <br>'
+        __check_html_message__ += badshellhtml
+        __check_html_message__ += '<br>does not exist in the system but is'
+        __check_html_message__ += ' allowed their use, are included in'
+        __check_html_message__ += ' /etc/shells !!!'
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__,
-         __check_html_message__, __command__, __file__)
+            __check_html_message__, __command__, __file__)
 
 #------------------------------------------------------------------------------
 

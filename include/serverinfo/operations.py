@@ -68,7 +68,8 @@ __all__ = [
     "execute_cmd",
     "check_file",
     "exists_file",
-    "exists_read_file"
+    "exists_read_file",
+    "ip4_addresses"
 ]
 
 #------------------------------------------------------------------------------
@@ -80,7 +81,7 @@ def get_ip_address(ifname):
         #ifreq = ioctl(s, SIOCGIFADDR,struct.pack("16s16x",iff))
         ifreq = fcntl.ioctl(s.fileno(), config.SIOCGIFADDR, struct.pack('256s',
          ifname[:15]))
-    except IOError: # interface present in routing tables but doesn't have any assigned IP
+    except IOError:  # interface present in routing tables but doesn't have any assigned IP
         ifaddr = "0.0.0.0"
     else:
         addrfamily = struct.unpack("h", ifreq[16:18])[0]
@@ -143,7 +144,9 @@ def execute_cmd(cmd, host, user_fabric, passwd_fabric, port_fabric):
         else:
             __command_check__ = config.CHECKRESULTERROR
     elif __cmd_local__ is False:
-        with settings(host_string=host,user=user_fabric, password=passwd_fabric, port=port_fabric):
+        with settings(host_string=host, user=user_fabric,
+                                            password=passwd_fabric,
+                                            port=port_fabric):
             try:
                 __output_cmd__ = run(cmd,shell=True,warn_only=True, quiet=True)
                 if __output_cmd__.failed:

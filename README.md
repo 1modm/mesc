@@ -55,7 +55,7 @@ Dependencies
 ------------
 
 * 2.7 < Python < 3.0
-* python tabulate module # pip install tabulate
+* python tabulate module
 * python datetime module
 * python argparse module
 * python sys module
@@ -68,11 +68,13 @@ Dependencies
 * python commands module
 * python fabric module
 
+
 Ubuntu
 ------
 ```
 # apt-get install python python-pip
-# pip install tabulate interfaces netifaces fabric
+# git clone https://github.com/1modm/mesc.git && cd mesc
+# pip install -r requirements.lst
 ```
 
 Usage

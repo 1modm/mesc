@@ -54,7 +54,7 @@ import os
 import sys
 import argparse
 import hashlib
-from tabulate import tabulate  # pip install tabulate
+from tabulate import tabulate
 from datetime import datetime
 from thirdparty.color.termcolor import colored
 
@@ -64,7 +64,9 @@ from thirdparty.color.termcolor import colored
 #------------------------------------------------------------------------------
 
 from include import show_banner
-from lib.htmloutput import htmlaudit, htmlend, create_html_file
+from lib.htmloutput import htmlaudit, htmlend, htmllast, create_html_file,\
+                           create_blank_html_file, htmldatadashboard,\
+                           htmldatadashboardjs, htmldashboardend
 from lib.txtoutput import create_txt_file, print_audit_txt
 from lib.output import print_results, print_titles, print_title_console
 import include.log as log
@@ -74,6 +76,7 @@ import include.serverinfo.filesystem as filesystem
 import include.serverinfo.tcpip as tcpip
 import include.serverinfo.proc as proc
 import include.serverinfo.security as security
+import include.serverinfo.psmem as ps_mem
 
 #------------------------------------------------------------------------------
 # Python version check.
@@ -84,7 +87,6 @@ if __name__ == "__main__":
         show_banner()
         print ("[!] You must use Python version 2.7 or above")
         sys.exit(1)
-
 
 
 #------------------------------------------------------------------------------
@@ -160,6 +162,46 @@ def cmdline_parser():
 
 
 #------------------------------------------------------------------------------
+# Statistics
+#------------------------------------------------------------------------------
+
+def statistics(ccheck, section, totalchecks=[0], totalchecksok=[0],
+               totalcheckswarning=[0], totalcheckscritical=[0],
+               totalcheckserror=[0], totalchecksystem=[0], totalchecksboot=[0],
+               totalchecksfile=[0], totalchecksnet=[0], totalchecksproc=[0],
+               totalcheckssec=[0]):
+
+    totalchecks[0] += 1
+
+    if (ccheck == 'CHECKED'):
+        totalchecksok[0] += 1
+    elif (ccheck == 'WARNING'):
+        totalcheckswarning[0] += 1
+    elif (ccheck == 'CRITICAL'):
+        totalcheckscritical[0] += 1
+    elif (ccheck == 'ERROR'):
+        totalcheckserror[0] += 1
+
+    if (section == 'general'):
+        totalchecksystem[0] += 1
+    if (section == 'boot'):
+        totalchecksboot[0] += 1
+    if (section == 'filesystem'):
+        totalchecksfile[0] += 1
+    if (section == 'tcpip'):
+        totalchecksnet[0] += 1
+    if (section == 'processes'):
+        totalchecksproc[0] += 1
+    if (section == 'security'):
+        totalcheckssec[0] += 1
+
+    return (totalchecks[0], totalchecksok[0], totalcheckswarning[0],
+            totalcheckscritical[0], totalcheckserror[0], totalchecksystem[0],
+            totalchecksboot[0], totalchecksfile[0], totalchecksnet[0],
+            totalchecksproc[0], totalcheckssec[0])
+
+
+#------------------------------------------------------------------------------
 # Start of program
 #------------------------------------------------------------------------------
 
@@ -182,24 +224,29 @@ def main():
     results = parser.parse_args()
 
     #---------------------------------------------------------------------------
+    # Start time
+    #---------------------------------------------------------------------------
+    start_time = datetime.now()
+
+    #---------------------------------------------------------------------------
     # Sections
     #---------------------------------------------------------------------------
 
-    AUDIT = '[0] Auditor information            '
+    AUDIT = 'Auditor information            '
     AUDIT_LINE = '-----------------------'
-    GENERAL = '[1] System information             '
+    GENERAL = 'System information             '
     GENERAL_LINE = '----------------------'
-    BOOT = '[2] Boot information               '
+    BOOT = 'Boot information               '
     BOOT_LINE = '--------------------'
-    FILESYSTEM = '[3] File system information        '
+    FILESYSTEM = 'File system information        '
     FILESYSTEM_LINE = '---------------------------'
-    TCPIP = '[4] Network Information            '
+    TCPIP = 'Network Information            '
     TCPIP_LINE = '----------------------'
-    PROCESSES = '[5] Processes running in the system'
+    PROCESSES = 'Processes running in the system'
     PROCESSES_LINE = '-----------------------------------'
-    SECURITY = '[6] Security information           '
+    SECURITY = 'Security information           '
     SECURITY_LINE = '------------------------'
-    REPORTS = '[7] Reports                        '
+    REPORTS = 'Reports                        '
     REPORTS_LINE = '-----------'
 
     #---------------------------------------------------------------------------
@@ -238,47 +285,86 @@ def main():
     if not os.path.exists(outputdirectory):
         os.makedirs(outputdirectory)
     datenow = datetime.now()
-    outputdate = datenow.strftime('%Y-%m-%d@%H_%M_%S')
+    outputdate = datenow.strftime('%Y-%m-%d_%H_%M_%S')
     outputdirectory = 'output' + '/' + outputdate
     os.makedirs(outputdirectory)
-    os.makedirs(outputdirectory + '/css')
-    os.makedirs(outputdirectory + '/js')
+    os.makedirs(outputdirectory + '/txt')
+    os.makedirs(outputdirectory + '/html/reports')
+    os.makedirs(outputdirectory + '/html/css')
+    os.makedirs(outputdirectory + '/html/js')
+    os.makedirs(outputdirectory + '/html/css/plugins')
+    os.makedirs(outputdirectory + '/html/css/plugins/metisMenu')
+    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0')
+    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0/css')
+    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0/fonts')
+    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0/less')
+    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0/scss')
+    os.makedirs(outputdirectory + '/html/fonts')
+    os.makedirs(outputdirectory + '/html/js/plugins')
+    os.makedirs(outputdirectory + '/html/js/plugins/flot')
+    os.makedirs(outputdirectory + '/html/js/plugins/morris')
+    os.makedirs(outputdirectory + '/html/js/plugins/dataTables')
+    os.makedirs(outputdirectory + '/html/js/plugins/metisMenu')
+    os.makedirs(outputdirectory + '/html/less')
+    outputdirectorytxt = (outputdirectory + '/txt')
+    outputdirectoryhtml = (outputdirectory + '/html')
 
     # Create the txt results file
     if results.txt_file:
-        create_txt_file(results.txt_file, outputdirectory)
+        create_txt_file(results.txt_file, outputdirectorytxt)
     else:
         results.txt_file = 'results.log'
-        create_txt_file(results.txt_file, outputdirectory)
+        create_txt_file(results.txt_file, outputdirectorytxt)
 
     # Create the html results file
     if results.html_file:
-        create_html_file(results.html_file, outputdirectory, outputdate)
+        create_html_file(results.html_file, outputdirectoryhtml, outputdate)
     else:
         results.html_file = 'results.html'
-        create_html_file(results.html_file, outputdirectory, outputdate)
+        create_html_file(results.html_file, outputdirectoryhtml, outputdate)
 
 #------------------------------------------------------------------------------
 
     # Auditor Operating System Information
-    os_output, htmlAuditreport = common.auditor_info(outputdate,
-         results.auditorname)
-    # Output
-    print_audit_txt(AUDIT, AUDIT_LINE, os_output, results.txt_file,
-         outputdirectory)
-    htmlaudit(results.html_file, htmlAuditreport, outputdirectory)
+    os_output, htmlAuditreport = common.auditor_info(start_time,
+                                                     results.auditorname)
+    # Output txt
+    print_audit_txt('[0] ' + AUDIT, AUDIT_LINE, os_output, results.txt_file,
+                    outputdirectorytxt)
 
-    print_title_console(AUDIT, AUDIT_LINE, table0)
+    # Output html
+    gen_html_file = 'general_' + results.html_file
+    boot_html_file = 'boot_' + results.html_file
+    file_html_file = 'file_' + results.html_file
+    net_html_file = 'net_' + results.html_file
+    proc_html_file = 'proc_' + results.html_file
+    sec_html_file = 'security_' + results.html_file
+
+    cat_menu = {'fileout': results.html_file,
+                'fileoutgen': gen_html_file, 'general': 'System Information',
+                'fileoutboot': boot_html_file, 'boot': 'Boot',
+                'fileoutfile': file_html_file, 'filesystem': 'File system',
+                'fileoutnet': net_html_file, 'tcpip': 'Network',
+                'fileoutproc': proc_html_file, 'processes': 'Processes',
+                'fileoutsec': sec_html_file, 'security': 'Security'}
+
+    htmlaudit(results.html_file, htmlAuditreport, outputdirectoryhtml, cat_menu)
+
+    # Output console
+    print_title_console('[0] ' + AUDIT, AUDIT_LINE, table0)
     print((tabulate(table0, tablefmt="plain")))  # print out the results
     print((colored(os_output + os.linesep, 'white')))
 
-
 #------------------------------------------------------------------------------
 
-
     if results.general or results.all:
-        print_titles(GENERAL, GENERAL_LINE, 'general', results.txt_file,
-             results.html_file, outputdirectory, table1)
+        href = 'general'
+        html_file = gen_html_file
+        create_blank_html_file(html_file, outputdirectoryhtml, outputdate,
+                               cat_menu)
+        print_titles('[1] ' + GENERAL, GENERAL_LINE, href,
+                     results.txt_file, html_file, outputdirectory,
+                     table1)
 
         # Operating System Information
         command_output, help_command, command_check, check_message,\
@@ -286,35 +372,45 @@ def main():
                  fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
             check_html_message, command, cmd = common.OS_kernel(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
             check_html_message, command, cmd = common.OS_kernelver(results.host,
                  fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = common.OS_machine(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = common.OS_processor(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         # System Information
         command_output, help_command, command_check, check_message,\
@@ -322,72 +418,123 @@ def main():
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = common.free(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = common.who(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = common.tail_root(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.history(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = common.last(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = common.shells(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table1,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        htmlend(html_file, outputdirectoryhtml)
 
         print((tabulate(table1, tablefmt="plain")))  # print out the results
         print((os.linesep))
+
+    #---------------------------------------------------------------------------
+    # system time
+    #---------------------------------------------------------------------------
+        sys_time = datetime.now()
+        sys_duration = format(sys_time - start_time)
+
 #------------------------------------------------------------------------------
 
     if results.boot or results.all:
-        print_titles(BOOT, BOOT_LINE, 'boot', results.txt_file,
-             results.html_file, outputdirectory, table2)
+        href = 'boot'
+        html_file = boot_html_file
+        create_blank_html_file(html_file, outputdirectoryhtml, outputdate,
+                               cat_menu)
+        print_titles('[2] ' + BOOT, BOOT_LINE, href, results.txt_file,
+                     html_file, outputdirectory, table2)
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = boot.grub(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table2,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = boot.rc3(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table2,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        htmlend(html_file, outputdirectoryhtml)
 
         print((tabulate(table2, tablefmt="plain")))  # print out the results
         print((os.linesep))
 
+    #---------------------------------------------------------------------------
+    # boot time
+    #---------------------------------------------------------------------------
+        boot_time = datetime.now()
+        boot_duration = format(boot_time - start_time)
+
 #------------------------------------------------------------------------------
+
     if results.filesystem or results.all:
-        print_titles(FILESYSTEM, FILESYSTEM_LINE, 'filesystem',
-             results.txt_file, results.html_file, outputdirectory, table3)
+        href = 'filesystem'
+        html_file = file_html_file
+        create_blank_html_file(html_file, outputdirectoryhtml, outputdate,
+                               cat_menu)
+        print_titles('[3] ' + FILESYSTEM, FILESYSTEM_LINE, href,
+             results.txt_file, html_file, outputdirectory, table3)
 
         filesystem.defpath()
 
@@ -396,35 +543,45 @@ def main():
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = filesystem.inodespace(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = filesystem.setuid(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = filesystem.setgid(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = filesystem.rhosts(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command,\
@@ -432,7 +589,9 @@ def main():
                fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command,\
@@ -440,112 +599,193 @@ def main():
                fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = filesystem.writefiles(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = filesystem.tmpcontent(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table3,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        htmlend(html_file, outputdirectoryhtml)
 
         print((tabulate(table3, tablefmt="plain")))  # print out the results
         print((os.linesep))
+
+    #---------------------------------------------------------------------------
+    # file time
+    #---------------------------------------------------------------------------
+        file_time = datetime.now()
+        file_duration = format(file_time - start_time)
+
 #------------------------------------------------------------------------------
+
     if results.tcpip or results.all:
-        print_titles(TCPIP, TCPIP_LINE, 'tcpip', results.txt_file,
-             results.html_file, outputdirectory, table4)
+        href = 'tcpip'
+        html_file = net_html_file
+        create_blank_html_file(html_file, outputdirectoryhtml, outputdate,
+                               cat_menu)
+        print_titles('[4] ' + TCPIP, TCPIP_LINE, href, results.txt_file,
+                     html_file, outputdirectory, table4)
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = tcpip.nmap(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table4,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = tcpip.rpcinfo(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table4,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = tcpip.routes(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table4,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = tcpip.activeconections(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table4,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = tcpip.ifconfig(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table4,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        htmlend(html_file, outputdirectoryhtml)
 
         print((tabulate(table4, tablefmt="plain")))  # print out the results
         print((os.linesep))
+
+    #---------------------------------------------------------------------------
+    # network time
+    #---------------------------------------------------------------------------
+        network_time = datetime.now()
+        network_duration = format(network_time - start_time)
+
 #------------------------------------------------------------------------------
+
     if results.processes or results.all:
-        print_titles(PROCESSES, PROCESSES_LINE, 'processes',
-             results.txt_file, results.html_file, outputdirectory, table5)
+        href = 'processes'
+        html_file = proc_html_file
+        create_blank_html_file(html_file, outputdirectoryhtml, outputdate,
+                               cat_menu)
+        print_titles('[5] ' + PROCESSES, PROCESSES_LINE, href,
+             results.txt_file, html_file, outputdirectory, table5)
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = proc.proc(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table5,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = proc.packages(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table5,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = proc.top(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table5,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = ps_mem.ps_mem(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        command_output_str = os.linesep
+        for psm in command_output:
+            command_output_str += psm + os.linesep
+        print_results(help_command, command_output_str, command_check,
+             check_message, check_html_message, command, cmd, table5,
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        htmlend(html_file, outputdirectoryhtml)
 
         print((tabulate(table5, tablefmt="plain")))  # print out the results
         print((os.linesep))
+
+    #---------------------------------------------------------------------------
+    # processes time
+    #---------------------------------------------------------------------------
+        processes_time = datetime.now()
+        processes_duration = format(processes_time - start_time)
+
 #------------------------------------------------------------------------------
+
     if results.security or results.all:
-        print_titles(SECURITY, SECURITY_LINE, 'security', results.txt_file,
-             results.html_file, outputdirectory, table6)
+        href = 'security'
+        html_file = sec_html_file
+        create_blank_html_file(html_file, outputdirectoryhtml, outputdate,
+                               cat_menu)
+        print_titles('[6] ' + SECURITY, SECURITY_LINE, href,
+                     results.txt_file, html_file, outputdirectory,
+                     table6)
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = security.checkShells(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table6,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = security.checkSSH(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table6,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command,\
@@ -553,58 +793,66 @@ def main():
                fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table6,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = security.checkCrontab(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table6,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = security.checkApache(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table6,
-              results.txt_file, results.html_file, outputdirectory)
-        '''
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.recomendations(results.host,
-              fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table6,
-              results.txt_file, results.html_file, outputdirectory)
+              results.txt_file, html_file, outputdirectory)
 
-        print "<FONT COLOR=$color_cabecera>- chkrootkit: shell script that checks system binaries for rootkit modification</FONT> http://www.chkrootkit.org/<br>";
-        print "<FONT COLOR=$color_cabecera>- AIDE (Advanced Intrusion Detection Environment) </FONT>http://www.cs.tut.fi/~rammer/aide.html<br>";
-        print "<FONT COLOR=$color_cabecera>- John the Ripper is a fast password cracker </FONT>http://www.openwall.com/john/ <br>";
-        print "<FONT COLOR=$color_cabecera>- Logcheck is a simple utility which is designed to allow a system administrator to view the logfiles which are produced upon hosts under their control. </FONT>http://logcheck.org/ <br>";
-        print "<FONT COLOR=$color_cabecera>- Portsentry is an attack detection tool </FONT>http://sourceforge.net/projects/sentrytools/<br>";
-        print "<FONT COLOR=$color_cabecera>- HostSentry is a host based intrusion detection tool </FONT><br>";
-        print "<FONT COLOR=$color_cabecera>- DenyHosts is a script intended to be run by Linux system administrators to help thwart SSH server attacks  </FONT>http://denyhosts.sourceforge.net/<br>";
-        '''
+    #---------------------------------------------------------------------------
+    # Last statistics
+    #---------------------------------------------------------------------------
+        total, totalsok, totalwarning, totalcritical, totalserror,\
+        totalsystem, totalboot, totalfile, totalnet, totalproc,\
+        totalsec = statistics(command_check, href)
+
+        htmlend(html_file, outputdirectoryhtml)
+
         print((tabulate(table6, tablefmt="plain")))  # print out the results
 
-#------------------------------------------------------------------------------
-    htmlend(results.html_file, outputdirectory)
+    #---------------------------------------------------------------------------
+    # End time
+    #---------------------------------------------------------------------------
+    end_time = datetime.now()
+    execute_duration = format(end_time - start_time)
+    #---------------------------------------------------------------------------
+    htmlreportstat = {'total': total, 'ok': totalsok, 'warn': totalwarning,
+                      'critical': totalcritical, 'error': totalserror,
+                      'system': totalsystem, 'boot': totalboot,
+                      'file': totalfile, 'net': totalnet, 'proc': totalproc,
+                      'sec': totalsec, 'starttime': start_time,
+                      'endtime': execute_duration,
+                      'ptime': processes_duration, 'ntime': network_duration,
+                      'ftime': file_duration, 'btime': boot_duration,
+                      'stime': sys_duration}
+    #---------------------------------------------------------------------------
+
+    htmldatadashboard(results.html_file, outputdirectoryhtml, htmlreportstat)
+    htmllast(results.html_file, outputdirectoryhtml)
+    htmldatadashboardjs(results.html_file, outputdirectoryhtml, htmlreportstat)
+    #--------------------------------------------------------------------------
+    htmldashboardend(results.html_file, outputdirectoryhtml)
 
     hashhtmlreport = hashlib.sha224(results.html_file).hexdigest()
     hashtxtreport = hashlib.sha224(results.txt_file).hexdigest()
-    log.create_log(REPORTS, REPORTS_LINE, hashhtmlreport, hashtxtreport,
-         outputdirectory, results.html_file, results.txt_file, 'audit_mesc.log',
-          outputdate, results.host)
-    '''
-    print(os.linesep * 2  + (colored(REPORTS, 'white')))
-    print((colored(REPORTS_LINE + os.linesep, 'white')))
-    hashhtmlreport = hashlib.sha224(results.html_file).hexdigest()
-    hashtxtreport = hashlib.sha224(results.txt_file).hexdigest()
-    print((colored(' - HTML report (%s): ./' % hashhtmlreport
-        + outputdirectory +'/' + results.html_file, 'yellow')))
-    print((colored(' - Text report (%s): ./' % hashtxtreport
-        + outputdirectory +'/' + results.txt_file, 'yellow')))
-    print os.linesep
-    '''
+    log.create_log('[7] ' + REPORTS, REPORTS_LINE, hashhtmlreport,
+                   hashtxtreport, outputdirectory, results.html_file,
+                   results.txt_file, 'audit_mesc.log', outputdate, results.host)
+
     #---------------------------------------------------------------------------
     # The End
     #---------------------------------------------------------------------------

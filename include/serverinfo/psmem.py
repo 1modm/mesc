@@ -113,54 +113,95 @@ import os
 import string
 import sys
 
+from . import config
+from .operations import execute_cmd, ip4_addresses
+
+__all__ = [
+    "ps_mem"
+]
+
 PAGESIZE=os.sysconf("SC_PAGE_SIZE")/1024 #KiB
 our_pid=os.getpid()
 
 
-def ps_mem():
+
+def ps_mem(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: Memory allocated.
+    :param host: Target.
+    """
+    __help_result__ = 'Try to determine how much RAM is currently being used per program.'
+    __help_result__ += os.linesep
+    __command__ = 'Memory allocated being used per program'
+    __cmd__ = "ps -e -o rss=,pid=,comm="
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+                                                __passwd__, __port__)
+
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+
     cmds={}
     shareds={}
     count={}
-    for line in os.popen("ps -e -o rss=,pid=,comm=").readlines():
-        size, pid, cmd = map(string.strip,line.strip().split(None,2))
-        if int(pid) == our_pid:
-            continue #no point counting this process
-        try:
-            shared=getShared(pid)
-        except:
-            continue #ps gone away
-        if shareds.get(cmd):
-            if shareds[cmd] < shared:
+
+    if __host__ == 'localhost':
+        #for line in os.popen("ps -e -o rss=,pid=,comm=").readlines():
+        for line in __output__.splitlines():
+            size, pid, cmd = map(string.strip,line.strip().split(None,2))
+            if int(pid) == our_pid:
+                continue #no point counting this process
+            try:
+                shared=getShared(pid)
+            except:
+                continue #ps gone away
+            if shareds.get(cmd):
+                if shareds[cmd] < shared:
+                    shareds[cmd]=shared
+            else:
                 shareds[cmd]=shared
-        else:
-            shareds[cmd]=shared
-        #Note shared is always a subset of rss (trs is not always)
-        cmds[cmd]=cmds.setdefault(cmd,0)+int(size)-shared
-        if count.has_key(cmd):
-          count[cmd] += 1
-        else:
-          count[cmd] = 1
+            #Note shared is always a subset of rss (trs is not always)
+            cmds[cmd]=cmds.setdefault(cmd,0)+int(size)-shared
+            if count.has_key(cmd):
+              count[cmd] += 1
+            else:
+              count[cmd] = 1
 
-    #Add max shared mem for each program
-    for cmd in cmds.keys():
-        cmds[cmd]=cmds[cmd]+shareds[cmd]
+        #Add max shared mem for each program
+        for cmd in cmds.keys():
+            cmds[cmd]=cmds[cmd]+shareds[cmd]
 
-    sort_list = cmds.items()
-    sort_list.sort(lambda x,y:cmp(x[1],y[1]))
-    sort_list=filter(lambda x:x[1],sort_list) #get rid of zero sized processes (kernel threads)
+        sort_list = cmds.items()
+        sort_list.sort(lambda x,y:cmp(x[1],y[1]))
+        sort_list=filter(lambda x:x[1],sort_list) #get rid of zero sized processes (kernel threads)
 
-    i=0
-    output=[]
-    output.append("Private   +  Shared   =  RAM used          Program")
-    for cmd in sort_list:
-        txtoutput = "%8sB + %8sB = %8sB\t%s" % (human(cmd[1]-shareds[cmd[0]]), human(shareds[cmd[0]]), human(cmd[1]),
-                                          cmd_with_count(cmd[0], count[cmd[0]]))
-        output.append(txtoutput)
-        i=i+1
-        #print "%8sB + %8sB = %8sB\t%s" % (human(cmd[1]-shareds[cmd[0]]), human(shareds[cmd[0]]), human(cmd[1]),
-                                          #cmd_with_count(cmd[0], count[cmd[0]]))
-    output.append("Private   +  Shared   =  RAM used          Program")
-    return output
+        i=0
+        output=[]
+        output.append("Private   +  Shared   =  RAM used          Program")
+        for cmd in sort_list:
+            txtoutput = "%8sB + %8sB = %8sB\t%s" % (human(cmd[1]-shareds[cmd[0]]), human(shareds[cmd[0]]), human(cmd[1]),
+                                              cmd_with_count(cmd[0], count[cmd[0]]))
+            output.append(txtoutput)
+            i=i+1
+            #print "%8sB + %8sB = %8sB\t%s" % (human(cmd[1]-shareds[cmd[0]]), human(shareds[cmd[0]]), human(cmd[1]),
+                                              #cmd_with_count(cmd[0], count[cmd[0]]))
+        output.append("Private   +  Shared   =  RAM used          Program")
+
+    elif __host__ not in ip4_addresses():
+        output=[]
+        output.append("Only for local checks")
+
+    return (output, __help_result__, __command_check__, __check_message__,
+            __check_html_message__, __command__, __cmd__)
 
 
 #The following matches "du -h" output

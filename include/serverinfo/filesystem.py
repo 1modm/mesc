@@ -80,12 +80,14 @@ def diskspace(__host__, __user__, __passwd__, __port__):
     :returns: File system disk space usage.
     :param host: Target.
     """
-    __help_result__ = 'Displays the amount of disk space available on the file system'
+    __help_result__ = 'Displays the amount of disk space available on the'
+    __help_result__ += ' file system'
     __help_result__ += os.linesep
     __command__ = "File system disk space usage"
     __cmd__ = "df -h"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
-         __passwd__, __port__)
+                                    __passwd__, __port__)
+
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = ''
         __check_html_message__ = ''
@@ -102,28 +104,28 @@ def diskspace(__host__, __user__, __passwd__, __port__):
         percentage_used = (int(int_use))
         if (percentage_used < config.RESULTOKTHRESHOLD):
             __check_message__ = 'Disk space usage: ' + str(percentage_used) +\
-                 '%' + os.linesep
+                                '%' + os.linesep
             __check_html_message__ = ''
         elif (percentage_used < config.RESULTWARNINGTHRESHOLD):
             __command_check__ = config.CHECKRESULTWARNING
             __check_message__ = 'Disk space usage: ' + str(percentage_used) +\
-                 '%' + os.linesep
+                                '%' + os.linesep
             __check_message__ += 'Space: ' + str(space) + ' - ' + 'Free: ' +\
-                 str(free)
+                                 str(free)
             __check_html_message__ = 'Disk space usage: ' +\
-                 str(percentage_used) + '%'
+                                     str(percentage_used) + '%'
             __check_html_message__ += '<br>Space: ' + str(space) +\
-                 ' - ' + 'Free: ' + str(free)
+                                      ' - ' + 'Free: ' + str(free)
         else:
             __command_check__ = config.CHECKRESULTCRITICAL
             __check_message__ = 'Disk space usage: ' + str(percentage_used) +\
-                 '%' + os.linesep
+                                '%' + os.linesep
             __check_message__ += 'Space: ' + str(space) + ' - ' + 'Free: ' +\
-                 str(free)
+                                 str(free)
             __check_html_message__ = 'Disk space usage: ' +\
-                 str(percentage_used) + '%'
+                                     str(percentage_used) + '%'
             __check_html_message__ += '<br>Space: ' + str(space) +\
-                 ' - ' + 'Free: ' + str(free)
+                                      ' - ' + 'Free: ' + str(free)
 
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = ''
@@ -135,7 +137,7 @@ def diskspace(__host__, __user__, __passwd__, __port__):
         __check_message__ = ''
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__,
-         __check_html_message__, __command__, __cmd__)
+            __check_html_message__, __command__, __cmd__)
 
 #------------------------------------------------------------------------------
 
@@ -145,7 +147,8 @@ def inodespace(__host__, __user__, __passwd__, __port__):
     :returns: File system disk inode space usage.
     :param host: Target.
     """
-    __help_result__ = 'df displays the amount of disk space available on the file system'
+    __help_result__ = 'df displays the amount of disk space available on'
+    __help_result__ += ' the file system'
     __help_result__ += os.linesep
     __command__ = "File system disk inode space usage"
     __cmd__ = "df -i"
@@ -167,28 +170,28 @@ def inodespace(__host__, __user__, __passwd__, __port__):
         percentage_used = (int(int_use))
         if (percentage_used < config.RESULTOKTHRESHOLD):
             __check_message__ = 'Disk space usage: ' + str(percentage_used) +\
-                 '%' + os.linesep
+                                '%' + os.linesep
             __check_html_message__ = ''
         elif (percentage_used < config.RESULTWARNINGTHRESHOLD):
             __command_check__ = config.CHECKRESULTWARNING
             __check_message__ = 'Disk space usage: ' + str(percentage_used) +\
-                 '%' + os.linesep
+                                '%' + os.linesep
             __check_message__ += 'Space: ' + str(inode) + ' - ' + 'Free: ' +\
-                 str(free)
+                                 str(free)
             __check_html_message__ = 'Disk space usage: ' +\
-                 str(percentage_used) + '%'
+                                     str(percentage_used) + '%'
             __check_html_message__ += '<br>Space: ' + str(inode) + ' - ' +\
-                 'Free: ' + str(free)
+                                      'Free: ' + str(free)
         else:
             __command_check__ = config.CHECKRESULTCRITICAL
             __check_message__ = 'Disk space usage: ' + str(percentage_used) +\
-                 '%' + os.linesep
+                                '%' + os.linesep
             __check_message__ += 'Space: ' + str(inode) + ' - ' + 'Free: ' +\
-                 str(free)
+                                 str(free)
             __check_html_message__ = 'Disk space usage: ' +\
-                 str(percentage_used) + '%'
+                                     str(percentage_used) + '%'
             __check_html_message__ += '<br>Space: ' + str(inode) + ' - ' +\
-                 'Free: ' + str(free)
+                                      'Free: ' + str(free)
 
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to execute the command'

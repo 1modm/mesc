@@ -62,18 +62,23 @@ __all__ = [
 #------------------------------------------------------------------------------
 
 def print_results(help_command, outputresult, checkresult, checkmessage,
-     checkhtmlmessage, commandresult, cmdresults, tableresult, txtfile,
-      htmlfile, outputdirectory):
-    print_result_txt(help_command, outputresult, checkresult, checkmessage,
-         commandresult, cmdresults, txtfile, outputdirectory)
+                  checkhtmlmessage, commandresult, cmdresults, tableresult,
+                  txtfile, htmlfile, outputdirectory):
+    outputdirectorytxt = (outputdirectory + '/txt')
+    outputdirectoryhtml = (outputdirectory + '/html')
     print_result_console(help_command, outputresult, checkresult,
-         checkmessage, commandresult, cmdresults, tableresult)
-    htmlinfo(htmlfile, outputdirectory, help_command, outputresult,
-         checkresult, checkhtmlmessage, commandresult, cmdresults)
+                         checkmessage, commandresult, cmdresults, tableresult)
+    print_result_txt(help_command, outputresult, checkresult, checkmessage,
+                     commandresult, cmdresults, txtfile, outputdirectorytxt)
+    htmlinfo(htmlfile, outputdirectoryhtml, help_command, outputresult,
+             checkresult, checkhtmlmessage, commandresult, cmdresults)
 
 
 def print_titles(title_name, hr_title, hrefsection, txtfile, htmlfile,
-     outputdirectory, tableresult):
-    print_title_txt(title_name, hr_title, txtfile, outputdirectory)
+                 outputdirectory, tableresult):
+    outputdirectorytxt = (outputdirectory + '/txt/')
+    outputdirectoryhtml = (outputdirectory + '/html/')
     print_title_console(title_name, hr_title, tableresult)
-    htmltitle(htmlfile, outputdirectory, title_name, hrefsection)
+    print_title_txt(title_name, hr_title, txtfile, outputdirectorytxt)
+    htmltitle(htmlfile, outputdirectoryhtml, title_name, hrefsection)
+
