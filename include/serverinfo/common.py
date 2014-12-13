@@ -53,7 +53,7 @@ import sys
 import platform
 import re
 from . import config
-from .operations import execute_cmd
+from .operations import execute_cmd, exists_file
 
 
 __all__ = [
@@ -457,6 +457,51 @@ def shells(__host__, __user__, __passwd__, __port__):
     __command__ = 'Active users in the system with an active shell'
     __cmd__ = "cat /etc/passwd | grep -v \/false | grep -v \/nologin" +\
      " | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to execute the command'
+        __check_html_message__ = 'Unable to execute the command'
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
+
+#------------------------------------------------------------------------------
+
+
+def packages(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: Installed packages in the system.
+    :param host: Target.
+    """
+    __help_result__ = ''
+    __help_result__ += os.linesep
+    __command__ = "Installed packages in the system"
+    RedHat = '/etc/redhat-release'
+    SuSE = '/etc/SuSE-release'
+    mandrake = '/etc/mandrake-release'
+    debian = '/etc/debian_version'
+
+    if (exists_file(RedHat, __host__, __user__, __passwd__, __port__)):
+        __cmd__ = "rpm -qa"
+    elif (exists_file(SuSE, __host__, __user__, __passwd__, __port__)):
+        __cmd__ = "rpm -qa"
+    elif (exists_file(debian, __host__, __user__, __passwd__, __port__)):
+        __cmd__ = "dpkg -l"
+    elif (exists_file(mandrake, __host__, __user__, __passwd__, __port__)):
+        __cmd__ = "rpm -qa"
+    else:
+        __cmd__ = "dpkg -l"
+
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
          __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:

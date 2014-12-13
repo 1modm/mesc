@@ -734,7 +734,7 @@ def datadashboardtimeline(stat):
                                     </div>
                                     <div class="timeline-panel">
                                         <div class="timeline-heading">
-                                            <h4 class="timeline-title">File system information</h4>
+                                            <h4 class="timeline-title">Filesystem information</h4>
                                             <p><small class="text-muted"><i class="fa fa-clock-o"></i> %s</small>
                                             </p>
                                         </div>

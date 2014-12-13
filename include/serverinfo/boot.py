@@ -51,12 +51,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 import os
 from . import config
-from .operations import execute_cmd
+from .operations import execute_cmd, exists_file
 
 
 __all__ = [
     "grub",
-    "rc3"
+    "rc3",
+    "initservices"
 ]
 
 
@@ -98,6 +99,51 @@ def rc3(__host__, __user__, __passwd__, __port__):
     __help_result__ += os.linesep
     __command__ = "rc3.d level"
     __cmd__ = "ls -ltr /etc/rc3.d/S*"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to load configuration'
+        __check_html_message__ = 'Unable to load configuration'
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
+
+#------------------------------------------------------------------------------
+
+
+def initservices(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: list all available services.
+    :param host: Target.
+    """
+    __help_result__ = 'List all available services and specify in which'
+    __help_result__ += ' runlevel start a service'
+    __help_result__ += os.linesep
+    __command__ = "List all available services"
+    RedHat = '/etc/redhat-release'
+    SuSE = '/etc/SuSE-release'
+    mandrake = '/etc/mandrake-release'
+    debian = '/etc/debian_version'
+
+    if (exists_file(RedHat, __host__, __user__, __passwd__, __port__)):
+        __cmd__ = "chkconfig --list"
+    elif (exists_file(SuSE, __host__, __user__, __passwd__, __port__)):
+        __cmd__ = "chkconfig --list"
+    elif (exists_file(debian, __host__, __user__, __passwd__, __port__)):
+        __cmd__ = "service --status-all"
+    elif (exists_file(mandrake, __host__, __user__, __passwd__, __port__)):
+        __cmd__ = "chkconfig --list"
+    else:
+        __cmd__ = "service --status-all"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
          __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:

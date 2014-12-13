@@ -143,7 +143,7 @@ def cmdline_parser():
 
     group.add_argument('-f', '--filesystem', action='store_true', default=False,
         dest='filesystem',
-        help='File System Information')
+        help='Filesystem Information')
 
     group.add_argument('-t', '--tcpip', action='store_true', default=False,
         dest='tcpip',
@@ -238,7 +238,7 @@ def main():
     GENERAL_LINE = '----------------------'
     BOOT = 'Boot information               '
     BOOT_LINE = '--------------------'
-    FILESYSTEM = 'File system information        '
+    FILESYSTEM = 'Filesystem information        '
     FILESYSTEM_LINE = '---------------------------'
     TCPIP = 'Network Information            '
     TCPIP_LINE = '----------------------'
@@ -259,6 +259,23 @@ def main():
     table4 = []
     table5 = []
     table6 = []
+
+    total = 0
+    totalsok = 0
+    totalwarning = 0
+    totalcritical = 0
+    totalserror = 0
+    totalsystem = 0
+    totalboot = 0
+    totalfile = 0
+    totalnet = 0
+    totalproc = 0
+    totalsec = 0
+    processes_duration = 0
+    network_duration = 0
+    file_duration = 0
+    boot_duration = 0
+    sys_duration = 0
 
     # Fabric
     if results.port:
@@ -343,7 +360,7 @@ def main():
     cat_menu = {'fileout': results.html_file,
                 'fileoutgen': gen_html_file, 'general': 'System Information',
                 'fileoutboot': boot_html_file, 'boot': 'Boot',
-                'fileoutfile': file_html_file, 'filesystem': 'File system',
+                'fileoutfile': file_html_file, 'filesystem': 'Filesystem',
                 'fileoutnet': net_html_file, 'tcpip': 'Network',
                 'fileoutproc': proc_html_file, 'processes': 'Processes',
                 'fileoutsec': sec_html_file, 'security': 'Security'}
@@ -476,6 +493,15 @@ def main():
 
         statistics(command_check, href)  # Statistics
 
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = common.packages(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table1,
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
         htmlend(html_file, outputdirectoryhtml)
 
         print((tabulate(table1, tablefmt="plain")))  # print out the results
@@ -508,6 +534,15 @@ def main():
 
         command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = boot.rc3(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table2,
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = boot.initservices(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
              check_message, check_html_message, command, cmd, table2,
@@ -718,15 +753,6 @@ def main():
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = proc.packages(results.host,
-              fabric_user, fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table5,
-              results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
          check_html_message, command, cmd = proc.top(results.host,
               fabric_user, fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
@@ -813,16 +839,17 @@ def main():
              check_message, check_html_message, command, cmd, table6,
               results.txt_file, html_file, outputdirectory)
 
+        print((tabulate(table6, tablefmt="plain")))  # print out the results
+
     #---------------------------------------------------------------------------
     # Last statistics
     #---------------------------------------------------------------------------
-        total, totalsok, totalwarning, totalcritical, totalserror,\
-        totalsystem, totalboot, totalfile, totalnet, totalproc,\
-        totalsec = statistics(command_check, href)
 
-        htmlend(html_file, outputdirectoryhtml)
+    total, totalsok, totalwarning, totalcritical, totalserror,\
+    totalsystem, totalboot, totalfile, totalnet, totalproc,\
+    totalsec = statistics(command_check, href)
 
-        print((tabulate(table6, tablefmt="plain")))  # print out the results
+    htmlend(html_file, outputdirectoryhtml)
 
     #---------------------------------------------------------------------------
     # End time

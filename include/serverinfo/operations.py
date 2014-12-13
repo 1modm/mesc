@@ -50,12 +50,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #------------------------------------------------------------------------------
 import os
 import commands
-import platform
 import sys
 import socket
 import struct
 import fcntl
-import re
 from .import config
 from thirdparty.color.termcolor import colored
 from netifaces import interfaces
