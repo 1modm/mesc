@@ -238,7 +238,7 @@ def main():
     GENERAL_LINE = '----------------------'
     BOOT = 'Boot information               '
     BOOT_LINE = '--------------------'
-    FILESYSTEM = 'Filesystem information        '
+    FILESYSTEM = 'Filesystem information         '
     FILESYSTEM_LINE = '---------------------------'
     TCPIP = 'Network Information            '
     TCPIP_LINE = '----------------------'
@@ -656,6 +656,16 @@ def main():
 
         statistics(command_check, href)  # Statistics
 
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = filesystem.runFilesNoGroup(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table3,
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+
         htmlend(html_file, outputdirectoryhtml)
 
         print((tabulate(table3, tablefmt="plain")))  # print out the results
@@ -813,6 +823,14 @@ def main():
 
         statistics(command_check, href)  # Statistics
 
+        command_output, help_command, command_check, check_message,\
+         check_html_message, command, cmd = security.checkSSH2(results.host,
+              fabric_user, fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+             check_message, check_html_message, command, cmd, table6,
+              results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
         command_output, help_command, command_check, check_message,\
          check_html_message, command,\
           cmd = security.checkDisabledCtrlAltDel(results.host, fabric_user,

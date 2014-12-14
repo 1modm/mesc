@@ -52,12 +52,14 @@ POSSIBILITY OF SUCH DAMAGE.
 import os
 import StringIO
 from . import config
-from .operations import execute_cmd, check_file, exists_file, exists_read_file
+from .operations import execute_cmd, check_file, exists_file, exists_read_file,\
+                        check_file_exact
 
 
 __all__ = [
     "checkShells",
     "checkSSH",
+    "checkSSH2",
     "checkDisabledCtrlAltDel",
     "checkCrontab",
     "checkApache"
@@ -69,7 +71,7 @@ def checkShells(__host__, __user__, __passwd__, __port__):
     :returns: Valid shells status
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'Check shells status'
     __help_result__ += os.linesep
     __command__ = "Valid login shells"
     __file__ = "/etc/shells"
@@ -127,26 +129,22 @@ def checkSSH(__host__, __user__, __passwd__, __port__):
     :returns: Check ssh service
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'Check PermitRootLogin'
     __help_result__ += os.linesep
-    __command__ = "Check ssh service"
+    __command__ = "Check PermitRootLogin in ssh service"
     __file__ = "/etc/ssh/sshd_config"
-    __cmdfile__ = "cat /etc/ssh/sshd_config"
     __check__ = ['#PermitRootLogin yes', 'PermitRootLogin no',
-        '#PermitEmptyPasswords yes', 'PermitEmptyPasswords no']
-    __check_count__ = 0
+                 'PermitRootLogin without-password']
 
-    __command_check__ = config.CHECKRESULTERROR
-    __output__, __command_check__ = execute_cmd(__cmdfile__, __host__, __user__,
-         __passwd__, __port__)
+    __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__,
+                                                 __passwd__, __port__)
 
-    if (__command_check__ == config.CHECKRESULTOK):
+    if not __cmd_check__:
+        __command_check__ = config.CHECKRESULTERROR
+    else:
         __command_check__, __line__, __linehtml__, __check_count__ =\
-         check_file(__file__, __check__, __host__, __user__, __passwd__,
-              __port__)
-
-    if (__check_count__ < 2):
-        __command_check__ = config.CHECKRESULTWARNING
+        check_file_exact(__file__, __check__, __host__, __user__, __passwd__,
+                         __port__)
 
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = 'The next file ' + __file__ +\
@@ -158,9 +156,57 @@ def checkSSH(__host__, __user__, __passwd__, __port__):
         __check_html_message__ = 'Unable to load the configuration file: ' +\
          __file__
     elif __command_check__ == config.CHECKRESULTWARNING:
-        __check_message__ = 'ssh service has an insecure configuration: ' +\
-         os.linesep
-        __check_html_message__ = 'ssh service has an insecure configuration: '\
+        __check_message__ = 'ssh service has an insecure configuration: ' + \
+        'should have: ' + __check__[0] + ' or ' + __check__[1] + ' or ' + \
+         __check__[2] + os.linesep
+        __check_html_message__ = 'ssh service has an insecure configuration '\
+         + 'should have: ' + __check__[0] + ' or ' + __check__[1] \
+         + ' or ' + __check__[2] + '<br>'
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __file__)
+
+
+#------------------------------------------------------------------------------
+
+
+def checkSSH2(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: Check ssh service
+    :param host: Target.
+    """
+    __help_result__ = 'Check PermitEmptyPasswords'
+    __help_result__ += os.linesep
+    __command__ = "Check PermitEmptyPasswords in ssh service"
+    __file__ = "/etc/ssh/sshd_config"
+    __check__ = ['#PermitEmptyPasswords yes', 'PermitEmptyPasswords no']
+
+    __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__,
+                                                 __passwd__, __port__)
+
+    if not __cmd_check__:
+        __command_check__ = config.CHECKRESULTERROR
+    else:
+        __command_check__, __line__, __linehtml__, __check_count__ =\
+        check_file_exact(__file__, __check__, __host__, __user__, __passwd__,
+                         __port__)
+
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = 'The next file ' + __file__ +\
+         ' contains any of the following chains:' + __line__
+        __check_html_message__ = 'The next file ' + __file__ +\
+         ' contains any of the following chains:' + __line__
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to load the configuration file: ' + __file__
+        __check_html_message__ = 'Unable to load the configuration file: ' +\
+         __file__
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = 'ssh service has an insecure configuration ' \
+         + 'should have: ' + __check__[0] + ' or ' + __check__[1] + os.linesep
+        __check_html_message__ = 'ssh service has an insecure configuration '\
+         + 'should have: ' + __check__[0] + ' or ' + __check__[1] \
          + '<br>'
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''
@@ -176,22 +222,24 @@ def checkDisabledCtrlAltDel(__host__, __user__, __passwd__, __port__):
     :returns: ctrl+alt+del reboot check.
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'Restrict the privilege to allow certain non-root users the right to shutdown or reboot the system from the console'
     __help_result__ += os.linesep
     __command__ = "ctrl+alt+del reboot check"
     __file__ = "/etc/inittab"
-    __cmdfile__ = "cat /etc/inittab"
-
     # Check that exists one of this:
-    # #ca::ctrlaltdel:/sbin/shutdown -t3 -r now, #ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+    # #ca::ctrlaltdel:/sbin/shutdown -t3 -r now
+    # #ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
     __check__ = ['#ca::ctrlaltdel:', '#ca:12345:ctrlaltdel:']
-    __command_check__ = config.CHECKRESULTERROR
-    __output__, __command_check__ = execute_cmd(__cmdfile__, __host__, __user__,
-         __passwd__, __port__)
 
-    if (__command_check__ == config.CHECKRESULTOK):
+    __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__,
+                                                 __passwd__, __port__)
+
+    if not __cmd_check__:
+        __command_check__ = config.CHECKRESULTERROR
+    else:
         __command_check__, __line__, __linehtml__, __check_count__ =\
-         check_file(__file__, __check__, __host__, __user__, __passwd__, __port__)
+        check_file(__file__, __check__, __host__, __user__, __passwd__,
+                         __port__)
 
     if __command_check__ == config.CHECKRESULTOK:
         __check_message__ = 'The next file ' + __file__ +\
@@ -220,29 +268,29 @@ def checkCrontab(__host__, __user__, __passwd__, __port__):
     :returns: Users allowed to use the crontab
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'Controlling access to Cron'
     __help_result__ += os.linesep
     __command__ = "Users allowed to use the crontab"
     __file__ = "/etc/cron.allow"
-    __cmdfile__ = "cat /etc/cron.allow"
-    __line__ = ""
-    __linehtml__ = ""
     # Check that exists at least the root user:
     __check__ = ['root']
-    __command_check__ = config.CHECKRESULTERROR
-    __output__, __command_check__ = execute_cmd(__cmdfile__, __host__, __user__
-    , __passwd__, __port__)
 
-    if (__command_check__ == config.CHECKRESULTOK):
+    __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__,
+                                                 __passwd__, __port__)
+
+    if not __cmd_check__:
+        __command_check__ = config.CHECKRESULTERROR
+    else:
         __command_check__, __line__, __linehtml__, __check_count__ =\
-         check_file(__file__, __check__, __host__, __user__, __passwd__, __port__)
+        check_file_exact(__file__, __check__, __host__, __user__, __passwd__,
+                         __port__)
 
     if __command_check__ == config.CHECKRESULTOK:
-        __check_message__ = 'The next file exists and contais the root user: '\
+        __check_message__ = 'The next file exists and contains the root user: '\
          + __file__ +\
           ', so the crontab it is only allowed their use for root user'
         __check_html_message__ =\
-         'The next file exists and contais the root user: ' + __file__ +\
+         'The next file exists and contains the root user: ' + __file__ +\
           ', so the crontab it is only allowed their use for root user'
     elif __command_check__ == config.CHECKRESULTERROR:
         __check_message__ = 'Unable to load the configuration file: ' +\
@@ -251,10 +299,10 @@ def checkCrontab(__host__, __user__, __passwd__, __port__):
          __file__ + ' - It is allowed the crontab use for all users  !!!!'
     elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'The next file ' + __file__ +\
-         ' does not containt: ' + __line__ + os.linesep +\
+         ' does not contain: ' + __check__[0] + os.linesep +\
           ' - It is allowed the crontab use for all users  !!!!'
         __check_html_message__ = 'The next file ' + __file__ +\
-         ' does not containt: ' + __linehtml__ + '<br>' +\
+         ' does not contain: ' + __check__[0] + '<br>' +\
           'It is allowed the crontab use for all users  !!!!'
     elif __command_check__ == config.CHECKRESULTCRITICAL:
         __check_message__ = ''

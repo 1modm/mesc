@@ -50,8 +50,6 @@ POSSIBILITY OF SUCH DAMAGE.
 # Modules
 #------------------------------------------------------------------------------
 
-import os
-from datetime import date
 from thirdparty.color.termcolor import colored
 import include.serverinfo.config as config
 
@@ -74,7 +72,7 @@ def print_result_console(helpresult, outputresult, checkresult, checkmessage,
     elif checkresult == config.CHECKRESULTCRITICAL:
         __color_font__ = 'red'
     elif checkresult == config.CHECKRESULTERROR:
-        __color_font__ = 'red'
+        __color_font__ = 'white'
     else:
         __color_font__ = 'blue'
     tableresult.append([(colored(' - ' + commandresult + '', 'blue')), '[ '

@@ -68,10 +68,10 @@ def nmap(__host__, __user__, __passwd__, __port__):
     :returns: Opened ports in the system.
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'Nmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services (application name and version) those hosts are offering, what operating systems (and OS versions) they are running, what type of packet filters/firewalls are in use, and dozens of other characteristics.'
     __help_result__ += os.linesep
     __command__ = "Opened ports in the system"
-    __cmd__ = "nmap localhost"
+    __cmd__ = "nmap " + __host__
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
          __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
@@ -97,10 +97,10 @@ def rpcinfo(__host__, __user__, __passwd__, __port__):
     :returns: Openned RPC services.
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'rpcinfo makes an RPC call to an RPC server and reports what it finds.'
     __help_result__ += os.linesep
     __command__ = "Openned RPC services"
-    __cmd__ = "rpcinfo -p localhost"
+    __cmd__ = "bash -i -c \"rpcinfo -p\" " + __host__
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
          __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
@@ -126,7 +126,7 @@ def routes(__host__, __user__, __passwd__, __port__):
     :returns: Routing tables
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'Network connections, routing tables, interface statistics, masquerade connections, and multicast memberships '
     __help_result__ += os.linesep
     __command__ = "Routing tables"
     __cmd__ = "netstat -nr"
@@ -155,7 +155,7 @@ def activeconections(__host__, __user__, __passwd__, __port__):
     :returns: Active Internet connections (servers and established)
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'Network connections, routing tables, interface statistics, masquerade connections, and multicast memberships '
     __help_result__ += os.linesep
     __command__ = "Active Internet connections (servers and established)"
     __cmd__ = "netstat -ta"
@@ -184,7 +184,7 @@ def ifconfig(__host__, __user__, __passwd__, __port__):
     :returns: Status of the currently active interfaces.
     :param host: Target.
     """
-    __help_result__ = ''
+    __help_result__ = 'Check ip addr and ip link'
     __help_result__ += os.linesep
     __command__ = "Status of the currently active interfaces"
     __cmd__ = "ifconfig -a"

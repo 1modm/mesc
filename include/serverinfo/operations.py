@@ -54,6 +54,7 @@ import sys
 import socket
 import struct
 import fcntl
+import re
 from .import config
 from thirdparty.color.termcolor import colored
 from netifaces import interfaces
@@ -65,6 +66,7 @@ from fabric.contrib.files import exists, contains
 __all__ = [
     "execute_cmd",
     "check_file",
+    "check_file_exact",
     "exists_file",
     "exists_read_file",
     "ip4_addresses"
@@ -180,23 +182,91 @@ def check_file(filecheck, check, host, user_fabric, passwd_fabric, port_fabric):
             f = open(__file__, 'r')
             out = f.readlines()
             for line in out:
-                for c in check:
-                    if c in line:
-                        __check_count__ += 1
-                        __okline__ += line
-                        __oklinehtml__ += line + '<br>'
+                if line.startswith('#'):
+                    __command_check__ = config.CHECKRESULTWARNING
+                else:
+                    for c in check:
+                        if c in line:
+                            __check_count__ += 1
+                            __okline__ += line
+                            __oklinehtml__ += line + '<br>'
         if __check_count__ > 0:
             __command_check__ = config.CHECKRESULTOK
         else:
             __command_check__ = config.CHECKRESULTWARNING
     elif __cmd_local__ is False:
         with settings(host_string=host, user=user_fabric,
-             password=passwd_fabric, port=port_fabric):
+                      password=passwd_fabric, port=port_fabric):
             try:
                 if (exists(__file__, use_sudo=False, verbose=False)):
                     for c in check:
                         __output_cmd__ = contains(__file__, c, exact=False,
-                             use_sudo=False)
+                                                  use_sudo=False)
+                        if __output_cmd__ is True:
+                            __command_check__ = config.CHECKRESULTOK
+                            __okline__ += c
+                            __oklinehtml__ += c + '<br>'
+                        else:
+                            __command_check__ = config.CHECKRESULTWARNING
+                else:
+                    __command_check__ = config.CHECKRESULTERROR
+
+            except:
+                print((colored('*** Warning *** Host {host} on port {port} is down or file can not be read.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
+                sys.exit(0)
+    return (__command_check__, __okline__, __oklinehtml__, __check_count__)
+
+#------------------------------------------------------------------------------
+
+
+def exact_Match(phrase, word):
+    b = r'(\s|^|$)'
+    res = re.match(b + word + b, phrase, flags=re.IGNORECASE)
+    return bool(res)
+
+
+def check_file_exact(filecheck, check, host, user_fabric, passwd_fabric,
+                     port_fabric):
+
+    if host == 'localhost':
+        __cmd_local__ = True
+    elif host not in ip4_addresses():
+        __cmd_local__ = False
+    else:
+        __cmd_local__ = True
+
+    __file__ = filecheck
+    __command_check__ = config.CHECKRESULTERROR
+    __okline__ = os.linesep
+    __oklinehtml__ = '<br>'
+    __check_count__ = 0
+
+    if __cmd_local__ is True:
+        if (os.path.isfile(__file__)):
+            __command_check__ = config.CHECKRESULTWARNING
+            f = open(__file__, 'r')
+            out = f.readlines()
+            for line in out:
+                if line.startswith('#'):
+                    __command_check__ = config.CHECKRESULTWARNING
+                else:
+                    for c in check:
+                        if (exact_Match(line, c)):
+                            __check_count__ += 1
+                            __okline__ += line
+                            __oklinehtml__ += line + '<br>'
+        if __check_count__ > 0:
+            __command_check__ = config.CHECKRESULTOK
+        else:
+            __command_check__ = config.CHECKRESULTWARNING
+    elif __cmd_local__ is False:
+        with settings(host_string=host, user=user_fabric,
+                      password=passwd_fabric, port=port_fabric):
+            try:
+                if (exists(__file__, use_sudo=False, verbose=False)):
+                    for c in check:
+                        __output_cmd__ = contains(__file__, c, exact=True,
+                                                  use_sudo=False)
                         if __output_cmd__ is True:
                             __command_check__ = config.CHECKRESULTOK
                             __okline__ += c

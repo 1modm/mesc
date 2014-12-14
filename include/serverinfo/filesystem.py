@@ -212,6 +212,8 @@ def defpath():
     # Get path for all search (find) functions
     global directory
     directory = raw_input("Enter path to search files with \"insecure\" permissions (default /tmp): ")
+    if not directory:
+        directory = '/tmp'
     print(os.linesep)
 
 #------------------------------------------------------------------------------

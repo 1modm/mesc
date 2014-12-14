@@ -154,7 +154,7 @@ def ps_mem(__host__, __user__, __passwd__, __port__):
     shareds={}
     count={}
 
-    if __host__ == 'localhost':
+    if (__host__ in ip4_addresses() or __host__ == 'localhost'):
         #for line in os.popen("ps -e -o rss=,pid=,comm=").readlines():
         for line in __output__.splitlines():
             size, pid, cmd = map(string.strip,line.strip().split(None,2))
