@@ -69,7 +69,8 @@ __all__ = [
     "check_file_exact",
     "exists_file",
     "exists_read_file",
-    "ip4_addresses"
+    "ip4_addresses",
+    "OS_dist"
 ]
 
 #------------------------------------------------------------------------------
@@ -348,5 +349,27 @@ def exists_read_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
                 print((colored('*** Warning *** Host {host} on port {port} is down or file can not be read.', 'red')).format(host=host, port=port_fabric) + os.linesep*2)
                 sys.exit(0)
     return (__command_check__, __out__)
+
+#------------------------------------------------------------------------------
+
+
+def OS_dist(host, user_fabric, passwd_fabric, port_fabric):
+    RedHat = '/etc/redhat-release'
+    SuSE = '/etc/SuSE-release'
+    mandrake = '/etc/mandrake-release'
+    debian = '/etc/debian_version'
+
+    if (exists_file(RedHat, host, user_fabric, passwd_fabric, port_fabric)):
+        __dist__ = "RedHat"
+    elif (exists_file(SuSE, host, user_fabric, passwd_fabric, port_fabric)):
+        __dist__ = "SuSE"
+    elif (exists_file(debian, host, user_fabric, passwd_fabric, port_fabric)):
+        __dist__ = "debian"
+    elif (exists_file(mandrake, host, user_fabric, passwd_fabric, port_fabric)):
+        __dist__ = "mandrake"
+    else:
+        __dist__ = "debian"
+
+    return (__dist__)
 
 #------------------------------------------------------------------------------

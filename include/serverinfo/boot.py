@@ -51,13 +51,15 @@ POSSIBILITY OF SUCH DAMAGE.
 
 import os
 from . import config
-from .operations import execute_cmd, exists_file
+from .operations import execute_cmd, check_file_exact,\
+                        exists_read_file, OS_dist
 
 
 __all__ = [
     "grub",
     "rc3",
-    "initservices"
+    "initservices",
+    "grubterminal"
 ]
 
 
@@ -129,21 +131,19 @@ def initservices(__host__, __user__, __passwd__, __port__):
     __help_result__ += ' runlevel start a service'
     __help_result__ += os.linesep
     __command__ = "List all available services"
-    RedHat = '/etc/redhat-release'
-    SuSE = '/etc/SuSE-release'
-    mandrake = '/etc/mandrake-release'
-    debian = '/etc/debian_version'
+    __distribution__ = OS_dist(__host__, __user__, __passwd__, __port__)
 
-    if (exists_file(RedHat, __host__, __user__, __passwd__, __port__)):
+    if (__distribution__ == "RedHat"):
         __cmd__ = "chkconfig --list"
-    elif (exists_file(SuSE, __host__, __user__, __passwd__, __port__)):
+    elif (__distribution__ == "SuSE"):
         __cmd__ = "chkconfig --list"
-    elif (exists_file(debian, __host__, __user__, __passwd__, __port__)):
+    elif (__distribution__ == "debian"):
         __cmd__ = "service --status-all"
-    elif (exists_file(mandrake, __host__, __user__, __passwd__, __port__)):
+    elif (__distribution__ == "mandrake"):
         __cmd__ = "chkconfig --list"
     else:
         __cmd__ = "service --status-all"
+
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
          __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
@@ -160,3 +160,61 @@ def initservices(__host__, __user__, __passwd__, __port__):
         __check_html_message__ = ''
     return (__output__, __help_result__, __command_check__, __check_message__,
          __check_html_message__, __command__, __cmd__)
+
+
+#------------------------------------------------------------------------------
+
+
+def grubterminal(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: Disable graphical terminal
+    :param host: Target.
+    """
+    __help_result__ = 'To see all the kernel messages fly by as it boots'
+    __help_result__ += os.linesep
+    __command__ = "Disable graphical terminal"
+    __distribution__ = OS_dist(__host__, __user__, __passwd__, __port__)
+
+    if (__distribution__ == "RedHat"):
+        __file__ = "/etc/default/grub"
+        __check__ = ['GRUB_TERMINAL=console']
+    elif (__distribution__ == "SuSE"):
+        __file__ = "/etc/default/grub"
+        __check__ = ['GRUB_TERMINAL=console']
+    elif (__distribution__ == "debian"):
+        __file__ = "/etc/default/grub"
+        __check__ = ['GRUB_TERMINAL=console']
+    elif (__distribution__ == "mandrake"):
+        __file__ = "/etc/default/grub"
+        __check__ = ['GRUB_TERMINAL=console']
+    else:
+        __file__ = "/etc/default/grub"
+        __check__ = ['GRUB_TERMINAL=console']
+
+    __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__,
+                                                 __passwd__, __port__)
+
+    if not __cmd_check__:
+        __command_check__ = config.CHECKRESULTERROR
+    else:
+        __command_check__, __line__, __linehtml__, __check_count__ =\
+        check_file_exact(__file__, __check__, __host__, __user__, __passwd__,
+                         __port__)
+
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = 'Grub graphical terminal disabled'
+        __check_html_message__ = 'Grub graphical terminal disabled'
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to load configuration'
+        __check_html_message__ = 'Unable to load configuration'
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = 'Recomended to disable Grub graphical terminal'
+        __check_message__ += ' with: ' + __check__[0]
+        __check_html_message__ = 'Recomended to disable Grub graphical terminal'
+        __check_html_message__ += ' with: ' + __check__[0]
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __file__)
+

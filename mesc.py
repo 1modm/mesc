@@ -385,120 +385,133 @@ def main():
 
         # Operating System Information
         command_output, help_command, command_check, check_message,\
-            check_html_message, command, cmd = common.OS_ver(results.host,
-                 fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.OS_ver(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-            check_html_message, command, cmd = common.OS_kernel(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.OS_kernel(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-            check_html_message, command, cmd = common.OS_kernelver(results.host,
-                 fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.OS_kernelver(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.OS_machine(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.OS_machine(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.OS_processor(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.OS_processor(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         # System Information
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.uptime(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.uptime(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.free(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.free(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.who(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.who(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.tail_root(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.tail_root(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.history(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.history(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.last(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.last(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.shells(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.shells(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = common.packages(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = common.packages(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table1,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
@@ -524,29 +537,42 @@ def main():
                      html_file, outputdirectory, table2)
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = boot.grub(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = boot.grub(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table2,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table2,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = boot.rc3(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = boot.rc3(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table2,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table2,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = boot.initservices(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = boot.initservices(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table2,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table2,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = boot.grubterminal(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table2,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
@@ -574,97 +600,104 @@ def main():
         filesystem.defpath()
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = filesystem.diskspace(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.diskspace(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = filesystem.inodespace(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.inodespace(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = filesystem.setuid(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.setuid(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = filesystem.setgid(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.setgid(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = filesystem.rhosts(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.rhosts(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command,\
-          cmd = filesystem.allpermissionsdir(results.host, fabric_user,
-               fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.allpermissionsdir(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command,\
-          cmd = filesystem.allpermissionsfiles(results.host,
-               fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.allpermissionsfiles(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = filesystem.writefiles(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.writefiles(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = filesystem.tmpcontent(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.tmpcontent(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = filesystem.runFilesNoGroup(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = filesystem.runFilesNoGroup(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table3,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table3,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
-
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -688,47 +721,52 @@ def main():
                      html_file, outputdirectory, table4)
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = tcpip.nmap(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = tcpip.nmap(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table4,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table4,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = tcpip.rpcinfo(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = tcpip.rpcinfo(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table4,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table4,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = tcpip.routes(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = tcpip.routes(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table4,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table4,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = tcpip.activeconections(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = tcpip.activeconections(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table4,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table4,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = tcpip.ifconfig(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = tcpip.ifconfig(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table4,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table4,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
@@ -754,32 +792,35 @@ def main():
              results.txt_file, html_file, outputdirectory, table5)
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = proc.proc(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = proc.proc(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table5,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table5,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = proc.top(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = proc.top(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table5,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table5,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = ps_mem.ps_mem(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = ps_mem.ps_mem(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         command_output_str = os.linesep
         for psm in command_output:
             command_output_str += psm + os.linesep
         print_results(help_command, command_output_str, command_check,
-             check_message, check_html_message, command, cmd, table5,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table5,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
@@ -806,56 +847,124 @@ def main():
                      table6)
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = security.checkShells(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = security.checkShells(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table6,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = security.checkSSH(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = security.LoadSSH(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table6,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = security.checkSSH2(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = security.checkSSH(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table6,
-              results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-        command_output, help_command, command_check, check_message,\
-         check_html_message, command,\
-          cmd = security.checkDisabledCtrlAltDel(results.host, fabric_user,
-               fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table6,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = security.checkCrontab(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = security.checkSSH2(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table6,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
 
         statistics(command_check, href)  # Statistics
 
         command_output, help_command, command_check, check_message,\
-         check_html_message, command, cmd = security.checkApache(results.host,
-              fabric_user, fabric_passwd, fabric_port)
+        check_html_message, command, cmd = security.checkDisabledCtrlAltDel(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
-             check_message, check_html_message, command, cmd, table6,
-              results.txt_file, html_file, outputdirectory)
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.checkCrontab(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.LoadApache(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.checkPassAging(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.checkPassLength(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.autologout(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.MagicSysRq(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.NumberTTYs(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
 
         print((tabulate(table6, tablefmt="plain")))  # print out the results
 
