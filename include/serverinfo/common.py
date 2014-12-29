@@ -53,11 +53,12 @@ import sys
 import platform
 import re
 from . import config
-from .operations import execute_cmd, exists_file
+from .operations import execute_cmd, OS_dist
 
 
 __all__ = [
     "OS_ver",
+    "OS_info",
     "OS_kernel",
     "OS_kernelver",
     "OS_machine",
@@ -68,13 +69,35 @@ __all__ = [
     "who",
     "tail_root",
     "last",
-    "history"
+    "history",
+    "ulimit"
 ]
+
+
+def OS_info(__host__, __user__, __passwd__, __port__):
+    __osreport__ = {}
+    __help_result__ = 'Get name and information about current kernel'\
+                    + os.linesep
+    __command__ = "Operating System Information"
+    __cmd__ = "uname -a"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    __osreport__ = {'Operating System Information': __output__}
+    __OSout__ = __osreport__['Operating System Information']
+    return (__OSout__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
 
 
 def OS_ver(__host__, __user__, __passwd__, __port__):
     __osreport__ = {}
-    __help_result__ = 'Get name and information about current kernel' + os.linesep
+    __help_result__ = 'Get name and information about current kernel'\
+                    + os.linesep
     __command__ = "Operating System Version"
     __cmd__ = "uname -o"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
@@ -486,22 +509,49 @@ def packages(__host__, __user__, __passwd__, __port__):
     __help_result__ = ''
     __help_result__ += os.linesep
     __command__ = "Installed packages in the system"
-    RedHat = '/etc/redhat-release'
-    SuSE = '/etc/SuSE-release'
-    mandrake = '/etc/mandrake-release'
-    debian = '/etc/debian_version'
+    __distribution__ = OS_dist(__host__, __user__, __passwd__, __port__)
 
-    if (exists_file(RedHat, __host__, __user__, __passwd__, __port__)):
+    if (__distribution__ == "RedHat"):
         __cmd__ = "rpm -qa"
-    elif (exists_file(SuSE, __host__, __user__, __passwd__, __port__)):
+    elif (__distribution__ == "SuSE"):
         __cmd__ = "rpm -qa"
-    elif (exists_file(debian, __host__, __user__, __passwd__, __port__)):
+    elif (__distribution__ == "debian"):
         __cmd__ = "dpkg -l"
-    elif (exists_file(mandrake, __host__, __user__, __passwd__, __port__)):
+    elif (__distribution__ == "mandrake"):
         __cmd__ = "rpm -qa"
     else:
         __cmd__ = "dpkg -l"
 
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to execute the command'
+        __check_html_message__ = 'Unable to execute the command'
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
+
+#------------------------------------------------------------------------------
+
+
+def ulimit(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: ulimit command.
+    :param host: Target.
+    """
+    __help_result__ = 'Show user limits'
+    __help_result__ += os.linesep
+    __command__ = "User limits"
+    __cmd__ = "ulimit -a"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
          __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:

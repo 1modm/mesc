@@ -385,6 +385,16 @@ def main():
 
         # Operating System Information
         command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = common.OS_info(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
         check_html_message, command, cmd = common.OS_ver(
                                          results.host, fabric_user,
                                          fabric_passwd, fabric_port)
@@ -507,6 +517,16 @@ def main():
 
         command_output, help_command, command_check, check_message,\
         check_html_message, command, cmd = common.packages(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table1,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = common.ulimit(
                                          results.host, fabric_user,
                                          fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,
@@ -819,6 +839,27 @@ def main():
         for psm in command_output:
             command_output_str += psm + os.linesep
         print_results(help_command, command_output_str, command_check,
+                      check_message, check_html_message, command, cmd, table5,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = proc.lsof(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table5,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = proc.lsof_i(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
                       check_message, check_html_message, command, cmd, table5,
                       results.txt_file, html_file, outputdirectory)
 

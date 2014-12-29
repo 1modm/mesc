@@ -56,7 +56,9 @@ from .operations import execute_cmd
 
 __all__ = [
     "proc",
-    "top"
+    "top",
+    "lsof",
+    "lsof_i"
 ]
 
 
@@ -98,6 +100,66 @@ def top(__host__, __user__, __passwd__, __port__):
     __help_result__ += os.linesep
     __command__ = "Running system information"
     __cmd__ = "top -n1 -b1"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to execute the command'
+        __check_html_message__ = 'Unable to execute the command'
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
+
+#------------------------------------------------------------------------------
+
+
+def lsof(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: lsof.
+    :param host: Target.
+    """
+    __help_result__ = 'Lists on its standard output file information about files opened by processes'
+    __help_result__ += os.linesep
+    __command__ = "Files opened by processes"
+    __cmd__ = "lsof"
+    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+         __passwd__, __port__)
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to execute the command'
+        __check_html_message__ = 'Unable to execute the command'
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __cmd__)
+
+
+#------------------------------------------------------------------------------
+
+
+def lsof_i(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: lsof.
+    :param host: Target.
+    """
+    __help_result__ = 'List of all Internet network files'
+    __help_result__ += os.linesep
+    __command__ = "Internet network files"
+    __cmd__ = "lsof -i"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
          __passwd__, __port__)
     if __command_check__ == config.CHECKRESULTOK:
