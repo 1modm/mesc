@@ -84,7 +84,7 @@ def diskspace(__host__, __user__, __passwd__, __port__):
     __help_result__ += ' file system'
     __help_result__ += os.linesep
     __command__ = "File system disk space usage"
-    __cmd__ = "df -h"
+    __cmd__ = "df -Th"
     __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
                                     __passwd__, __port__)
 

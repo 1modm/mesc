@@ -240,7 +240,7 @@ def main():
     BOOT_LINE = '--------------------'
     FILESYSTEM = 'Filesystem information         '
     FILESYSTEM_LINE = '---------------------------'
-    TCPIP = 'Network Information            '
+    TCPIP = 'Network information            '
     TCPIP_LINE = '----------------------'
     PROCESSES = 'Processes running in the system'
     PROCESSES_LINE = '-----------------------------------'
@@ -358,7 +358,7 @@ def main():
     sec_html_file = 'security_' + results.html_file
 
     cat_menu = {'fileout': results.html_file,
-                'fileoutgen': gen_html_file, 'general': 'System Information',
+                'fileoutgen': gen_html_file, 'general': 'System information',
                 'fileoutboot': boot_html_file, 'boot': 'Boot',
                 'fileoutfile': file_html_file, 'filesystem': 'Filesystem',
                 'fileoutnet': net_html_file, 'tcpip': 'Network',
@@ -999,6 +999,16 @@ def main():
 
         command_output, help_command, command_check, check_message,\
         check_html_message, command, cmd = security.NumberTTYs(
+                                         results.host, fabric_user,
+                                         fabric_passwd, fabric_port)
+        print_results(help_command, command_output, command_check,
+                      check_message, check_html_message, command, cmd, table6,
+                      results.txt_file, html_file, outputdirectory)
+
+        statistics(command_check, href)  # Statistics
+
+        command_output, help_command, command_check, check_message,\
+        check_html_message, command, cmd = security.limits(
                                          results.host, fabric_user,
                                          fabric_passwd, fabric_port)
         print_results(help_command, command_output, command_check,

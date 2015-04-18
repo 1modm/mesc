@@ -638,11 +638,11 @@ def autologout(__host__, __user__, __passwd__, __port__):
          __file__
     elif __command_check__ == config.CHECKRESULTWARNING:
         __check_message__ = 'The file ' + __file__
-        __check_message__ += ' doesn\'t contains the TMOUT variable'
+        __check_message__ += ' doesn\'t contains the variable'
         __check_message__ += __check__[0] + os.linesep
         __check_message__ += 'Set value to define a variable to auto logout'
         __check_html_message__ = 'The file ' + __file__
-        __check_html_message__ += ' doesn\'t contains the TMOUT variable'
+        __check_html_message__ += ' doesn\'t contains the variable'
         __check_html_message__ += __check__[0] + '<br>'
         __check_html_message__ += 'Set value to define a variable to auto logout'
     elif __command_check__ == config.CHECKRESULTCRITICAL:
@@ -782,3 +782,55 @@ def NumberTTYs(__host__, __user__, __passwd__, __port__):
     return (__output__, __help_result__, __command_check__, __check_message__,
          __check_html_message__, __command__, __file__)
 
+
+#------------------------------------------------------------------------------
+
+
+def limits(__host__, __user__, __passwd__, __port__):
+    """
+    :returns: Shell Limits.
+    :param host: Target.
+    """
+    __help_result__ = 'Hard limit or soft limit of resources'
+    __help_result__ += os.linesep
+    __command__ = "Shell Limits"
+    __file__ = "/etc/security/limits.conf"
+    __check__ = ['               hard', '*               soft']
+
+    __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__,
+                                                 __passwd__, __port__)
+
+    if not __cmd_check__:
+        __command_check__ = config.CHECKRESULTERROR
+    else:
+        __command_check__, __line__, __linehtml__, __check_count__ =\
+        check_file(__file__, __check__, __host__, __user__, __passwd__,
+                   __port__)
+
+    if __command_check__ == config.CHECKRESULTOK:
+        __check_message__ = 'The file ' + __file__
+        __check_message__ += ' contains the next limits: '
+        __check_message__ += __line__ + os.linesep
+        __check_message__ += 'Review the values'
+        __check_html_message__ = 'The file ' + __file__
+        __check_html_message__ += ' contains the next limits: '
+        __check_html_message__ += __linehtml__ + '<br>'
+        __check_html_message__ += 'Review the values'
+    elif __command_check__ == config.CHECKRESULTERROR:
+        __check_message__ = 'Unable to load the configuration file: ' + __file__
+        __check_html_message__ = 'Unable to load the configuration file: ' +\
+         __file__
+    elif __command_check__ == config.CHECKRESULTWARNING:
+        __check_message__ = 'The file ' + __file__
+        __check_message__ += ' doesn\'t contains any of the next limits'
+        __check_message__ += __check__[0] + ' or ' + __check__[1] + os.linesep
+        __check_message__ += 'Set values to active the shell limits'
+        __check_html_message__ = 'The file ' + __file__
+        __check_html_message__ += ' doesn\'t contains any of the next limits'
+        __check_html_message__ += __check__[0] + ' or ' + __check__[1] + '<br>'
+        __check_html_message__ += 'Set values to active the shell limits'
+    elif __command_check__ == config.CHECKRESULTCRITICAL:
+        __check_message__ = ''
+        __check_html_message__ = ''
+    return (__output__, __help_result__, __command_check__, __check_message__,
+         __check_html_message__, __command__, __file__)
