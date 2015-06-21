@@ -134,7 +134,10 @@ Check Sections:
 
 Output
 ======
-- Text report
-- HTML report
-
 ![MESC](https://dl.dropboxusercontent.com/u/5741635/mesc.png "MESC Output")
+
+- Text report
+![MESC](https://dl.dropboxusercontent.com/u/5741635/txt_report.png "MESC TXT Report")
+
+- HTML report
+![MESC](https://dl.dropboxusercontent.com/u/5741635/html_report.png "MESC HTML Report")
