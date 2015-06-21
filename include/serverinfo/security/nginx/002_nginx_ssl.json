@@ -1,0 +1,66 @@
+{
+	"check":"nginxssl",
+	"returns":"Check nginx ssl configuration",
+	"help_result":"ssl_protocols alowed",
+	"command":"Check nginx ssl configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_protocols TLSv1 TLSv1.1 TLSv1.2;",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure nginx SSL",
+			"check_html_message":"secure nginx SSL"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure nginx SSL configuration",
+			"check_html_message":"insecure nginx SSL configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure nginx SSL configuration",
+			"check_html_message":"insecure nginx SSL configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, nginx web server is not installed",
+			"check_html_message":"Unable to load configuration, nginx web server is not installed"
+		}
+	}
+}

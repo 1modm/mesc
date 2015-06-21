@@ -1,0 +1,66 @@
+{
+	"check":"lighttpd_sslv2",
+	"returns":"Check lighttpd ssl sslv2",
+	"help_result":"",
+	"command":"Check lighttpd ssl sslv2",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl.use-sslv2 = \"disable\"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-sslv2 = \"disable\""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-sslv2 = \"disable\""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-sslv2 = \"disable\""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-sslv2 = \"disable\""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-sslv2 = \"disable\""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure lighttpd ssl sslv2",
+			"check_html_message":"secure lighttpd ssl sslv2"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure lighttpd ssl sslv2",
+			"check_html_message":"insecure lighttpd ssl sslv2"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure lighttpd ssl sslv2",
+			"check_html_message":"insecure lighttpd ssl sslv2"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		}
+	}
+}

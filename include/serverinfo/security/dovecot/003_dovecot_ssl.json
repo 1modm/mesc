@@ -1,0 +1,66 @@
+{
+	"check":"dovecot_ssl",
+	"returns":"Check Dovecot ssl configuration",
+	"help_result":"",
+	"command":"Check Dovecot ssl configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl = yes",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl = yes"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl = yes"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl = yes"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl = yes"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl = yes"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure Dovecot ssl enabled",
+			"check_html_message":"secure Dovecot ssl enabled"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure Dovecot ssl disabled",
+			"check_html_message":"insecure Dovecot ssl disabled"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure Dovecot ssl disabled",
+			"check_html_message":"insecure Dovecot ssl disabled"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Dovecot is not installed",
+			"check_html_message":"Unable to load configuration, Dovecot is not installed"
+		}
+	}
+}

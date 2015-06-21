@@ -1,0 +1,66 @@
+{
+	"check":"Loadpostfixmaster",
+	"returns":"Load postfix master configuration",
+	"help_result":"",
+	"command":"Load postfix master configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/master.cf",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/master.cf",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/master.cf",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/master.cf",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/master.cf",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"postfix configuration loaded",
+			"check_html_message":"postfix configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"SSLSessionTickets",
+	"returns":"SSLSessionTickets Directive",
+	"help_result":"Enable or disable use of TLS session tickets",
+	"command":"SSLSessionTickets Directive",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set SSLSessionTickets Off",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLSessionTickets Off"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLSessionTickets Off"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLSessionTickets Off"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLSessionTickets Off"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLSessionTickets Off"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Disabled the use of TLS session tickets (RFC 5077)",
+			"check_html_message":"Disabled the use of TLS session tickets (RFC 5077)"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Enabled the use of TLS session tickets (RFC 5077)",
+			"check_html_message":"Enabled the use of TLS session tickets (RFC 5077)"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Enabled the use of TLS session tickets (RFC 5077)",
+			"check_html_message":"Enabled the use of TLS session tickets (RFC 5077)"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"postfix_protocols",
+	"returns":"Check postfix smtpd tls protocols",
+	"help_result":"",
+	"command":"Check postfix smtpd tls protocols",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure postfix smtpd tls protocols",
+			"check_html_message":"secure postfix smtpd tls protocols"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure postfix smtpd tls protocols",
+			"check_html_message":"insecure postfix smtpd tls protocols"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure postfix smtpd tls protocols",
+			"check_html_message":"insecure postfix smtpd tls protocols"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

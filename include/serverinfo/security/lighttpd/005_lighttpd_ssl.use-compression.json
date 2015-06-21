@@ -1,0 +1,66 @@
+{
+	"check":"lighttpd_ssl.use-compression",
+	"returns":"Check lighttpd ssl compression",
+	"help_result":"",
+	"command":"Check lighttpd ssl compression",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl.use-compression = \"disable\"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-compression = \"disable\""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-compression = \"disable\""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-compression = \"disable\""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-compression = \"disable\""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.use-compression = \"disable\""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure lighttpd ssl compression",
+			"check_html_message":"secure lighttpd ssl compression"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure lighttpd ssl compression",
+			"check_html_message":"insecure lighttpd ssl compression"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure lighttpd ssl compression",
+			"check_html_message":"insecure lighttpd ssl compression"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		}
+	}
+}

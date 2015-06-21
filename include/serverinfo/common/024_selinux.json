@@ -1,0 +1,66 @@
+{
+	"check":"selinux",
+	"returns":"SELinux status",
+	"help_result":"",
+	"command":"SELinux status",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"Install and configure SELinux",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"sestatus",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"sestatus",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"sestatus",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"sestatus",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"sestatus",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"SELinux enable",
+			"check_html_message":"SELinux enable"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

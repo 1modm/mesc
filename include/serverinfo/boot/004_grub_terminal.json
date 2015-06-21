@@ -1,0 +1,66 @@
+{
+	"check":"grub terminal",
+	"returns":"Disable graphical terminal",
+	"help_result":"To see all the kernel messages fly by as it boots",
+	"command":"Disable graphical terminal",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/default/grub",
+			"chk":"'GRUB_TERMINAL=console'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/default/grub",
+			"chk":"'GRUB_TERMINAL=console'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/default/grub",
+			"chk":"'GRUB_TERMINAL=console'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/default/grub",
+			"chk":"'GRUB_TERMINAL=console'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/default/grub",
+			"chk":"'GRUB_TERMINAL=console'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Grub graphical terminal disabled",
+			"check_html_message":"Grub graphical terminal disabled"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Recomended to disable Grub graphical terminal with GRUB_TERMINAL=console",
+			"check_html_message":"Recomended to disable Grub graphical terminal with GRUB_TERMINAL=console"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration",
+			"check_html_message":"Unable to load configuration"
+		}
+	}
+}

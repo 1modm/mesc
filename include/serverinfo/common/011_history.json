@@ -1,0 +1,66 @@
+{
+	"check":"history",
+	"returns":"history command",
+	"help_result":"The GNU History library is able to keep track of those lines, associate arbitrary data with each line, and utilize information from previous lines in composing new ones. You should add in bashrc HISTTIMEFORMAT",
+	"command":"Current user history",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"export HISTTIMEFORMAT='%F %T ' ; bash -i -c \"history -r; history\"",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"export HISTTIMEFORMAT='%F %T ' ; bash -i -c \"history -r; history\"",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"export HISTTIMEFORMAT='%F %T ' ; bash -i -c \"history -r; history\"",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"export HISTTIMEFORMAT='%F %T ' ; bash -i -c \"history -r; history\"",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"export HISTTIMEFORMAT='%F %T ' ; bash -i -c \"history -r; history\"",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

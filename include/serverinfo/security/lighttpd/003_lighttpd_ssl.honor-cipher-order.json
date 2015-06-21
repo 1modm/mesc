@@ -1,0 +1,66 @@
+{
+	"check":"lighttpdssl.honor-cipher-order",
+	"returns":"Check lighttpd ssl honor-cipher-order",
+	"help_result":"",
+	"command":"Check lighttpd ssl honor-cipher-order",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl.honor-cipher-order = \"enable\"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.honor-cipher-order = \"enable\""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.honor-cipher-order = \"enable\""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.honor-cipher-order = \"enable\""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.honor-cipher-order = \"enable\""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.honor-cipher-order = \"enable\""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure lighttpd ssl honor-cipher-order",
+			"check_html_message":"secure lighttpd ssl honor-cipher-order"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure lighttpd ssl honor-cipher-order",
+			"check_html_message":"insecure lighttpd ssl honor-cipher-order"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure lighttpd ssl honor-cipher-order",
+			"check_html_message":"insecure lighttpd ssl honor-cipher-order"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		}
+	}
+}

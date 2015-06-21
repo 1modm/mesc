@@ -1,0 +1,66 @@
+{
+	"check":"postfix_certs",
+	"returns":"Check postfix smtpd certs",
+	"help_result":"",
+	"command":"Check postfix smtpd certs",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Verify TLS certificates",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"'smtpd_tls_cert_file=/etc/ssl/postfix.cert','smtpd_tls_key_file=/etc/ssl/postfix.key'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"'smtpd_tls_cert_file=/etc/ssl/postfix.cert','smtpd_tls_key_file=/etc/ssl/postfix.key'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"'smtpd_tls_cert_file=/etc/ssl/postfix.cert','smtpd_tls_key_file=/etc/ssl/postfix.key'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"'smtpd_tls_cert_file=/etc/ssl/postfix.cert','smtpd_tls_key_file=/etc/ssl/postfix.key'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"'smtpd_tls_cert_file=/etc/ssl/postfix.cert','smtpd_tls_key_file=/etc/ssl/postfix.key'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure postfix smtpd certs",
+			"check_html_message":"secure postfix smtpd certs"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure postfix smtpd certs",
+			"check_html_message":"insecure postfix smtpd certs"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure postfix smtpd certs",
+			"check_html_message":"insecure postfix smtpd certs"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

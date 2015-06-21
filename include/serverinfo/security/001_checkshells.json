@@ -1,0 +1,66 @@
+{
+	"check":"checkShells",
+	"returns":"Valid shells status",
+	"help_result":"Check shells status",
+	"command":"Valid shells status",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution":
+	{
+		"all":
+		{
+			"cmd":"cat /etc/shells",
+			"file":"/etc/shells",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"cat /etc/shells",
+			"file":"/etc/shells",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"cat /etc/shells",
+			"file":"/etc/shells",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"cat /etc/shells",
+			"file":"/etc/shells",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"cat /etc/shells",
+			"file":"/etc/shells",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"All shells accounts are being used",
+			"check_html_message":"All shells accounts are being used"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"There are shells that does not exist in the system but is allowed their use, are included in /etc/shells",
+			"check_html_message":"There are shells that does not exist in the system but is allowed their use, are included in /etc/shells"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"There are shells that does not exist in the system but is allowed their use, are included in /etc/shells",
+			"check_html_message":"There are shells that does not exist in the system but is allowed their use, are included in /etc/shells"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file",
+			"check_html_message":"Unable to load the configuration file"
+		}
+	}
+}

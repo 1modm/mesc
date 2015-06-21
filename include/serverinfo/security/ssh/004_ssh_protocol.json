@@ -1,0 +1,66 @@
+{
+	"check":"ssh_check_protocol",
+	"returns":"Check ssh protocol",
+	"help_result":"",
+	"command":"Check protocol in ssh service",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set Protocol 2",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Protocol 2"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Protocol 2"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Protocol 2"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Protocol 2"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Protocol 2"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/ssh/sshd_config contains any of the following chain: Protocol 2",
+			"check_html_message":"The file /etc/ssh/sshd_config contains any of the following chain: Protocol 2"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"SSH service has an insecure configuration. Protocol 2",
+			"check_html_message":"SSH service has an insecure configuration. Protocol 2"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"SSH service has an insecure configuration. Protocol 2",
+			"check_html_message":"SSH service has an insecure configuration. Protocol 2"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file",
+			"check_html_message":"Unable to load the configuration file"
+		}
+	}
+}

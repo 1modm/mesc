@@ -1,0 +1,66 @@
+{
+	"check":"free",
+	"returns":"free command",
+	"help_result":"Displays the total amount of free and used physical and swap memory in the system, as well as the buffers used by the kernel",
+	"command":"Free and used memory",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"free -o",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"free -o",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"free -o",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"free -o",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"free -o",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Warning",
+			"check_html_message":"Warning"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Error",
+			"check_html_message":"Error"
+		}
+	}
+}

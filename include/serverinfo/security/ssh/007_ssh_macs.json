@@ -1,0 +1,66 @@
+{
+	"check":"ssh_macs",
+	"returns":"Check ssh Macs",
+	"help_result":"",
+	"command":"Check Macs in ssh service",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/ssh/sshd_config contains any of the following chain: MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com",
+			"check_html_message":"The file /etc/ssh/sshd_config contains any of the following chain: MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"SSH service has an insecure Macs configuration.",
+			"check_html_message":"SSH service has an insecure Macs configuration."
+		},
+		"checkresultcritical":
+		{
+			"check_message":"SSH service has an insecure Macs configuration.",
+			"check_html_message":"SSH service has an insecure Macs configuration."
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file",
+			"check_html_message":"Unable to load the configuration file"
+		}
+	}
+}

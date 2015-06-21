@@ -18,7 +18,7 @@ Author: 1_mod_m
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2014, Miguel Morillo Iruela.
+Copyright (c) 2015, Miguel Morillo.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -99,7 +99,7 @@ Help
 # python mesc.py -h
 
 #-----------------------------------------------#
-| MESC 0.1 - Minimun Essential Security Checks. |
+| MESC 0.2 - Minimun Essential Security Checks. |
 | Contact: https://twitter.com/1_mod_m/         |
 |                                               |
 | https://github.com/1modm/mesc                 |

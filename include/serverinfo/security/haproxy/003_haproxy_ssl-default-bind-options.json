@@ -1,0 +1,66 @@
+{
+	"check":"haproxy_ssl-default-bind-ciphers",
+	"returns":"Check haproxy ssl default bind ciphers",
+	"help_result":"",
+	"command":"Check haproxy ssl default bind ciphers",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl-default-bind-ciphers AES128+EECDH:AES128+EDH",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-ciphers AES128+EECDH:AES128+EDH"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-ciphers AES128+EECDH:AES128+EDH"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-ciphers AES128+EECDH:AES128+EDH"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-ciphers AES128+EECDH:AES128+EDH"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-ciphers AES128+EECDH:AES128+EDH"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure haproxy ssl default bind ciphers",
+			"check_html_message":"secure haproxy ssl default bind ciphers"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure haproxy ssl default bind ciphers",
+			"check_html_message":"insecure haproxy ssl default bind ciphers"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure haproxy ssl default bind ciphers",
+			"check_html_message":"insecure haproxy ssl default bind ciphers"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, haproxy is not installed",
+			"check_html_message":"Unable to load configuration, haproxy is not installed"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"SSLHonorCipherOrder",
+	"returns":"SSLHonorCipherOrder Directive",
+	"help_result":"Option to prefer the server's cipher preference order",
+	"command":"SSLHonorCipherOrder Directive",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set SSLHonorCipherOrder On",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLHonorCipherOrder On"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLHonorCipherOrder On"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLHonorCipherOrder On"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLHonorCipherOrder On"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLHonorCipherOrder On"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Apache SSL TLS server's preference",
+			"check_html_message":"Apache SSL TLS server's preference"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Insecure configuration, Apache SSL TLS client preference",
+			"check_html_message":"Insecure configuration, Apache SSL TLS client preference"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Insecure configuration, Apache SSL TLS client preference",
+			"check_html_message":"Insecure configuration, Apache SSL TLS client preference"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

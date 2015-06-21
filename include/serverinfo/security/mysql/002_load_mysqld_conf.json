@@ -1,0 +1,66 @@
+{
+	"check":"Loadmysqld",
+	"returns":"Load MySQL daemon configuration",
+	"help_result":"",
+	"command":"Load MySQL daemon configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"MySQL configuration loaded",
+			"check_html_message":"MySQL configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, MySQL is not installed",
+			"check_html_message":"Unable to load configuration, MySQL is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, MySQL is not installed",
+			"check_html_message":"Unable to load configuration, MySQL is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, MySQL is not installed",
+			"check_html_message":"Unable to load configuration, MySQL is not installed"
+		}
+	}
+}

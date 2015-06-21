@@ -1,0 +1,66 @@
+{
+	"check":"checkCrontab",
+	"returns":"Users allowed to use the crontab",
+	"help_result":"Controlling access to Cron",
+	"command":"Users allowed to use the crontab",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/cron.allow",
+			"chk":"'root'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/cron.allow",
+			"chk":"'root'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/cron.allow",
+			"chk":"'root'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/cron.allow",
+			"chk":"'root'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/cron.allow",
+			"chk":"'root'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The next file exists and contains the root user: /etc/cron.allow so the crontab it is only allowed their use for root user",
+			"check_html_message":"The next file exists and contains the root user: /etc/cron.allow so the crontab it is only allowed their use for root user"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"The next file /etc/cron.allow does not contain: root - It is allowed the crontab use for all users",
+			"check_html_message":"The next file /etc/cron.allow does not contain: root - It is allowed the crontab use for all users"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"The next file /etc/cron.allow does not contain: root - It is allowed the crontab use for all users",
+			"check_html_message":"The next file /etc/cron.allow does not contain: root - It is allowed the crontab use for all users"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file /etc/cron.allow does not contain: root - It is allowed the crontab use for all users",
+			"check_html_message":"Unable to load the configuration file /etc/cron.allow does not contain: root - It is allowed the crontab use for all users"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"autologout",
+	"returns":"Logout shell user after certain minutes of inactivity",
+	"help_result":"UNIX or Linux login shells can be configured to automatically log users out after a period of inactivity. The TMOUT (under bash ) and autologout (under tcsh) variables defines auto logout time in seconds.",
+	"command":"Console auto Logout",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/profile",
+			"chk":"'TMOUT'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/profile",
+			"chk":"'TMOUT'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/profile",
+			"chk":"'TMOUT'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/profile",
+			"chk":"'TMOUT'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/profile",
+			"chk":"'TMOUT'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/profile contains the TMOUT variable: TMOUT. Review the values",
+			"check_html_message":"The file /etc/profile contains the TMOUT variable: TMOUT. Review the values"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"The file /etc/profile doesn't contains the variable TMOUT. Set value to define a variable to auto logout",
+			"check_html_message":"The file /etc/profile doesn't contains the variable TMOUT. Set value to define a variable to auto logout"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"The file /etc/profile doesn't contains the variable TMOUT. Set value to define a variable to auto logout",
+			"check_html_message":"The file /etc/profile doesn't contains the variable TMOUT. Set value to define a variable to auto logout"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file /etc/profile",
+			"check_html_message":"Unable to load the configuration file /etc/profile"
+		}
+	}
+}

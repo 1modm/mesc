@@ -1,0 +1,66 @@
+{
+	"check":"nginx_ssl_stapling",
+	"returns":"Check nginx ssl stapling configuration",
+	"help_result":"",
+	"command":"Check nginx ssl stapling configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_stapling on; ssl_stapling_verify on;",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"'ssl_stapling on;','ssl_stapling_verify on;'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"'ssl_stapling on;','ssl_stapling_verify on;'"	
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"'ssl_stapling on;','ssl_stapling_verify on;'"		
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"'ssl_stapling on;','ssl_stapling_verify on;'"	
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"'ssl_stapling on;','ssl_stapling_verify on;'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure nginx ssl stapling configuration",
+			"check_html_message":"secure nginx ssl stapling configuration"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure nginx ssl stapling configuration",
+			"check_html_message":"insecure nginx ssl stapling configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure nginx ssl stapling configuration",
+			"check_html_message":"insecure nginx ssl stapling configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, nginx web server is not installed",
+			"check_html_message":"Unable to load configuration, nginx web server is not installed"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"proftpd_tls_engine",
+	"returns":"Check ProFTPd TLSEngine",
+	"help_result":"",
+	"command":"Check ProFTPd TLSEngine",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set TLSEngine on",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSEngine on"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSEngine on"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSEngine on"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSEngine on"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSEngine on"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure ProFTPd TLSEngine option",
+			"check_html_message":"secure ProFTPd TLSEngine option"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure ProFTPd TLSEngine option",
+			"check_html_message":"insecure ProFTPd TLSEngine option"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure ProFTPd TLSEngine option",
+			"check_html_message":"insecure ProFTPd TLSEngine option"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, ProFTPd is not installed",
+			"check_html_message":"Unable to load configuration, ProFTPd is not installed"
+		}
+	}
+}

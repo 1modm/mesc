@@ -1,0 +1,66 @@
+{
+	"check":"LoadApache",
+	"returns":"Load Apache configuration",
+	"help_result":"",
+	"command":"Load Apache configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/apache2.conf",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf/httpd.conf",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/httpd.conf",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/apache2.conf",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf/httpd.conf",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Apache configuration loaded",
+			"check_html_message":"Apache configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

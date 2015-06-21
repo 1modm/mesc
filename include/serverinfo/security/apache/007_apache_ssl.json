@@ -1,0 +1,66 @@
+{
+	"check":"SSLProtocol",
+	"returns":"Configure usable SSL protocol flavors",
+	"help_result":"This directive can be used to control the SSL protocol flavors mod_ssl should use when establishing its server environment. Clients then can only connect with one of the provided protocols.",
+	"command":"Configure usable SSL protocol flavors",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set SSLProtocol All -SSLv2 -SSLv3",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLProtocol All -SSLv2 -SSLv3"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLProtocol All -SSLv2 -SSLv3"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLProtocol All -SSLv2 -SSLv3"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLProtocol All -SSLv2 -SSLv3"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLProtocol All -SSLv2 -SSLv3"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Apache SSLv3 and SSLv2 disabled",
+			"check_html_message":"Apache SSLv3 and SSLv2 disabled"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Insecure configuration, Apache SSLv3 and SSLv2 enabled",
+			"check_html_message":"Insecure configuration, Apache SSLv3 and SSLv2 enabled"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Insecure configuration, Apache SSLv3 and SSLv2 enabled",
+			"check_html_message":"Insecure configuration, Apache SSLv3 and SSLv2 enabled"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

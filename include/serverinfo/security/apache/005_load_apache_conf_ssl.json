@@ -1,0 +1,66 @@
+{
+	"check":"LoadApacheSSL",
+	"returns":"Load Apache SSL configuration",
+	"help_result":"",
+	"command":"Load Apache SSL configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Apache configuration loaded",
+			"check_html_message":"Apache configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

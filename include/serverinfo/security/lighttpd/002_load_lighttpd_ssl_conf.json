@@ -1,0 +1,66 @@
+{
+	"check":"Loadlighttpdssl",
+	"returns":"Load lighttpd SSL configuration",
+	"help_result":"",
+	"command":"Load lighttpd SSL configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"lighttpd configuration SSL loaded",
+			"check_html_message":"lighttpd configuration SSL loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		}
+	}
+}

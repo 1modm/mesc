@@ -1,0 +1,66 @@
+{
+	"check":"tmpcontent",
+	"returns":"/tmp content",
+	"help_result":"",
+	"command":"/tmp content",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"ls -ltr /tmp",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"ls -ltr /tmp",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"ls -ltr /tmp",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"ls -ltr /tmp",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"ls -ltr /tmp",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"You must be root",
+			"check_html_message":"You must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

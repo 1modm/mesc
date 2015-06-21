@@ -1,0 +1,66 @@
+{
+	"check":"nethw",
+	"returns":"Network adapters hardware",
+	"help_result":"",
+	"command":"Network adapters hardware",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lshw -C network",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lshw -C network",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lshw -C network",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lshw -C network",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lshw -C network",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to execute, you must be root",
+			"check_html_message":"Unable to execute, you must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

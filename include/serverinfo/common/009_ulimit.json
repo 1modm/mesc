@@ -1,0 +1,66 @@
+{
+	"check":"ulimit",
+	"returns":"ulimit command",
+	"help_result":"Show user limits",
+	"command":"User limits",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"ulimit -a",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"ulimit -a",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"ulimit -a",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"ulimit -a",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"ulimit -a",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Warning",
+			"check_html_message":"Warning"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Error",
+			"check_html_message":"Error"
+		}
+	}
+}

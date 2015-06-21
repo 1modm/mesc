@@ -1,0 +1,66 @@
+{
+	"check":"NumberTTYs",
+	"returns":"Check the number of TTYs",
+	"help_result":"In the [Login] section: NAutoVTs, takes a positive integer. Configures how many virtual terminals (VTs) to allocate",
+	"command":"Number of TTYs",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/default/console-setup",
+			"chk":"'ACTIVE_CONSOLES=\"/dev/tty[1-6]\"'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/systemd/logind.conf",
+			"chk":"'#NAutoVTs=6'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/systemd/logind.conf",
+			"chk":"'#NAutoVTs=6'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/default/console-setup",
+			"chk":"'ACTIVE_CONSOLES=\"/dev/tty[1-6]\"'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/systemd/logind.conf",
+			"chk":"'#NAutoVTs=6'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The TTYs config file contains a variable to reduce the number of TTYs. Review the values",
+			"check_html_message":"The TTYs config file contains a variable to reduce the number of TTYs. Review the values"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"The TTYs config doesn't contains a variable to reduce the number of TTYs. Set value to reduce the number of TTYs",
+			"check_html_message":"The TTYs config doesn't contains a variable to reduce the number of TTYs. Set value to reduce the number of TTYs"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"The TTYs config doesn't contains a variable to reduce the number of TTYs. Set value to reduce the number of TTYs",
+			"check_html_message":"The TTYs config doesn't contains a variable to reduce the number of TTYs. Set value to reduce the number of TTYs"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the TTYs configuration file",
+			"check_html_message":"Unable to load the TTYs configuration file"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"shells",
+	"returns":"active shells",
+	"help_result":"",
+	"command":"Active users in the system with an active shell",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"cat /etc/passwd | grep -v \/false | grep -v \/nologin | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"cat /etc/passwd | grep -v \/false | grep -v \/nologin | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"cat /etc/passwd | grep -v \/false | grep -v \/nologin | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"cat /etc/passwd | grep -v \/false | grep -v \/nologin | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"cat /etc/passwd | grep -v \/false | grep -v \/nologin | grep -v \/shutdown | grep -v \/halt | grep -v \/sync | grep -v \/news",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

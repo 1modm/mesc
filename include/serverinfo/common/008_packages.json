@@ -1,0 +1,66 @@
+{
+	"check":"packages",
+	"returns":"Installed packages in the system",
+	"help_result":"",
+	"command":"Installed packages in the system",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"dpkg -l",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"rpm -qa",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"rpm -qa",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"dpkg -l",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"rpm -qa",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

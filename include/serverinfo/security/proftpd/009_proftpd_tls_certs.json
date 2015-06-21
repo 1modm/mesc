@@ -1,0 +1,66 @@
+{
+	"check":"proftpd_tls_certificates",
+	"returns":"Check ProFTPd RSA Certificates",
+	"help_result":"",
+	"command":"Check ProFTPd RSA Certificates",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Verify TLS RSA Certificate Files",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"'TLSRSACertificateFile /etc/proftpd.cert','TLSRSACertificateKeyFile /etc/proftpd.key'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"'TLSRSACertificateFile /etc/proftpd.cert','TLSRSACertificateKeyFile /etc/proftpd.key'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"'TLSRSACertificateFile /etc/proftpd.cert','TLSRSACertificateKeyFile /etc/proftpd.key'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"'TLSRSACertificateFile /etc/proftpd.cert','TLSRSACertificateKeyFile /etc/proftpd.key'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"'TLSRSACertificateFile /etc/proftpd.cert','TLSRSACertificateKeyFile /etc/proftpd.key'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure ProFTPd RSA Certificates option",
+			"check_html_message":"secure ProFTPd RSA Certificates option"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure ProFTPd RSA Certificates option",
+			"check_html_message":"insecure ProFTPd RSA Certificates option"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure ProFTPd RSA Certificates option",
+			"check_html_message":"insecure ProFTPd RSA Certificates option"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, ProFTPd is not installed",
+			"check_html_message":"Unable to load configuration, ProFTPd is not installed"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"proc",
+	"returns":"Processes running in the system",
+	"help_result":"",
+	"command":"Processes running in the system",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"ps aux | sort -rn",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"ps aux | sort -rn",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"ps aux | sort -rn",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"ps aux | sort -rn",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"ps aux | sort -rn",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

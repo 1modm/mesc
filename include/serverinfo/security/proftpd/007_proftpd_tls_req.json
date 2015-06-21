@@ -1,0 +1,66 @@
+{
+	"check":"proftpd_tls_required",
+	"returns":"Check ProFTPd Required",
+	"help_result":"",
+	"command":"Check ProFTPd Required",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set TLSRequired on",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSRequired on"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSRequired on"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSRequired on"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSRequired on"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSRequired on"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure ProFTPd Required option",
+			"check_html_message":"secure ProFTPd Required option"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure ProFTPd Required option",
+			"check_html_message":"insecure ProFTPd Required option"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure ProFTPd Required option",
+			"check_html_message":"insecure ProFTPd Required option"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, ProFTPd is not installed",
+			"check_html_message":"Unable to load configuration, ProFTPd is not installed"
+		}
+	}
+}

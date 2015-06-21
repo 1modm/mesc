@@ -1,0 +1,53 @@
+{
+	"check":"uptime",
+	"returns":"uptime command",
+	"help_result":"Gives a one line display of the following information, the current time, how long the system has been running, how many users are currently logged on, and the system load averages for the past 1, 5, and 15 minutes",
+	"command":"System Uptime",
+	"type":"execute_cmd",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"uptime"
+		},
+		"RedHat":
+		{
+			"cmd":"uptime"
+		},
+		"SuSE":
+		{
+			"cmd":"uptime"
+		},
+		"debian":
+		{
+			"cmd":"uptime"
+		},
+		"mandrake":
+		{
+			"cmd":"uptime"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"6",
+			"check_html_message":"7"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"8",
+			"check_html_message":"9"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"10",
+			"check_html_message":"11"
+		},
+		"checkresulterror":
+		{
+			"check_message":"12",
+			"check_html_message":"13"
+		}
+	}
+}

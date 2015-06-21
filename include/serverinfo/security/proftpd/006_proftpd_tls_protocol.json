@@ -1,0 +1,66 @@
+{
+	"check":"proftpd_tls_protocol",
+	"returns":"Check ProFTPd Protocol",
+	"help_result":"",
+	"command":"Check ProFTPd Protocol",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set TLSProtocol TLSv1.2",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSProtocol TLSv1.2"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSProtocol TLSv1.2"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSProtocol TLSv1.2"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSProtocol TLSv1.2"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSProtocol TLSv1.2"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure ProFTPd Protocol option",
+			"check_html_message":"secure ProFTPd TLSLog Protocol option"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure ProFTPd Protocol option",
+			"check_html_message":"insecure ProFTPd Protocol option"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure ProFTPd Protocol option",
+			"check_html_message":"insecure ProFTPd Protocol option"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, ProFTPd is not installed",
+			"check_html_message":"Unable to load configuration, ProFTPd is not installed"
+		}
+	}
+}

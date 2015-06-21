@@ -1,0 +1,66 @@
+{
+	"check":"lshw",
+	"returns":"Hardware information",
+	"help_result":"",
+	"command":"Hardware information",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lshw",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lshw",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lshw",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lshw",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lshw",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

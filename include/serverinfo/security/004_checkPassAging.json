@@ -1,0 +1,66 @@
+{
+	"check":"checkPassAging",
+	"returns":"Password aging controls check",
+	"help_result":"Defines the site-specific configuration for the shadow password suite",
+	"command":"Password aging controls check",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"PASS_MAX_DAYS\\t99999   PASS_MIN_DAYS\\t0   PASS_WARN_AGE\\t7",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/login.defs",
+			"chk":"'PASS_MAX_DAYS\\t99999', 'PASS_MIN_DAYS\\t0', 'PASS_WARN_AGE\\t7'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/login.defs",
+			"chk":"'PASS_MAX_DAYS\\t99999', 'PASS_MIN_DAYS\\t0', 'PASS_WARN_AGE\\t7'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/login.defs",
+			"chk":"'PASS_MAX_DAYS\\t99999', 'PASS_MIN_DAYS\\t0', 'PASS_WARN_AGE\\t7'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/login.defs",
+			"chk":"'PASS_MAX_DAYS\\t99999', 'PASS_MIN_DAYS\\t0', 'PASS_WARN_AGE\\t7'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/login.defs",
+			"chk":"'PASS_MAX_DAYS\\t99999', 'PASS_MIN_DAYS\\t0', 'PASS_WARN_AGE\\t7'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The next file /etc/login.defs contains password aging controls: PASS_MAX_DAYS\\t99999, PASS_MIN_DAYS\\t0, PASS_WARN_AGE\\t7 - Review the values",
+			"check_html_message":"The next file /etc/login.defs contains password aging controls: PASS_MAX_DAYS\\t99999, PASS_MIN_DAYS\\t0, PASS_WARN_AGE\\t7 - Review the values"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"The next file /etc/login.defs contains default password aging controls: PASS_MAX_DAYS\\t99999, PASS_MIN_DAYS\\t0, PASS_WARN_AGE\\t7 - Modify default values to more restrictive values",
+			"check_html_message":"The next file /etc/login.defs contains default password aging controls: PASS_MAX_DAYS\\t99999, PASS_MIN_DAYS\\t0, PASS_WARN_AGE\\t7 - Modify default values to more restrictive values"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"The next file /etc/login.defs contains default password aging controls: PASS_MAX_DAYS\\t99999, PASS_MIN_DAYS\\t0, PASS_WARN_AGE\\t7 - Modify default values to more restrictive values",
+			"check_html_message":"The next file /etc/login.defs contains default password aging controls: PASS_MAX_DAYS\\t99999, PASS_MIN_DAYS\\t0, PASS_WARN_AGE\\t7 - Modify default values to more restrictive values"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file /etc/login.defs",
+			"check_html_message":"Unable to load the configuration file /etc/login.defs"
+		}
+	}
+}

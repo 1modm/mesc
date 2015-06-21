@@ -1,0 +1,66 @@
+{
+	"check":"postfix_tls_auth_only",
+	"returns":"Check postfix smtpd tls auth only",
+	"help_result":"",
+	"command":"Check postfix smtpd tls auth only",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set smtpd_tls_auth_only = yes",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_auth_only = yes"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_auth_only = yes"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_auth_only = yes"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_auth_only = yes"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_auth_only = yes"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure postfix smtpd tls auth only",
+			"check_html_message":"secure postfix smtpd tls auth only"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure postfix smtpd tls auth only",
+			"check_html_message":"insecure postfix smtpd tls auth only"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure postfix smtpd tls auth only",
+			"check_html_message":"insecure postfix smtpd tls auth only"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

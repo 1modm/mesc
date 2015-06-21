@@ -1,0 +1,66 @@
+{
+	"check":"allpermissionsdir",
+	"returns":"Folders with 777 permissions",
+	"help_result":"",
+	"command":"Folders with 777 permissions",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"find %s -type d -perm 777",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"find %s -type d -perm 777",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"find %s -type d -perm 777",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"find %s -type d -perm 777",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"find %s -type d -perm 777",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"You must be root",
+			"check_html_message":"You must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

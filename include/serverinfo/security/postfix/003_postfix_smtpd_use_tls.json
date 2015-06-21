@@ -1,0 +1,66 @@
+{
+	"check":"postfix_smtpd_use_tls",
+	"returns":"Check postfix smtpd tls",
+	"help_result":"",
+	"command":"Check postfix smtpd tls",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set smtpd_use_tls=yes",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_use_tls=yes"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_use_tls=yes"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_use_tls=yes"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_use_tls=yes"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_use_tls=yes"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure postfix smtpd tls",
+			"check_html_message":"secure postfix smtpd tls"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure postfix smtpd tls",
+			"check_html_message":"insecure postfix smtpd tls"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure postfix smtpd tls",
+			"check_html_message":"insecure postfix smtpd tls"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

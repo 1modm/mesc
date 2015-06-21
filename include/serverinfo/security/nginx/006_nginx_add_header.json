@@ -1,0 +1,66 @@
+{
+	"check":"nginx_add_header",
+	"returns":"Check nginx header configuration",
+	"help_result":"",
+	"command":"Check nginx header configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Verify add_header options",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"'add_header Strict-Transport-Security \"max-age=63072000; includeSubdomains; preload\";', 'add_header X-Frame-Options DENY;', 'add_header X-Content-Type-Options nosniff;'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"'add_header Strict-Transport-Security \"max-age=63072000; includeSubdomains; preload\";', 'add_header X-Frame-Options DENY;', 'add_header X-Content-Type-Options nosniff;'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"'add_header Strict-Transport-Security \"max-age=63072000; includeSubdomains; preload\";', 'add_header X-Frame-Options DENY;', 'add_header X-Content-Type-Options nosniff;'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"'add_header Strict-Transport-Security \"max-age=63072000; includeSubdomains; preload\";', 'add_header X-Frame-Options DENY;', 'add_header X-Content-Type-Options nosniff;'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"'add_header Strict-Transport-Security \"max-age=63072000; includeSubdomains; preload\";', 'add_header X-Frame-Options DENY;', 'add_header X-Content-Type-Options nosniff;'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure nginx header configuration",
+			"check_html_message":"secure nginx header configuration"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure nginx header configuration",
+			"check_html_message":"insecure nginx header configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure nginx header configuration",
+			"check_html_message":"insecure nginx header configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, nginx web server is not installed",
+			"check_html_message":"Unable to load configuration, nginx web server is not installed"
+		}
+	}
+}

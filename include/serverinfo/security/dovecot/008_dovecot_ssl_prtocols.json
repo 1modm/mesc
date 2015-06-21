@@ -1,0 +1,66 @@
+{
+	"check":"dovecot_protocols",
+	"returns":"Check Dovecot ssl protocols",
+	"help_result":"",
+	"command":"Check Dovecot ssl protocols",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_protocols = !SSLv2 !SSLv3",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_protocols = !SSLv2 !SSLv3"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_protocols = !SSLv2 !SSLv3"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_protocols = !SSLv2 !SSLv3"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_protocols = !SSLv2 !SSLv3"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_protocols = !SSLv2 !SSLv3"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure Dovecot ssl protocols",
+			"check_html_message":"secure Dovecot ssl protocols"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure Dovecot ssl protocols",
+			"check_html_message":"insecure Dovecot ssl protocols"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure Dovecot ssl protocols",
+			"check_html_message":"insecure Dovecot ssl protocols"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Dovecot is not installed",
+			"check_html_message":"Unable to load configuration, Dovecot is not installed"
+		}
+	}
+}

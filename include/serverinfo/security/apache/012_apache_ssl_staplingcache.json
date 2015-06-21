@@ -1,0 +1,66 @@
+{
+	"check":"SSLStaplingCache",
+	"returns":"SSLStaplingCache Directive",
+	"help_result":"Configures the OCSP stapling cache",
+	"command":"SSLStaplingCache Directive",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set SSLStaplingCache \"shmcb:logs/stapling-cache(150000)\"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLStaplingCache \"shmcb:logs/stapling-cache(150000)\""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLStaplingCache \"shmcb:logs/stapling-cache(150000)\""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLStaplingCache \"shmcb:logs/stapling-cache(150000)\""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLStaplingCache \"shmcb:logs/stapling-cache(150000)\""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLStaplingCache \"shmcb:logs/stapling-cache(150000)\""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Configured the cache used to store OCSP responses which get included in the TLS handshake if SSLUseStapling is enabled.",
+			"check_html_message":"Configured the cache used to store OCSP responses which get included in the TLS handshake if SSLUseStapling is enabled."
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Not configured the cache used to store OCSP responses which get included in the TLS handshake if SSLUseStapling is enabled.",
+			"check_html_message":"Not configured the cache used to store OCSP responses which get included in the TLS handshake if SSLUseStapling is enabled."
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Not configured the cache used to store OCSP responses which get included in the TLS handshake if SSLUseStapling is enabled.",
+			"check_html_message":"Not configured the cache used to store OCSP responses which get included in the TLS handshake if SSLUseStapling is enabled."
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

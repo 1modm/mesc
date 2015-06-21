@@ -1,0 +1,66 @@
+{
+	"check":"nginxcipher",
+	"returns":"Check nginx cipher configuration",
+	"help_result":"cipher alowed",
+	"command":"Check nginx cipher configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_ciphers \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_ciphers \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_ciphers \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_ciphers \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_ciphers \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_ciphers \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure nginx SSL ciphers",
+			"check_html_message":"secure nginx ciphers SSL secure"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure nginx SSL ciphers",
+			"check_html_message":"insecure nginx SSL ciphers"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure nginx SSL ciphers",
+			"check_html_message":"insecure nginx SSL ciphers"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, nginx web server is not installed",
+			"check_html_message":"Unable to load configuration, nginx web server is not installed"
+		}
+	}
+}

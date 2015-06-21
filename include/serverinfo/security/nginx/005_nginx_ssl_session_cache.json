@@ -1,0 +1,66 @@
+{
+	"check":"nginx_ssl_session_cache",
+	"returns":"Check nginx ssl session cache configuration",
+	"help_result":"",
+	"command":"Check nginx ssl session cache configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_session_cache shared:SSL:10m;",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_session_cache shared:SSL:10m;"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_session_cache shared:SSL:10m;"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_session_cache shared:SSL:10m;"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_session_cache shared:SSL:10m;"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_session_cache shared:SSL:10m;"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure nginx SSL session cache configuration",
+			"check_html_message":"secure nginx ciphers SSL session cache configuration"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure nginx SSL session cache configuration",
+			"check_html_message":"insecure nginx SSL session cache configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure nginx SSL session cache configuration",
+			"check_html_message":"insecure nginx SSL session cache configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, nginx web server is not installed",
+			"check_html_message":"Unable to load configuration, nginx web server is not installed"
+		}
+	}
+}

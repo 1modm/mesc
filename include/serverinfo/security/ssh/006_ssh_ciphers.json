@@ -1,0 +1,66 @@
+{
+	"check":"ssh_Ciphers",
+	"returns":"Check ssh Ciphers",
+	"help_result":"",
+	"command":"Check Ciphers in ssh service",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/ssh/sshd_config contains any of the following chain: Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr",
+			"check_html_message":"The file /etc/ssh/sshd_config contains any of the following chain: Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"SSH service has an insecure Ciphers configuration.",
+			"check_html_message":"SSH service has an insecure Ciphers configuration."
+		},
+		"checkresultcritical":
+		{
+			"check_message":"SSH service has an insecure Ciphers configuration.",
+			"check_html_message":"SSH service has an insecure Ciphers configuration."
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file",
+			"check_html_message":"Unable to load the configuration file"
+		}
+	}
+}

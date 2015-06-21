@@ -1,0 +1,66 @@
+{
+	"check":"SSLCompression",
+	"returns":"SSLCompression Directive",
+	"help_result":"This directive allows to disable compression on the SSL level",
+	"command":"SSLCompression Directive",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set SSLCompression off",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLCompression off"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLCompression off"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLCompression off"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLCompression off"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLCompression off"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Disabled compression on the SSL level",
+			"check_html_message":"Disabled compression on the SSL level"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Enabled compression on the SSL level",
+			"check_html_message":"Enabled compression on the SSL level"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Enabled compression on the SSL level",
+			"check_html_message":"Enabled compression on the SSL level"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

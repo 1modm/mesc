@@ -1,0 +1,66 @@
+{
+	"check":"checkDisabledCtrlAltDel",
+	"returns":"ctrl+alt+del reboot check",
+	"help_result":"Restrict the privilege to allow certain non-root users the right to shutdown or reboot the system from the console",
+	"command":"ctrl+alt+del reboot check",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/inittab",
+			"chk":"'#ca::ctrlaltdel:', '#ca:12345:ctrlaltdel:'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/inittab",
+			"chk":"'#ca::ctrlaltdel:', '#ca:12345:ctrlaltdel:'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/inittab",
+			"chk":"'#ca::ctrlaltdel:', '#ca:12345:ctrlaltdel:'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/inittab",
+			"chk":"'#ca::ctrlaltdel:', '#ca:12345:ctrlaltdel:'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/inittab",
+			"chk":"'#ca::ctrlaltdel:', '#ca:12345:ctrlaltdel:'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/inittab contains the chain that comment ctrl+alt+del. It is not allowed reboot the system with ctrl+alt+del",
+			"check_html_message":"The file /etc/inittab contains the chain that comment ctrl+alt+del. It is not allowed reboot the system with ctrl+alt+del"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is allowed to reboot the system with ctrl+alt+del",
+			"check_html_message":"It is allowed to reboot the system with ctrl+alt+del"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is allowed to reboot the system with ctrl+alt+del",
+			"check_html_message":"It is allowed to reboot the system with ctrl+alt+del"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file",
+			"check_html_message":"Unable to load the configuration file"
+		}
+	}
+}

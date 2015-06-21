@@ -1,0 +1,66 @@
+{
+	"check":"sys_files",
+	"returns":"sys user files",
+	"help_result":"Files used by trojans",
+	"command":"sys user files",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"find %s -user sys -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"find %s -user sys -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"find %s -user sys -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"find %s -user sys -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"find %s -user sys -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"You must be root",
+			"check_html_message":"You must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

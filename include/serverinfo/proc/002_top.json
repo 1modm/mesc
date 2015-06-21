@@ -1,0 +1,66 @@
+{
+	"check":"top",
+	"returns":"Running system information",
+	"help_result":"",
+	"command":"Running system information",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"top -n1 -b1",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"top -n1 -b1",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"top -n1 -b1",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"top -n1 -b1",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"top -n1 -b1",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"rpcinfo",
+	"returns":"Openned RPC services",
+	"help_result":"rpcinfo makes an RPC call to an RPC server and reports what it finds",
+	"command":"Openned RPC services",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"bash -i -c \"rpcinfo -p\"",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"bash -i -c \"rpcinfo -p\"",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"bash -i -c \"rpcinfo -p\"",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"bash -i -c \"rpcinfo -p\"",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"bash -i -c \"rpcinfo -p\"",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

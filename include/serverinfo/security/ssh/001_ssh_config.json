@@ -1,0 +1,66 @@
+{
+	"check":"ssh_config",
+	"returns":"Load SSH config file",
+	"help_result":"OpenSSH SSH daemon configuration file",
+	"command":"Load SSH config file",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"SSH configuration loaded",
+			"check_html_message":"SSH configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration",
+			"check_html_message":"Unable to load configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration",
+			"check_html_message":"Unable to load configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration",
+			"check_html_message":"Unable to load configuration"
+		}
+	}
+}

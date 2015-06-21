@@ -1,0 +1,66 @@
+{
+	"check":"nginxsslserver",
+	"returns":"Check nginx ssl server configuration",
+	"help_result":"ssl server",
+	"command":"Check nginx ssl server configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_prefer_server_ciphers on;",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_prefer_server_ciphers on;"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_prefer_server_ciphers on;"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_prefer_server_ciphers on;"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_prefer_server_ciphers on;"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_prefer_server_ciphers on;"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure nginx SSL server",
+			"check_html_message":"secure nginx ciphers SSL server"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure nginx SSL server",
+			"check_html_message":"insecure nginx SSL server"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure nginx SSL server",
+			"check_html_message":"insecure nginx SSL server"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, nginx web server is not installed",
+			"check_html_message":"Unable to load configuration, nginx web server is not installed"
+		}
+	}
+}

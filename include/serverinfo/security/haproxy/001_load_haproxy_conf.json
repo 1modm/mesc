@@ -1,0 +1,66 @@
+{
+	"check":"Loadhaproxy",
+	"returns":"Load haproxy configuration",
+	"help_result":"",
+	"command":"Load haproxy configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"haproxy configuration loaded",
+			"check_html_message":"haproxy configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, haproxy is not installed",
+			"check_html_message":"Unable to load configuration, haproxy is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, haproxy is not installed",
+			"check_html_message":"Unable to load configuration, haproxy is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, haproxy is not installed",
+			"check_html_message":"Unable to load configuration, haproxy is not installed"
+		}
+	}
+}

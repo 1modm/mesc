@@ -1,0 +1,66 @@
+{
+	"check":"nmap",
+	"returns":"Opened ports in the system",
+	"help_result":"Nmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services (application name and version) those hosts are offering, what operating systems (and OS versions) they are running, what type of packet filters/firewalls are in use, and dozens of other characteristics.",
+	"command":"Opened ports in the system",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"nmap",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"nmap",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"nmap",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"nmap",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"nmap",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

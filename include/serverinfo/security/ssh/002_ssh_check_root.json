@@ -1,0 +1,66 @@
+{
+	"check":"ssh_check",
+	"returns":"Check ssh service",
+	"help_result":"Check PermitRootLogin",
+	"command":"Check PermitRootLogin in ssh service",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set PermitRootLogin no and PermitRootLogin without-password",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitRootLogin yes', 'PermitRootLogin no', 'PermitRootLogin without-password'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitRootLogin yes', 'PermitRootLogin no', 'PermitRootLogin without-password'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitRootLogin yes', 'PermitRootLogin no', 'PermitRootLogin without-password'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitRootLogin yes', 'PermitRootLogin no', 'PermitRootLogin without-password'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitRootLogin yes', 'PermitRootLogin no', 'PermitRootLogin without-password'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/ssh/sshd_config contains any of the following chains: '#PermitRootLogin yes', 'PermitRootLogin no', 'PermitRootLogin without-password'",
+			"check_html_message":"The file /etc/ssh/sshd_config contains any of the following chains: '#PermitRootLogin yes', 'PermitRootLogin no', 'PermitRootLogin without-password'"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"SSH service has an insecure configuration",
+			"check_html_message":"SSH service has an insecure configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"SSH service has an insecure configuration",
+			"check_html_message":"SSH service has an insecure configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file",
+			"check_html_message":"Unable to load the configuration file"
+		}
+	}
+}

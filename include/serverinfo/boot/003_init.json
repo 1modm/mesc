@@ -1,0 +1,66 @@
+{
+	"check":"init services",
+	"returns":"list all available services",
+	"help_result":"List all available services and specify in which runlevel start a service",
+	"command":"List all available services",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"service --status-all",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"chkconfig --list",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"chkconfig --list",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"service --status-all",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"chkconfig --list",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Warning",
+			"check_html_message":"Warning"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

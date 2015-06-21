@@ -1,0 +1,66 @@
+{
+	"check":"checkPassLength",
+	"returns":"Minimum password length check",
+	"help_result":"In order to improve the security of standard reusable passwords, \"best practices\" tell us to require users to change their passwords on a regular basis, enforce minimum lengths and good \"rules\" for new passwords (such as requiring mixed case and non-alphanumeric characters), and even keep a \"history\" of previous user passwords so that users dont \"repeat\" \"minlen\" is actually the minimum required length for a password consisting of all lower-case letters. The four parameters \"lcredit\", \"ucredit\", \"dcredit\", and \"ocredit\" are used to set the maximum credit for lower-case, upper-case, numeric (digit), and non-alphanumeric (other) characters, respectively",
+	"command":"Minimum password length check",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/common-password",
+			"chk":"'retry=', 'minlen=', 'difok=', 'lcredit=', 'ucredit=', 'dcredit=', 'ocredit='"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/system-auth",
+			"chk":"'retry=', 'minlen=', 'difok=', 'lcredit=', 'ucredit=', 'dcredit=', 'ocredit='"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/system-auth",
+			"chk":"'retry=', 'minlen=', 'difok=', 'lcredit=', 'ucredit=', 'dcredit=', 'ocredit='"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/common-password",
+			"chk":"'retry=', 'minlen=', 'difok=', 'lcredit=', 'ucredit=', 'dcredit=', 'ocredit='"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/system-auth",
+			"chk":"'retry=', 'minlen=', 'difok=', 'lcredit=', 'ucredit=', 'dcredit=', 'ocredit='"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The next file /etc/pam.d/system-auth contains minimum password length controls: 'retry=', 'minlen=', 'difok=', 'lcredit=', 'ucredit=', 'dcredit=', 'ocredit=' - Review the values",
+			"check_html_message":"The next file /etc/pam.d/system-auth contains minimum password length controls: 'retry=', 'minlen=', 'difok=', 'lcredit=', 'ucredit=', 'dcredit=', 'ocredit=' - Review the values"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"The next file /etc/pam.d/system-auth doesn't contains minimum password length and password best practices controls. Set values to restrict password length and use",
+			"check_html_message":"The next file /etc/pam.d/system-auth doesn't contains minimum password length and password best practices controls. Set values to restrict password length and use"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"The next file /etc/pam.d/system-auth doesn't contains minimum password length and password best practices controls. Set values to restrict password length and use",
+			"check_html_message":"The next file /etc/pam.d/system-auth doesn't contains minimum password length and password best practices controls. Set values to restrict password length and use"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file /etc/pam.d/system-auth",
+			"check_html_message":"Unable to load the configuration file /etc/pam.d/system-auth"
+		}
+	}
+}

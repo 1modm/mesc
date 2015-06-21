@@ -1,0 +1,66 @@
+{
+	"check":"inodespace",
+	"returns":"File system disk inode space usage",
+	"help_result":"df displays the amount of disk space available on the file system",
+	"command":"File system disk inode space usage",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"df -i",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"df -i",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"df -i",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"df -i",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"df -i",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

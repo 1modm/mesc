@@ -1,0 +1,66 @@
+{
+	"check":"mysql_cipher",
+	"returns":"Check MySQL cipher configuration",
+	"help_result":"",
+	"command":"Check MySQL cipher configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl-cipher=AES128+EECDH:AES128+EDH",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":"ssl-cipher=AES128+EECDH:AES128+EDH"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":"ssl-cipher=AES128+EECDH:AES128+EDH"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":"ssl-cipher=AES128+EECDH:AES128+EDH"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":"ssl-cipher=AES128+EECDH:AES128+EDH"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"chk":"ssl-cipher=AES128+EECDH:AES128+EDH"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure MySQL cipher configuration",
+			"check_html_message":"secure MySQL cipher configuration"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure MySQL cipher configuration",
+			"check_html_message":"insecure MySQL cipher configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure MySQL cipher configuration",
+			"check_html_message":"insecure MySQL cipher configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, haproxy is not installed",
+			"check_html_message":"Unable to load configuration, haproxy is not installed"
+		}
+	}
+}

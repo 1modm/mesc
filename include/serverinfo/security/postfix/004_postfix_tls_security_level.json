@@ -1,0 +1,66 @@
+{
+	"check":"postfix_tls_security_level",
+	"returns":"Check postfix smtpd tls security level",
+	"help_result":"",
+	"command":"Check postfix smtpd tls security level",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set smtpd_tls_security_level = may",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_security_level = may"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_security_level = may"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_security_level = may"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_security_level = may"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_security_level = may"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure postfix smtpd tls security level",
+			"check_html_message":"secure postfix smtpd tls security level"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure postfix smtpd tls security level",
+			"check_html_message":"insecure postfix smtpd tls security level"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure postfix smtpd tls security level",
+			"check_html_message":"insecure postfix smtpd tls security level"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

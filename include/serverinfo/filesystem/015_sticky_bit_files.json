@@ -1,0 +1,66 @@
+{
+	"check":"sticky_bit_files",
+	"returns":"Sticky Bit files",
+	"help_result":"Find all the Sticky Bit set files whose permission are 551. When a directory's sticky bit is set, the filesystem treats the files in such directories in a special way so only the file's owner, the directory's owner, or root user can rename or delete the file. Without the sticky bit set, any user with write and execute permissions for the directory can rename or delete contained files, regardless of the file's owner. Typically this is set on the /tmp directory to prevent ordinary users from deleting or moving other users files.",
+	"command":"Sticky Bit files",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"find %s -type f -perm -1551 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"find %s -type f -perm -1551 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"find %s -type f -perm -1551 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"find %s -type f -perm -1551 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"find %s -type f -perm -1551 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"You must be root",
+			"check_html_message":"You must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

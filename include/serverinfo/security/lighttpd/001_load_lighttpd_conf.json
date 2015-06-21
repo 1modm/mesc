@@ -1,0 +1,66 @@
+{
+	"check":"Loadlighttpd",
+	"returns":"Load lighttpd configuration",
+	"help_result":"",
+	"command":"Load lighttpd configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/lighttpd.conf",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/lighttpd.conf",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/lighttpd.conf",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/lighttpd.conf",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/lighttpd.conf",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"lighttpd configuration loaded",
+			"check_html_message":"lighttpd configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		}
+	}
+}

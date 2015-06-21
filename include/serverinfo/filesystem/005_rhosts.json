@@ -1,0 +1,66 @@
+{
+	"check":"rhosts",
+	"returns":".rhosts files",
+	"help_result":"The .rhosts file is the user equivalent of the /etc/hosts.equiv file. It contains a list of host-user combinations, rather than hosts in general. If a host-user combination is listed in this file, the specified user is granted permission to log in remotely from the specified host without having to supply a password. The machines and users writen in these files they will have allowed to access without password using some r-service, like rlogin",
+	"command":".rhosts files",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"find %s -type f -name .rhosts -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"find %s -type f -name .rhosts -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"find %s -type f -name .rhosts -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"find %s -type f -name .rhosts -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"find %s -type f -name .rhosts -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"You must be root",
+			"check_html_message":"You must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"dovecot_cer",
+	"returns":"Check Dovecot ssl certificates",
+	"help_result":"",
+	"command":"Check Dovecot ssl certificates",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_cert = </etc/dovecot.cert and ssl_key = </etc/dovecot.key",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"'ssl_cert = </etc/dovecot.cert','ssl_key = </etc/dovecot.key'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"'ssl_cert = </etc/dovecot.cert','ssl_key = </etc/dovecot.key'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"'ssl_cert = </etc/dovecot.cert','ssl_key = </etc/dovecot.key'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"'ssl_cert = </etc/dovecot.cert','ssl_key = </etc/dovecot.key'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"'ssl_cert = </etc/dovecot.cert','ssl_key = </etc/dovecot.key'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure Dovecot ssl certificates",
+			"check_html_message":"secure Dovecot ssl certificates"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure Dovecot ssl certificates",
+			"check_html_message":"insecure Dovecot ssl certificates"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure Dovecot ssl certificates",
+			"check_html_message":"insecure Dovecot ssl certificates"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Dovecot is not installed",
+			"check_html_message":"Unable to load configuration, Dovecot is not installed"
+		}
+	}
+}

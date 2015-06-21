@@ -1,0 +1,66 @@
+{
+	"check":"nginx_ssl_session_tickets",
+	"returns":"Check nginx ssl session tickets configuration",
+	"help_result":"",
+	"command":"Check nginx ssl session tickets configuration",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_session_tickets off;",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_session_tickets off;"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_session_tickets off;"		
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_session_tickets off;"		
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/nginx.conf",
+			"chk":"ssl_session_tickets off;"		
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/nginx/conf.d/nginx.conf",
+			"chk":"ssl_session_tickets off;"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure nginx ssl session tickets configuration",
+			"check_html_message":"secure nginx ssl session tickets configuration"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure nginx ssl session tickets configuration",
+			"check_html_message":"insecure nginx ssl session tickets configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure nginx ssl session tickets configuration",
+			"check_html_message":"insecure nginx ssl session tickets configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, nginx web server is not installed",
+			"check_html_message":"Unable to load configuration, nginx web server is not installed"
+		}
+	}
+}

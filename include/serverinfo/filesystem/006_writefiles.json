@@ -1,0 +1,66 @@
+{
+	"check":"writefiles",
+	"returns":"Files with write access for all users",
+	"help_result":"",
+	"command":"Files with write access for all users",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"find %s -type f -perm -2 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"find %s -type f -perm -2 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"find %s -type f -perm -2 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"find %s -type f -perm -2 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"find %s -type f -perm -2 -print 2>/dev/null",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"You must be root",
+			"check_html_message":"You must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

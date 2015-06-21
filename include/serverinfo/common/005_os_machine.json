@@ -1,0 +1,66 @@
+{
+	"check":"OS_machine",
+	"returns":"uname command",
+	"help_result":"Get name and information about current kernel",
+	"command":"Machine",
+	"type":"os_information",
+	"information":"Machine",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"uname -m",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"uname -m",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"uname -m",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"uname -m",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"uname -m",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Warning",
+			"check_html_message":"Warning"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Error",
+			"check_html_message":"Error"
+		}
+	}
+}

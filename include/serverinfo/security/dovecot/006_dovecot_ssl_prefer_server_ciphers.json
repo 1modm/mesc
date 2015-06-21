@@ -1,0 +1,66 @@
+{
+	"check":"dovecot_prefer_server_ciphers",
+	"returns":"Check Dovecot ssl prefer server ciphers",
+	"help_result":"",
+	"command":"Check Dovecot ssl prefer server ciphers",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_prefer_server_ciphers = yes # >Dovecot 2.2.6",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_prefer_server_ciphers = yes"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_prefer_server_ciphers = yes"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_prefer_server_ciphers = yes"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_prefer_server_ciphers = yes"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_prefer_server_ciphers = yes"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure Dovecot ssl prefer server ciphers",
+			"check_html_message":"secure Dovecot ssl prefer server ciphers"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure Dovecot ssl prefer server ciphers",
+			"check_html_message":"insecure Dovecot ssl prefer server ciphers"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure Dovecot ssl prefer server ciphers",
+			"check_html_message":"insecure Dovecot ssl prefer server ciphers"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Dovecot is not installed",
+			"check_html_message":"Unable to load configuration, Dovecot is not installed"
+		}
+	}
+}

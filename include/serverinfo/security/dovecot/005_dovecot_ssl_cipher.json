@@ -1,0 +1,66 @@
+{
+	"check":"dovecot_cipher",
+	"returns":"Check Dovecot ssl cipher list",
+	"help_result":"",
+	"command":"Check Dovecot ssl cipher list",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_cipher_list = AES128+EECDH:AES128+EDH",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_cipher_list = AES128+EECDH:AES128+EDH"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_cipher_list = AES128+EECDH:AES128+EDH"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_cipher_list = AES128+EECDH:AES128+EDH"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_cipher_list = AES128+EECDH:AES128+EDH"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_cipher_list = AES128+EECDH:AES128+EDH"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure Dovecot ssl cipher list",
+			"check_html_message":"secure Dovecot ssl cipher list"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure Dovecot ssl cipher list",
+			"check_html_message":"insecure Dovecot ssl cipher list"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure Dovecot ssl cipher list",
+			"check_html_message":"insecure Dovecot ssl cipher list"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Dovecot is not installed",
+			"check_html_message":"Unable to load configuration, Dovecot is not installed"
+		}
+	}
+}

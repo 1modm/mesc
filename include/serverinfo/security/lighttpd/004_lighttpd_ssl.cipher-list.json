@@ -1,0 +1,66 @@
+{
+	"check":"lighttpd_ssl.cipher-list",
+	"returns":"Check lighttpd ssl cipher-list",
+	"help_result":"",
+	"command":"Check lighttpd ssl cipher-list",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl.cipher-list = \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.cipher-list = \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.cipher-list = \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.cipher-list = \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.cipher-list = \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"ssl.cipher-list = \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure lighttpd ssl cipher-list",
+			"check_html_message":"secure lighttpd ssl cipher-list"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure lighttpd ssl cipher-list",
+			"check_html_message":"insecure lighttpd ssl cipher-list"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure lighttpd ssl cipher-list",
+			"check_html_message":"insecure lighttpd ssl cipher-list"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		}
+	}
+}

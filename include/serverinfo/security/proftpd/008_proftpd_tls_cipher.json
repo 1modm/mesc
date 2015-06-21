@@ -1,0 +1,66 @@
+{
+	"check":"proftpd_tls_cipher",
+	"returns":"Check ProFTPd CipherSuite",
+	"help_result":"",
+	"command":"Check ProFTPd CipherSuite",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set TLSCipherSuite AES128+EECDH:AES128+EDH",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSCipherSuite AES128+EECDH:AES128+EDH"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSCipherSuite AES128+EECDH:AES128+EDH"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSCipherSuite AES128+EECDH:AES128+EDH"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSCipherSuite AES128+EECDH:AES128+EDH"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSCipherSuite AES128+EECDH:AES128+EDH"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure ProFTPd CipherSuite option",
+			"check_html_message":"secure ProFTPd CipherSuite option"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure ProFTPd CipherSuite option",
+			"check_html_message":"insecure ProFTPd CipherSuite option"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure ProFTPd CipherSuite option",
+			"check_html_message":"insecure ProFTPd CipherSuite option"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, ProFTPd is not installed",
+			"check_html_message":"Unable to load configuration, ProFTPd is not installed"
+		}
+	}
+}

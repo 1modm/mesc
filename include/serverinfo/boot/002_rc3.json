@@ -1,0 +1,66 @@
+{
+	"check":"rc3",
+	"returns":"rc3 level",
+	"help_result":"Started applications in the rc3.d level",
+	"command":"rc3.d level",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"ls -ltr /etc/rc3.d/S*",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"ls -ltr /etc/rc3.d/S*",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"ls -ltr /etc/rc3.d/S*",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"ls -ltr /etc/rc3.d/S*",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"ls -ltr /etc/rc3.d/S*",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Warning",
+			"check_html_message":"Warning"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

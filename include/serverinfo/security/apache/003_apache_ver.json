@@ -1,0 +1,66 @@
+{
+	"check":"Apache version",
+	"returns":"Check Apache server version",
+	"help_result":"ServerSignature Off tells apache not to display the server version on error pages, or other pages it generates",
+	"command":"Check Apache server version",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ServerSignature Off",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/conf-available/security.conf",
+			"chk":"ServerSignature Off"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf/httpd.conf",
+			"chk":"ServerSignature Off"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/httpd.conf",
+			"chk":"ServerSignature Off"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/conf-available/security.conf",
+			"chk":"ServerSignature Off"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf/httpd.conf",
+			"chk":"ServerSignature Off"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Apache version it is not showed",
+			"check_html_message":"Apache version it is not showed"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is possible to read apache version, set the directive ServerSignature Off",
+			"check_html_message":"It is possible to read apache version, set the directive ServerSignature Off"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is possible to read apache version, set the directive ServerSignature Off",
+			"check_html_message":"It is possible to read apache version, set the directive ServerSignature Off"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

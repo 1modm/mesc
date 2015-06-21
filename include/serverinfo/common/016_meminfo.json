@@ -1,0 +1,66 @@
+{
+	"check":"meminfo",
+	"returns":"MEM info",
+	"help_result":"",
+	"command":"MEM info",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/proc/meminfo",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/proc/meminfo",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/proc/meminfo",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/proc/meminfo",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/proc/meminfo",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to read the file",
+			"check_html_message":"Unable to read the file"
+		}
+	}
+}

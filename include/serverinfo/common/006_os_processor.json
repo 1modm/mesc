@@ -1,0 +1,66 @@
+{
+	"check":"OS_processor",
+	"returns":"uname command",
+	"help_result":"Get name and information about current kernel",
+	"command":"Processor",
+	"type":"os_information",
+	"information":"Processor",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"uname -p",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"uname -p",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"uname -p",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"uname -p",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"uname -p",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Warning",
+			"check_html_message":"Warning"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Error",
+			"check_html_message":"Error"
+		}
+	}
+}

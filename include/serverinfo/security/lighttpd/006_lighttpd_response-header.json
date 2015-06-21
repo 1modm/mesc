@@ -1,0 +1,66 @@
+{
+	"check":"lighttpd_response-header",
+	"returns":"Check lighttpd ssl response-header",
+	"help_result":"",
+	"command":"Check lighttpd ssl response-header",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set setenv.add-response-header = (\"Strict-Transport-Security\" => \"max-age=63072000; includeSubdomains; preload\", \"X-Frame-Options\" => \"DENY\",\"X-Content-Type-Options\" => \"nosniff\")",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"setenv.add-response-header = (\"Strict-Transport-Security\" => \"max-age=63072000; includeSubdomains; preload\", \"X-Frame-Options\" => \"DENY\",\"X-Content-Type-Options\" => \"nosniff\")"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"setenv.add-response-header = (\"Strict-Transport-Security\" => \"max-age=63072000; includeSubdomains; preload\", \"X-Frame-Options\" => \"DENY\",\"X-Content-Type-Options\" => \"nosniff\")"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"setenv.add-response-header = (\"Strict-Transport-Security\" => \"max-age=63072000; includeSubdomains; preload\", \"X-Frame-Options\" => \"DENY\",\"X-Content-Type-Options\" => \"nosniff\")"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"setenv.add-response-header = (\"Strict-Transport-Security\" => \"max-age=63072000; includeSubdomains; preload\", \"X-Frame-Options\" => \"DENY\",\"X-Content-Type-Options\" => \"nosniff\")"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/lighttpd/conf-available/10-ssl.conf",
+			"chk":"setenv.add-response-header = (\"Strict-Transport-Security\" => \"max-age=63072000; includeSubdomains; preload\", \"X-Frame-Options\" => \"DENY\",\"X-Content-Type-Options\" => \"nosniff\")"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure lighttpd ssl response-header",
+			"check_html_message":"secure lighttpd ssl response-header"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure lighttpd ssl response-header",
+			"check_html_message":"insecure lighttpd ssl response-header"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure lighttpd ssl response-header",
+			"check_html_message":"insecure lighttpd ssl response-header"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, lighttpd web server is not installed",
+			"check_html_message":"Unable to load configuration, lighttpd web server is not installed"
+		}
+	}
+}

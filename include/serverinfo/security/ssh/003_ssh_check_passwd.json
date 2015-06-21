@@ -1,0 +1,66 @@
+{
+	"check":"ssh_check_passwd",
+	"returns":"Check ssh service",
+	"help_result":"Check PermitEmptyPasswords",
+	"command":"Check PermitEmptyPasswords in ssh service",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set PermitEmptyPasswords no",
+	"level":"6",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitEmptyPasswords yes', 'PermitEmptyPasswords no'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitEmptyPasswords yes', 'PermitEmptyPasswords no'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitEmptyPasswords yes', 'PermitEmptyPasswords no'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitEmptyPasswords yes', 'PermitEmptyPasswords no'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/ssh/sshd_config",
+			"chk":"'#PermitEmptyPasswords yes', 'PermitEmptyPasswords no'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/ssh/sshd_config contains any of the following chains: '#PermitEmptyPasswords yes', 'PermitEmptyPasswords no'",
+			"check_html_message":"The file /etc/ssh/sshd_config contains any of the following chains: '#PermitEmptyPasswords yes', 'PermitEmptyPasswords no'"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"SSH service has an insecure configuration",
+			"check_html_message":"SSH service has an insecure configuration"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"SSH service has an insecure configuration",
+			"check_html_message":"SSH service has an insecure configuration"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file",
+			"check_html_message":"Unable to load the configuration file"
+		}
+	}
+}

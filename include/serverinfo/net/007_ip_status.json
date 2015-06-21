@@ -1,0 +1,66 @@
+{
+	"check":"ipaddrstatistics",
+	"returns":"Statistics of the current interfaces",
+	"help_result":"Check ip status and ip link",
+	"command":"Statistics of the current interfaces",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"ip addr s",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"ip addr s",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"ip addr s",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"ip addr s",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"ip addr s",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

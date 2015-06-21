@@ -1,0 +1,66 @@
+{
+	"check":"proftpd_tls_log",
+	"returns":"Check ProFTPd TLSLog",
+	"help_result":"",
+	"command":"Check ProFTPd TLSLog",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Verify TLSLog option",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSLog /var/ftpd/tls.log"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSLog /var/ftpd/tls.log"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSLog /var/ftpd/tls.log"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSLog /var/ftpd/tls.log"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/proftpd/tls.conf",
+			"chk":"TLSLog /var/ftpd/tls.log"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure ProFTPd TLSLog option",
+			"check_html_message":"secure ProFTPd TLSLog option"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure ProFTPd TLSLog option",
+			"check_html_message":"insecure ProFTPd TLSLog option"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure ProFTPd TLSLog option",
+			"check_html_message":"insecure ProFTPd TLSLog option"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, ProFTPd is not installed",
+			"check_html_message":"Unable to load configuration, ProFTPd is not installed"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"haproxy_ssl-default-bind-options",
+	"returns":"Check haproxy ssl default bind options",
+	"help_result":"",
+	"command":"Check haproxy ssl default bind options",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/haproxy/haproxy.cfg",
+			"chk":"ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure haproxy ssl default bind options",
+			"check_html_message":"secure haproxy ssl default bind options"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure haproxy ssl default bind options",
+			"check_html_message":"insecure haproxy ssl default bind options"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure haproxy ssl default bind options",
+			"check_html_message":"insecure haproxy ssl default bind options"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, haproxy is not installed",
+			"check_html_message":"Unable to load configuration, haproxy is not installed"
+		}
+	}
+}

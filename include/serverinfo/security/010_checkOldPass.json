@@ -1,0 +1,66 @@
+{
+	"check":"checkOldPass",
+	"returns":"Restrict Users to Use Old Passwords",
+	"help_result":"The old password file is located at /etc/security/opasswd. It is recommended to restrict using PAM module.",
+	"command":"Restrict Users to Use Old Passwords",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"Check password section to disallow a user from re-using last 5 password",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/common-password",
+			"chk":"'auth        sufficient    pam_unix.so likeauth nullok','password   sufficient    pam_unix.so nullok use_authtok md5 shadow remember=5'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/system-auth",
+			"chk":"'auth        sufficient    pam_unix.so likeauth nullok','password   sufficient    pam_unix.so nullok use_authtok md5 shadow remember=5'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/system-auth",
+			"chk":"'auth        sufficient    pam_unix.so likeauth nullok','password   sufficient    pam_unix.so nullok use_authtok md5 shadow remember=5'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/common-password",
+			"chk":"'auth        sufficient    pam_unix.so likeauth nullok','password   sufficient    pam_unix.so nullok use_authtok md5 shadow remember=5'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/pam.d/system-auth",
+			"chk":"'auth        sufficient    pam_unix.so likeauth nullok','password   sufficient    pam_unix.so nullok use_authtok md5 shadow remember=5'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file ",
+			"check_html_message":"Unable to load the configuration file"
+		}
+	}
+}

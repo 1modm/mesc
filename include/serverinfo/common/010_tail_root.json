@@ -1,0 +1,66 @@
+{
+	"check":"tail_root",
+	"returns":"tail_root command",
+	"help_result":"root saved history",
+	"command":"Last 100 root commands executed",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"tail -100 /root/.bash_history",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"tail -100 /root/.bash_history",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"tail -100 /root/.bash_history",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"tail -100 /root/.bash_history",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"tail -100 /root/.bash_history",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to execute, you must be root",
+			"check_html_message":"Unable to execute, you must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Error",
+			"check_html_message":"Error"
+		}
+	}
+}

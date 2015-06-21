@@ -1,0 +1,66 @@
+{
+	"check":"Apache header",
+	"returns":"Check Apache Server header",
+	"help_result":"ServerTokens Prod tells apache to only return Apache in the Server header, returned on every page request",
+	"command":"Check Apache Server header",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ServerTokens Prod",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/conf-available/security.conf",
+			"chk":"ServerTokens Prod"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf/httpd.conf",
+			"chk":"ServerTokens Prod"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/httpd.conf",
+			"chk":"ServerTokens Prod"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/conf-available/security.conf",
+			"chk":"ServerTokens Prod"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf/httpd.conf",
+			"chk":"ServerTokens Prod"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Apache version it is not showed due ServerTokens Prod",
+			"check_html_message":"Apache version it is not showed due ServerTokens Prod"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is possible to read apache version, set the directive ServerTokens Prod",
+			"check_html_message":"It is possible to read apache version, set the directive ServerTokens Prod"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is possible to read apache version, set the directive ServerTokens Prod",
+			"check_html_message":"It is possible to read apache version, set the directive ServerTokens Prod"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"diskspace",
+	"returns":"File system disk space usage",
+	"help_result":"Displays the amount of disk space available on the file system",
+	"command":"File system disk space usage",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"df -Th",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"df -Th",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"df -Th",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"df -Th",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"df -Th",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

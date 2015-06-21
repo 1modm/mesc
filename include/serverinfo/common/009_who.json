@@ -1,0 +1,66 @@
+{
+	"check":"who",
+	"returns":"w command",
+	"help_result":"Show who is logged on and what they are doing",
+	"command":"Users logged",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"w",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"w",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"w",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"w",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"w",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Warning",
+			"check_html_message":"Warning"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Error",
+			"check_html_message":"Error"
+		}
+	}
+}

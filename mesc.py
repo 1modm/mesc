@@ -16,7 +16,7 @@ Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2014, Miguel Morillo
+Copyright (c) 2015, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -96,7 +96,7 @@ if __name__ == "__main__":
 def cmdline_parser():
     parser = argparse.ArgumentParser(conflict_handler='resolve', add_help=True,
         description='Example: python %(prog)s -a -txt output.txt\
-            -html output.html localhost', version='MESC 0.1',
+            -html output.html localhost', version='MESC 0.2',
              usage="python %(prog)s [OPTIONS] HOST")
 
     # Mandatory
@@ -171,29 +171,30 @@ def statistics(ccheck, section, totalchecks=[0], totalchecksok=[0],
                totalchecksfile=[0], totalchecksnet=[0], totalchecksproc=[0],
                totalcheckssec=[0]):
 
-    totalchecks[0] += 1
+    if (ccheck != "load"):
+        totalchecks[0] += 1
 
-    if (ccheck == 'CHECKED'):
-        totalchecksok[0] += 1
-    elif (ccheck == 'WARNING'):
-        totalcheckswarning[0] += 1
-    elif (ccheck == 'CRITICAL'):
-        totalcheckscritical[0] += 1
-    elif (ccheck == 'ERROR'):
-        totalcheckserror[0] += 1
+        if (ccheck == 'CHECKED'):
+            totalchecksok[0] += 1
+        elif (ccheck == 'WARNING'):
+            totalcheckswarning[0] += 1
+        elif (ccheck == 'CRITICAL'):
+            totalcheckscritical[0] += 1
+        elif (ccheck == 'ERROR'):
+            totalcheckserror[0] += 1
 
-    if (section == 'general'):
-        totalchecksystem[0] += 1
-    if (section == 'boot'):
-        totalchecksboot[0] += 1
-    if (section == 'filesystem'):
-        totalchecksfile[0] += 1
-    if (section == 'tcpip'):
-        totalchecksnet[0] += 1
-    if (section == 'processes'):
-        totalchecksproc[0] += 1
-    if (section == 'security'):
-        totalcheckssec[0] += 1
+        if (section == 'general'):
+            totalchecksystem[0] += 1
+        if (section == 'boot'):
+            totalchecksboot[0] += 1
+        if (section == 'filesystem'):
+            totalchecksfile[0] += 1
+        if (section == 'tcpip'):
+            totalchecksnet[0] += 1
+        if (section == 'processes'):
+            totalchecksproc[0] += 1
+        if (section == 'security'):
+            totalcheckssec[0] += 1
 
     return (totalchecks[0], totalchecksok[0], totalcheckswarning[0],
             totalcheckscritical[0], totalcheckserror[0], totalchecksystem[0],
@@ -330,7 +331,7 @@ def main():
     if results.txt_file:
         create_txt_file(results.txt_file, outputdirectorytxt)
     else:
-        results.txt_file = 'results.log'
+        results.txt_file = 'results.txt'
         create_txt_file(results.txt_file, outputdirectorytxt)
 
     # Create the html results file
@@ -372,7 +373,7 @@ def main():
     print((tabulate(table0, tablefmt="plain")))  # print out the results
     print((colored(os_output + os.linesep, 'white')))
 
-#------------------------------------------------------------------------------
+################################################################################
 
     if results.general or results.all:
         href = 'general'
@@ -383,157 +384,35 @@ def main():
                      results.txt_file, html_file, outputdirectory,
                      table1)
 
-        # Operating System Information
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.OS_info(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.OS_ver(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.OS_kernel(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.OS_kernelver(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.OS_machine(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.OS_processor(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
         # System Information
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.uptime(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
+        folder = "include/serverinfo/common/"
+        for jsonfile in sorted(os.listdir(folder)):
 
-        statistics(command_check, href)  # Statistics
+            if jsonfile.endswith(".json"):
+                command_output, help_command, command_check, check_message,\
+                check_html_message, command, cmd = common.fire(results.host, fabric_user,
+                                                               fabric_passwd, fabric_port, jsonfile, folder)
+                print_results(help_command, command_output, command_check,
+                              check_message, check_html_message, command, cmd, table1,
+                              results.txt_file, html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.free(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
+                statistics(command_check, href)  # Statistics
 
-        statistics(command_check, href)  # Statistics
+        for rootfs, subFolders, files in os.walk(folder):
+            for sf in subFolders:
+                table1.append([(colored(' + ' + sf + '                                ', 'white')), '' + (colored('', 'blue')) + ''])
+                folderjson = folder + sf
+                for jsonfile in sorted(os.listdir(folderjson)):
+                    if jsonfile.endswith(".json"):
+                        command_output, help_command, command_check, check_message,\
+                        check_html_message, command, cmd = common.fire(results.host, fabric_user,
+                                                                       fabric_passwd, fabric_port, jsonfile, folderjson)
+                        print_results(help_command, command_output, command_check,
+                                      check_message, check_html_message, command, cmd, table1,
+                                      results.txt_file, html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.who(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
+                        statistics(command_check, href)  # Statistics
 
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.tail_root(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.history(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.last(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.shells(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.packages(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = common.ulimit(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table1,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -546,7 +425,7 @@ def main():
         sys_time = datetime.now()
         sys_duration = format(sys_time - start_time)
 
-#------------------------------------------------------------------------------
+################################################################################
 
     if results.boot or results.all:
         href = 'boot'
@@ -556,45 +435,34 @@ def main():
         print_titles('[2] ' + BOOT, BOOT_LINE, href, results.txt_file,
                      html_file, outputdirectory, table2)
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = boot.grub(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table2,
-                      results.txt_file, html_file, outputdirectory)
+        # Boot Information
+        folder = "include/serverinfo/boot/"
+        for jsonfile in sorted(os.listdir(folder)):
 
-        statistics(command_check, href)  # Statistics
+            if jsonfile.endswith(".json"):
+                command_output, help_command, command_check, check_message,\
+                check_html_message, command, cmd = boot.fire(results.host, fabric_user,
+                                                               fabric_passwd, fabric_port, jsonfile, folder)
+                print_results(help_command, command_output, command_check,
+                              check_message, check_html_message, command, cmd, table2,
+                              results.txt_file, html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = boot.rc3(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table2,
-                      results.txt_file, html_file, outputdirectory)
+                statistics(command_check, href)  # Statistics
 
-        statistics(command_check, href)  # Statistics
+        for rootfs, subFolders, files in os.walk(folder):
+            for sf in subFolders:
+                table2.append([(colored(' + ' + sf + '                                ', 'white')), '' + (colored('', 'blue')) + ''])
+                folderjson = folder + sf
+                for jsonfile in sorted(os.listdir(folderjson)):
+                    if jsonfile.endswith(".json"):
+                        command_output, help_command, command_check, check_message,\
+                        check_html_message, command, cmd = boot.fire(results.host, fabric_user,
+                                                                       fabric_passwd, fabric_port, jsonfile, folderjson)
+                        print_results(help_command, command_output, command_check,
+                                      check_message, check_html_message, command, cmd, table2,
+                                      results.txt_file, html_file, outputdirectory)
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = boot.initservices(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table2,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = boot.grubterminal(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table2,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href)  # Statistics
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -607,7 +475,7 @@ def main():
         boot_time = datetime.now()
         boot_duration = format(boot_time - start_time)
 
-#------------------------------------------------------------------------------
+################################################################################
 
     if results.filesystem or results.all:
         href = 'filesystem'
@@ -618,106 +486,34 @@ def main():
              results.txt_file, html_file, outputdirectory, table3)
 
         filesystem.defpath()
+        # Filesystem
+        folder = "include/serverinfo/filesystem/"
+        for jsonfile in sorted(os.listdir(folder)):
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.diskspace(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
+            if jsonfile.endswith(".json"):
+                command_output, help_command, command_check, check_message,\
+                check_html_message, command, cmd = filesystem.fire(results.host, fabric_user,
+                                                               fabric_passwd, fabric_port, jsonfile, folder)
+                print_results(help_command, command_output, command_check,
+                              check_message, check_html_message, command, cmd, table3,
+                              results.txt_file, html_file, outputdirectory)
 
-        statistics(command_check, href)  # Statistics
+                statistics(command_check, href)  # Statistics
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.inodespace(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
+        for rootfs, subFolders, files in os.walk(folder):
+            for sf in subFolders:
+                table3.append([(colored(' + ' + sf + '                                ', 'white')), '' + (colored('', 'blue')) + ''])
+                folderjson = folder + sf
+                for jsonfile in sorted(os.listdir(folderjson)):
+                    if jsonfile.endswith(".json"):
+                        command_output, help_command, command_check, check_message,\
+                        check_html_message, command, cmd = filesystem.fire(results.host, fabric_user,
+                                                                       fabric_passwd, fabric_port, jsonfile, folderjson)
+                        print_results(help_command, command_output, command_check,
+                                      check_message, check_html_message, command, cmd, table3,
+                                      results.txt_file, html_file, outputdirectory)
 
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.setuid(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.setgid(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.rhosts(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.allpermissionsdir(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.allpermissionsfiles(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.writefiles(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.tmpcontent(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = filesystem.runFilesNoGroup(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table3,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href)  # Statistics
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -730,7 +526,7 @@ def main():
         file_time = datetime.now()
         file_duration = format(file_time - start_time)
 
-#------------------------------------------------------------------------------
+################################################################################
 
     if results.tcpip or results.all:
         href = 'tcpip'
@@ -740,55 +536,33 @@ def main():
         print_titles('[4] ' + TCPIP, TCPIP_LINE, href, results.txt_file,
                      html_file, outputdirectory, table4)
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = tcpip.nmap(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table4,
-                      results.txt_file, html_file, outputdirectory)
+        # TCP/IP
+        folder = "include/serverinfo/net/"
+        for jsonfile in sorted(os.listdir(folder)):
+            if jsonfile.endswith(".json"):
+                command_output, help_command, command_check, check_message,\
+                check_html_message, command, cmd = tcpip.fire(results.host, fabric_user,
+                                                               fabric_passwd, fabric_port, jsonfile, folder)
+                print_results(help_command, command_output, command_check,
+                              check_message, check_html_message, command, cmd, table4,
+                              results.txt_file, html_file, outputdirectory)
 
-        statistics(command_check, href)  # Statistics
+                statistics(command_check, href)  # Statistics
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = tcpip.rpcinfo(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table4,
-                      results.txt_file, html_file, outputdirectory)
+        for rootfs, subFolders, files in os.walk(folder):
+            for sf in subFolders:
+                table4.append([(colored(' + ' + sf + '                                ', 'white')), '' + (colored('', 'blue')) + ''])
+                folderjson = folder + sf
+                for jsonfile in sorted(os.listdir(folderjson)):
+                    if jsonfile.endswith(".json"):
+                        command_output, help_command, command_check, check_message,\
+                        check_html_message, command, cmd = tcpip.fire(results.host, fabric_user,
+                                                                       fabric_passwd, fabric_port, jsonfile, folderjson)
+                        print_results(help_command, command_output, command_check,
+                                      check_message, check_html_message, command, cmd, table4,
+                                      results.txt_file, html_file, outputdirectory)
 
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = tcpip.routes(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table4,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = tcpip.activeconections(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table4,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = tcpip.ifconfig(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table4,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href)  # Statistics
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -801,7 +575,8 @@ def main():
         network_time = datetime.now()
         network_duration = format(network_time - start_time)
 
-#------------------------------------------------------------------------------
+
+################################################################################
 
     if results.processes or results.all:
         href = 'processes'
@@ -811,26 +586,37 @@ def main():
         print_titles('[5] ' + PROCESSES, PROCESSES_LINE, href,
              results.txt_file, html_file, outputdirectory, table5)
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = proc.proc(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table5,
-                      results.txt_file, html_file, outputdirectory)
 
-        statistics(command_check, href)  # Statistics
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = proc.top(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table5,
-                      results.txt_file, html_file, outputdirectory)
+        # PROCESSES
+        folder = "include/serverinfo/proc/"
+        for jsonfile in sorted(os.listdir(folder)):
+            if jsonfile.endswith(".json"):
+                command_output, help_command, command_check, check_message,\
+                check_html_message, command, cmd = proc.fire(results.host, fabric_user,
+                                                            fabric_passwd, fabric_port, jsonfile, folder)
+                print_results(help_command, command_output, command_check,
+                              check_message, check_html_message, command, cmd, table5,
+                              results.txt_file, html_file, outputdirectory)
 
-        statistics(command_check, href)  # Statistics
+                statistics(command_check, href)  # Statistics
 
+        for rootfs, subFolders, files in os.walk(folder):
+            for sf in subFolders:
+                table5.append([(colored(' + ' + sf + '                                ', 'white')), '' + (colored('', 'blue')) + ''])
+                folderjson = folder + sf
+                for jsonfile in sorted(os.listdir(folderjson)):
+                    if jsonfile.endswith(".json"):
+                        command_output, help_command, command_check, check_message,\
+                        check_html_message, command, cmd = proc.fire(results.host, fabric_user,
+                                                                       fabric_passwd, fabric_port, jsonfile, folderjson)
+                        print_results(help_command, command_output, command_check,
+                                      check_message, check_html_message, command, cmd, table5,
+                                      results.txt_file, html_file, outputdirectory)
+
+                        statistics(command_check, href)  # Statistics
+
+        # psmem Author: P@draigBrady.com
         command_output, help_command, command_check, check_message,\
         check_html_message, command, cmd = ps_mem.ps_mem(
                                          results.host, fabric_user,
@@ -841,29 +627,8 @@ def main():
         print_results(help_command, command_output_str, command_check,
                       check_message, check_html_message, command, cmd, table5,
                       results.txt_file, html_file, outputdirectory)
-
         statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = proc.lsof(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table5,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = proc.lsof_i(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table5,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
+        # psmem Author: P@draigBrady.com
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -876,7 +641,7 @@ def main():
         processes_time = datetime.now()
         processes_duration = format(processes_time - start_time)
 
-#------------------------------------------------------------------------------
+################################################################################
 
     if results.security or results.all:
         href = 'security'
@@ -887,146 +652,45 @@ def main():
                      results.txt_file, html_file, outputdirectory,
                      table6)
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.checkShells(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
+        # SECURITY
+        folder = "include/serverinfo/security/"
+        for jsonfile in sorted(os.listdir(folder)):
+            if jsonfile.endswith(".json"):
+                command_output, help_command, command_check, check_message,\
+                check_html_message, command, cmd = security.fire(results.host, fabric_user,
+                                                               fabric_passwd, fabric_port, jsonfile, folder)
+                print_results(help_command, command_output, command_check,
+                              check_message, check_html_message, command, cmd, table6,
+                              results.txt_file, html_file, outputdirectory)
 
-        statistics(command_check, href)  # Statistics
+                statistics(command_check, href)  # Statistics
 
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.LoadSSH(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
+        for rootfs, subFolders, files in os.walk(folder):
+            for sf in subFolders:
+                table6.append([(colored(' + ' + sf + '                                ', 'white')), '' + (colored('', 'blue')) + ''])
+                folderjson = folder + sf
+                for jsonfile in sorted(os.listdir(folderjson)):
+                    if jsonfile.endswith(".json"):
+                        command_output, help_command, command_check, check_message,\
+                        check_html_message, command, cmd = security.fire(results.host, fabric_user,
+                                                                       fabric_passwd, fabric_port, jsonfile, folderjson)
+                        print_results(help_command, command_output, command_check,
+                                      check_message, check_html_message, command, cmd, table6,
+                                      results.txt_file, html_file, outputdirectory)
 
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.checkSSH(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.checkSSH2(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.checkDisabledCtrlAltDel(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.checkCrontab(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.LoadApache(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.checkPassAging(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.checkPassLength(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.autologout(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.MagicSysRq(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.NumberTTYs(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
-
-        command_output, help_command, command_check, check_message,\
-        check_html_message, command, cmd = security.limits(
-                                         results.host, fabric_user,
-                                         fabric_passwd, fabric_port)
-        print_results(help_command, command_output, command_check,
-                      check_message, check_html_message, command, cmd, table6,
-                      results.txt_file, html_file, outputdirectory)
-
-        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href)  # Statistics
 
         print((tabulate(table6, tablefmt="plain")))  # print out the results
+
 
     #---------------------------------------------------------------------------
     # Last statistics
     #---------------------------------------------------------------------------
 
+
     total, totalsok, totalwarning, totalcritical, totalserror,\
     totalsystem, totalboot, totalfile, totalnet, totalproc,\
-    totalsec = statistics(command_check, href)
-
+    totalsec = statistics("load", "null")
     htmlend(html_file, outputdirectoryhtml)
 
     #---------------------------------------------------------------------------
@@ -1034,7 +698,9 @@ def main():
     #---------------------------------------------------------------------------
     end_time = datetime.now()
     execute_duration = format(end_time - start_time)
-    #---------------------------------------------------------------------------
+
+################################################################################
+
     htmlreportstat = {'total': total, 'ok': totalsok, 'warn': totalwarning,
                       'critical': totalcritical, 'error': totalserror,
                       'system': totalsystem, 'boot': totalboot,
@@ -1045,15 +711,19 @@ def main():
                       'ftime': file_duration, 'btime': boot_duration,
                       'stime': sys_duration}
     #---------------------------------------------------------------------------
-
     htmldatadashboard(results.html_file, outputdirectoryhtml, htmlreportstat)
     htmllast(results.html_file, outputdirectoryhtml)
     htmldatadashboardjs(results.html_file, outputdirectoryhtml, htmlreportstat)
     #--------------------------------------------------------------------------
     htmldashboardend(results.html_file, outputdirectoryhtml)
 
-    hashhtmlreport = hashlib.sha224(results.html_file).hexdigest()
-    hashtxtreport = hashlib.sha224(results.txt_file).hexdigest()
+    hash224html = outputdirectoryhtml + "/" + results.html_file
+    with open(hash224html) as rfile:
+        hashhtmlreport = hashlib.sha224(rfile.read()).hexdigest()
+    hash224txt = outputdirectorytxt + "/" + results.txt_file
+    with open(hash224txt) as rfile:
+        hashtxtreport = hashlib.sha224(rfile.read()).hexdigest()
+
     log.create_log('[7] ' + REPORTS, REPORTS_LINE, hashhtmlreport,
                    hashtxtreport, outputdirectory, results.html_file,
                    results.txt_file, 'audit_mesc.log', outputdate, results.host)

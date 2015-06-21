@@ -1,0 +1,66 @@
+{
+	"check":"MagicSysRq",
+	"returns":"The magic SysRq key",
+	"help_result":"The magic SysRq key is a key combination understood by the Linux kernel, which allows the user to perform various low-level commands regardless of the systems state. It is often used to recover from freezes, or to reboot a computer without corrupting the filesystem.",
+	"command":"The magic SysRq key",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/sysctl.conf",
+			"chk":"'kernel.sysrq=1'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/sysctl.conf",
+			"chk":"'kernel.sysrq=1'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/sysctl.conf",
+			"chk":"'kernel.sysrq=1'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/sysctl.conf",
+			"chk":"'kernel.sysrq=1'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/sysctl.conf",
+			"chk":"'kernel.sysrq=1'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/sysctl.conf contains the kernel.sysrq variable: kernel.sysrq=1 Review the values",
+			"check_html_message":"The file /etc/sysctl.conf contains the kernel.sysrq variable: kernel.sysrq=1 Review the values"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"The file /etc/sysctl.conf doesn't contains the kernel.sysrq variable kernel.sysrq. Set value to active the magic SysRq key",
+			"check_html_message":"The file /etc/sysctl.conf doesn't contains the kernel.sysrq variable kernel.sysrq. Set value to active the magic SysRq key"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"The file /etc/sysctl.conf doesn't contains the kernel.sysrq variable kernel.sysrq. Set value to active the magic SysRq key",
+			"check_html_message":"The file /etc/sysctl.conf doesn't contains the kernel.sysrq variable kernel.sysrq. Set value to active the magic SysRq key"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file /etc/sysctl.conf",
+			"check_html_message":"Unable to load the configuration file /etc/sysctl.conf"
+		}
+	}
+}

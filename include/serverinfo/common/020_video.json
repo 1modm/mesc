@@ -1,0 +1,66 @@
+{
+	"check":"video",
+	"returns":"GPU vendor, model name and architecture",
+	"help_result":"",
+	"command":"GPU vendor, model name and architecture",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lshw -class video",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lshw -class video",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lshw -class video",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lshw -class video",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lshw -class video",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to execute, you must be root",
+			"check_html_message":"Unable to execute, you must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

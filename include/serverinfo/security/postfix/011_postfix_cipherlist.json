@@ -1,0 +1,66 @@
+{
+	"check":"postfix_cipherlist",
+	"returns":"Check postfix smtpd cipherlist",
+	"help_result":"",
+	"command":"Check postfix smtpd tls cipherlist",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set tls_medium_cipherlist = AES128+EECDH:AES128+EDH",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"tls_medium_cipherlist = AES128+EECDH:AES128+EDH"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"tls_medium_cipherlist = AES128+EECDH:AES128+EDH"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"tls_medium_cipherlist = AES128+EECDH:AES128+EDH"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"tls_medium_cipherlist = AES128+EECDH:AES128+EDH"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"tls_medium_cipherlist = AES128+EECDH:AES128+EDH"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure postfix smtpd tls cipherlist",
+			"check_html_message":"secure postfix smtpd tls cipherlist"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure postfix smtpd tls cipherlist",
+			"check_html_message":"insecure postfix smtpd tls cipherlist"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure postfix smtpd tls cipherlist",
+			"check_html_message":"insecure postfix smtpd tls cipherlist"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

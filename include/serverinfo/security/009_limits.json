@@ -1,0 +1,66 @@
+{
+	"check":"limits",
+	"returns":"Shell Limits",
+	"help_result":"Hard limit or soft limit of resources",
+	"command":"Shell Limits",
+	"type":"check_file_exact_load",
+	"information":"",
+	"recommendations":"Set limits hard and soft in /etc/security/limits.conf",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/security/limits.conf",
+			"chk":"'               hard', '*               soft'"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/security/limits.conf",
+			"chk":"'               hard', '*               soft'"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/security/limits.conf",
+			"chk":"'               hard', '*               soft'"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/security/limits.conf",
+			"chk":"'               hard', '*               soft'"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/security/limits.conf",
+			"chk":"'               hard', '*               soft'"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"The file /etc/security/limits.conf contains limits: hard and soft. Review the values",
+			"check_html_message":"The file /etc/security/limits.conf contains limits: hard and soft. Review the values"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"The file /etc/security/limits.conf doesn't contains any of the next limits: hard and soft. Set values to active the shell limits",
+			"check_html_message":"The file /etc/security/limits.conf doesn't contains any of the next limits: hard and soft. Set values to active the shell limits"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"The file /etc/security/limits.conf doesn't contains any of the next limits: hard and soft. Set values to active the shell limits",
+			"check_html_message":"The file /etc/security/limits.conf doesn't contains any of the next limits: hard and soft. Set values to active the shell limits"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load the configuration file /etc/security/limits.conf",
+			"check_html_message":"Unable to load the configuration file /etc/security/limits.conf"
+		}
+	}
+}

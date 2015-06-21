@@ -1,0 +1,66 @@
+{
+	"check":"postfix_session_cache_database",
+	"returns":"Check postfix smtpd session cache database",
+	"help_result":"",
+	"command":"Check postfix smtpd session cache database",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Verify smtpd_tls_session_cache_database ",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure postfix smtpd session cache database",
+			"check_html_message":"secure postfix smtpd session cache database"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure postfix smtpd session cache database",
+			"check_html_message":"insecure postfix smtpd session cache database"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure postfix smtpd session cache database",
+			"check_html_message":"insecure postfix smtpd session cache database"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

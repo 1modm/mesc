@@ -1,0 +1,66 @@
+{
+	"check":"lspci",
+	"returns":"PCI buses in the system and devices ",
+	"help_result":"",
+	"command":"PCI buses in the system and devices ",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lspci",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lspci",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lspci",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lspci",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lspci",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"dmidecode",
+	"returns":"BIOS version, supported modes, motherboard manufacturer",
+	"help_result":"",
+	"command":"BIOS version, supported modes, motherboard manufacturer",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"dmidecode -q",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"dmidecode -q",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"dmidecode -q",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"dmidecode -q",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"dmidecode -q",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to execute, you must be root",
+			"check_html_message":"Unable to execute, you must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

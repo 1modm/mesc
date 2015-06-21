@@ -1,0 +1,66 @@
+{
+	"check":"grub",
+	"returns":"grub configuration",
+	"help_result":"The GRUB menu interface configuration file is /boot/grub/grub.conf. The commands to set the global preferences for the menu interface are placed at the top of the file, followed by stanzas for each operating kernel or operating system listed in the menu.",
+	"command":"Grub configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/boot/grub/grub.cfg",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/boot/grub/grub.cfg",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/boot/grub/grub.cfg",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/boot/grub/grub.cfg",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/boot/grub/grub.cfg",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Grub configuration file loaded correctly",
+			"check_html_message":"Grub configuration file loaded correctly"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Warning",
+			"check_html_message":"Warning"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Critical",
+			"check_html_message":"Critical"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration",
+			"check_html_message":"Unable to load configuration"
+		}
+	}
+}

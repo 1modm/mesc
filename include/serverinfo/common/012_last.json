@@ -1,0 +1,66 @@
+{
+	"check":"last",
+	"returns":"last command",
+	"help_result":"Show listing of last logged in users",
+	"command":"Last logged in users",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"last",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"last",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"last",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"last",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"last",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

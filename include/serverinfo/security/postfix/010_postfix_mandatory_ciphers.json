@@ -1,0 +1,66 @@
+{
+	"check":"postfix_mandatory_ciphers",
+	"returns":"Check postfix smtpd mandatory ciphers",
+	"help_result":"",
+	"command":"Check postfix smtpd tls mandatory ciphers",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set smtpd_tls_mandatory_ciphers = medium",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_mandatory_ciphers = medium"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_mandatory_ciphers = medium"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_mandatory_ciphers = medium"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_mandatory_ciphers = medium"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/postfix/main.cf",
+			"chk":"smtpd_tls_mandatory_ciphers = medium"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure postfix smtpd tls mandatory ciphers",
+			"check_html_message":"secure postfix smtpd tls mandatory ciphers"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure postfix smtpd tls mandatory ciphers",
+			"check_html_message":"insecure postfix smtpd tls mandatory ciphers"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure postfix smtpd tls mandatory ciphers",
+			"check_html_message":"insecure postfix smtpd tls mandatory ciphers"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, postfix is not installed",
+			"check_html_message":"Unable to load configuration, postfix is not installed"
+		}
+	}
+}

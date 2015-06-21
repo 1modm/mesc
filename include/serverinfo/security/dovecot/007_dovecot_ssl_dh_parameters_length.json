@@ -1,0 +1,66 @@
+{
+	"check":"dovecot_dh_parameters_length",
+	"returns":"Check Dovecot ssl dh parameters length",
+	"help_result":"",
+	"command":"Check Dovecot ssl dh parameters length",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set ssl_dh_parameters_length = 4096 # >Dovecot 2.2",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_dh_parameters_length = 4096"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_dh_parameters_length = 4096"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_dh_parameters_length = 4096"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_dh_parameters_length = 4096"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/dovecot/conf.d/10-ssl.conf",
+			"chk":"ssl_dh_parameters_length = 4096"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"secure Dovecot ssl prefer dh parameters length",
+			"check_html_message":"secure Dovecot ssl dh parameters length"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"insecure Dovecot ssl dh parameters length",
+			"check_html_message":"insecure Dovecot ssl dh parameters length"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"insecure Dovecot ssl dh parameters length",
+			"check_html_message":"insecure Dovecot ssl dh parameters length"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Dovecot is not installed",
+			"check_html_message":"Unable to load configuration, Dovecot is not installed"
+		}
+	}
+}

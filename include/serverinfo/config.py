@@ -16,7 +16,7 @@ Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2014, Miguel Morillo
+Copyright (c) 2015, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -68,4 +68,8 @@ CHECKRESULTERROR = 'ERROR'
 RESULTOKTHRESHOLD = 50
 RESULTWARNINGTHRESHOLD = 90
 RESULTCRITICALTHRESHOLD = 99
+#------------------------------------------------------------------------------
+VALUETOK = 3
+VALUEWARNING = 5
+VALUECRITICAL = 7
 #------------------------------------------------------------------------------

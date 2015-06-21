@@ -1,0 +1,66 @@
+{
+	"check":"SSLUseStapling",
+	"returns":"SSLUseStapling Directive",
+	"help_result":"Enable stapling of OCSP responses in the TLS handshake",
+	"command":"SSLUseStapling Directive",
+	"type":"check_file_exact",
+	"information":"",
+	"recommendations":"Set SSLUseStapling on",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLUseStapling on"
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLUseStapling on"
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLUseStapling on"
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/apache2/mods-available/ssl.conf",
+			"chk":"SSLUseStapling on"
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/httpd/conf.d/ssl.conf",
+			"chk":"SSLUseStapling on"
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Enabled stapling of OCSP responses in the TLS handshake",
+			"check_html_message":"Enabled stapling of OCSP responses in the TLS handshake"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Disabled stapling of OCSP responses in the TLS handshake",
+			"check_html_message":"Disabled stapling of OCSP responses in the TLS handshake"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Disabled stapling of OCSP responses in the TLS handshake",
+			"check_html_message":"Disabled stapling of OCSP responses in the TLS handshake"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Apache web server is not installed",
+			"check_html_message":"Unable to load configuration, Apache web server is not installed"
+		}
+	}
+}
