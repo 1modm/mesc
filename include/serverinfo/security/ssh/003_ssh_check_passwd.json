@@ -6,7 +6,7 @@
 	"type":"check_file_exact",
 	"information":"",
 	"recommendations":"Set PermitEmptyPasswords no",
-	"level":"6",
+	"level":"8",
 	"distribution": 
 	{
 		"all":

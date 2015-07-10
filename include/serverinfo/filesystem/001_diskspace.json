@@ -11,25 +11,25 @@
 	{
 		"all":
 		{
-			"cmd":"df -Th",
+			"cmd":"df -h",
 			"file":"",
 			"chk":""
 		},
 		"RedHat":
 		{
-			"cmd":"df -Th",
+			"cmd":"df -h",
 			"file":"",
 			"chk":""
 		},
 		"SuSE":
 		{
-			"cmd":"df -Th",
+			"cmd":"df -h",
 			"file":"",
 			"chk":""
 		},
 		"debian":
 		{
-			"cmd":"df -Th",
+			"cmd":"df -h",
 			"file":"",
 			"chk":""
 		},
