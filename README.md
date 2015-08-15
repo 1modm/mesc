@@ -72,7 +72,7 @@ Dependencies
 Ubuntu
 ------
 ```
-# apt-get install python python-pip
+# apt-get install python python-pip python-dev
 # git clone https://github.com/1modm/mesc.git && cd mesc
 # pip install -r requirements.lst
 ```
