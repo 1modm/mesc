@@ -1,0 +1,66 @@
+{
+	"check":"LoadShorewallMasq",
+	"returns":"Load Shorewall Masq configuration",
+	"help_result":"",
+	"command":"Load Shorewall Masq configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/masq",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/masq",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/masq",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/masq",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/masq",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Shorewall Masq configuration loaded",
+			"check_html_message":"Shorewall Masq configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		}
+	}
+}

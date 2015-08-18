@@ -1,0 +1,66 @@
+{
+	"check":"LoadShorewallZones",
+	"returns":"Load Shorewall zones configuration",
+	"help_result":"",
+	"command":"Load Shorewall zones configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/zones",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/zones",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/zones",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/zones",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/zones",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Shorewall zones configuration loaded",
+			"check_html_message":"Shorewall zones configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		}
+	}
+}

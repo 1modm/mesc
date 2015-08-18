@@ -1,0 +1,66 @@
+{
+	"check":"iptables_nat_rules",
+	"returns":"Check iptables nat rules",
+	"help_result":"iptables nat rules",
+	"command":"Check iptables nat rules",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"iptables -L -t nat",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"iptables -L -t nat",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"iptables -L -t nat",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"iptables -L -t nat",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"iptables -L -t nat",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"iptables nat rules",
+			"check_html_message":"iptables nat rules"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is not possible to verify if iptables is enabled",
+			"check_html_message":"It is not possible to verify if iptables is enabled"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is not possible to verify if iptables is enabled",
+			"check_html_message":"It is not possible to verify if iptables is enabled"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load iptables configuration, iptables is not enabled",
+			"check_html_message":"Unable to load iptables configuration, iptables is not enabled"
+		}
+	}
+}

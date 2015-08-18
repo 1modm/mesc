@@ -1,0 +1,66 @@
+{
+	"check":"iptables_module",
+	"returns":"Check if exists iptables loaded in memory",
+	"help_result":"iptables module",
+	"command":"Check if exists iptables loaded in memory",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"7",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lsmod | awk '{ print $1 }' | grep '^ip*_tables'",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lsmod | awk '{ print $1 }' | grep '^ip*_tables'",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lsmod | awk '{ print $1 }' | grep '^ip*_tables'",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lsmod | awk '{ print $1 }' | grep '^ip*_tables'",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lsmod | awk '{ print $1 }' | grep '^ip*_tables'",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"iptables loaded in memory",
+			"check_html_message":"iptables loaded in memory"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is not possible to verify if iptables module is in memory, enable a firewall in your system",
+			"check_html_message":"It is not possible to verify if iptables module is in memory, enable a firewall in your system"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is not possible to verify if iptables module is in memory, enable a firewall in your system",
+			"check_html_message":"It is not possible to verify if iptables module is in memory, enable a firewall in your system"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load modules configuration, iptables is not enabled",
+			"check_html_message":"Unable to load modules configuration, iptables is not enabled"
+		}
+	}
+}

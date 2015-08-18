@@ -1,0 +1,66 @@
+{
+	"check":"LoadShorewallInterfaces",
+	"returns":"Load Shorewall Interfaces configuration",
+	"help_result":"",
+	"command":"Load Shorewall Interfaces configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/interfaces",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/interfaces",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/interfaces",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/interfaces",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/interfaces",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Shorewall Interfaces configuration loaded",
+			"check_html_message":"Shorewall Interfaces configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		}
+	}
+}

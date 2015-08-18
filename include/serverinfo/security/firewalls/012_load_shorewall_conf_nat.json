@@ -1,0 +1,66 @@
+{
+	"check":"LoadShorewallNat",
+	"returns":"Load Shorewall Nat configuration",
+	"help_result":"",
+	"command":"Load Shorewall Nat configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/nat",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/nat",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/nat",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/nat",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/nat",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Shorewall Nat configuration loaded",
+			"check_html_message":"Shorewall Nat configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		}
+	}
+}

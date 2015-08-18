@@ -1,0 +1,66 @@
+{
+	"check":"LoadShorewallRules",
+	"returns":"Load Shorewall Rules configuration",
+	"help_result":"",
+	"command":"Load Shorewall Rules configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/rules",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/rules",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/rules",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/rules",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/shorewall/rules",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Shorewall Rules configuration loaded",
+			"check_html_message":"Shorewall Rules configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Shorewall is not installed",
+			"check_html_message":"Unable to load configuration, Shorewall is not installed"
+		}
+	}
+}

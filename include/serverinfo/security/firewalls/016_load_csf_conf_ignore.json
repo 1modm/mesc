@@ -1,0 +1,66 @@
+{
+	"check":"LoadCSFConfignore",
+	"returns":"Load CSF ignore configuration",
+	"help_result":"",
+	"command":"Load CSF ignore configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.ignore",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.ignore",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.ignore",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.ignore",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.ignore",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"CSF configuration loaded",
+			"check_html_message":"CSF configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, CSF is not installed",
+			"check_html_message":"Unable to load configuration, CSF is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, CSF is not installed",
+			"check_html_message":"Unable to load configuration, CSF is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, CSF is not installed",
+			"check_html_message":"Unable to load configuration, CSF is not installed"
+		}
+	}
+}

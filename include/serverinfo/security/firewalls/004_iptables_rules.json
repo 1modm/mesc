@@ -1,0 +1,66 @@
+{
+	"check":"iptables_rules",
+	"returns":"Check iptables rules",
+	"help_result":"iptables rules",
+	"command":"Check iptables rules",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"5",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"iptables -L ",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"iptables -L ",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"iptables -L ",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"iptables -L ",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"iptables -L ",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"iptables rules",
+			"check_html_message":"iptables rules"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is not possible to verify if iptables is enabled",
+			"check_html_message":"It is not possible to verify if iptables is enabled"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is not possible to verify if iptables is enabled",
+			"check_html_message":"It is not possible to verify if iptables is enabled"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load iptables configuration, iptables is not enabled",
+			"check_html_message":"Unable to load iptables configuration, iptables is not enabled"
+		}
+	}
+}

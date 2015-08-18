@@ -1,0 +1,66 @@
+{
+	"check":"ufw",
+	"returns":"Check if ufw is enabled",
+	"help_result":"",
+	"command":"Check if ufw is enabled",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"ufw status",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"ufw status",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"ufw status",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"ufw status",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"ufw status",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"ufw status loaded",
+			"check_html_message":"ufw status loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is not possible to verify if ufw is enabled",
+			"check_html_message":"It is not possible to verify if ufw is enabled"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is not possible to verify if ufw is enabled",
+			"check_html_message":"It is not possible to verify if ufw is enabled"
+		},
+		"checkresulterror":
+		{
+			"check_message":"ufw is not enabled",
+			"check_html_message":"ufw is not enabled"
+		}
+	}
+}

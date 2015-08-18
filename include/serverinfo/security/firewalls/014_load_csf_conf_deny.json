@@ -1,0 +1,66 @@
+{
+	"check":"LoadCSFConfdeny",
+	"returns":"Load CSF deny configuration",
+	"help_result":"",
+	"command":"Load CSF deny configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.deny",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.deny",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.deny",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.deny",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/csf/csf.deny",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"CSF configuration loaded",
+			"check_html_message":"CSF configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, CSF is not installed",
+			"check_html_message":"Unable to load configuration, CSF is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, CSF is not installed",
+			"check_html_message":"Unable to load configuration, CSF is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, CSF is not installed",
+			"check_html_message":"Unable to load configuration, CSF is not installed"
+		}
+	}
+}

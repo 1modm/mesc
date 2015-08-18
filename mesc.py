@@ -719,10 +719,10 @@ def main():
 
     hash224html = outputdirectoryhtml + "/" + results.html_file
     with open(hash224html) as rfile:
-        hashhtmlreport = hashlib.sha224(rfile.read()).hexdigest()
+        hashhtmlreport = "sha224sum: " + hashlib.sha224(rfile.read()).hexdigest()
     hash224txt = outputdirectorytxt + "/" + results.txt_file
     with open(hash224txt) as rfile:
-        hashtxtreport = hashlib.sha224(rfile.read()).hexdigest()
+        hashtxtreport = "sha224sum: " + hashlib.sha224(rfile.read()).hexdigest()
 
     log.create_log('[7] ' + REPORTS, REPORTS_LINE, hashhtmlreport,
                    hashtxtreport, outputdirectory, results.html_file,
