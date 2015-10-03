@@ -1,0 +1,66 @@
+{
+	"check":"lsof_tmp",
+	"returns":"lsof",
+	"help_result":"Lists all open files in /tmp and its subdirectories without paying attention to symbolic links",
+	"command":"Files opened by processes",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lsof +D /tmp",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lsof +D /tmp",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lsof +D /tmp",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lsof +D /tmp",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lsof +D /tmp",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

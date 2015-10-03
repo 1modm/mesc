@@ -1,0 +1,66 @@
+{
+	"check":"lsof_bash",
+	"returns":"lsof",
+	"help_result":"Lists all processes that use the bash shell",
+	"command":"Files opened by processes",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lsof /bin/bash",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lsof /bin/bash",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lsof /bin/bash",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lsof /bin/bash",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lsof /bin/bash",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

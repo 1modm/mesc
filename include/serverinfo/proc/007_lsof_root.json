@@ -1,0 +1,66 @@
+{
+	"check":"lsof_root",
+	"returns":"lsof",
+	"help_result":"Lists all files that are opened by root",
+	"command":"Files opened by processes",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lsof -u root",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lsof -u root",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lsof -u root",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lsof -u root",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lsof -u root",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"lsof_ipv6",
+	"returns":"lsof",
+	"help_result":"Lists ipv6-related files",
+	"command":"Files opened by processes",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lsof -i6",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lsof -i6",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lsof -i6",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lsof -i6",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lsof -i6",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"lsof_www",
+	"returns":"lsof",
+	"help_result":"List all network files opened by the user www-data",
+	"command":"Files opened by processes by the user www-data",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"lsof -a -i -u www-data",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"lsof -a -i -u www-data",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"lsof -a -i -u www-data",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"lsof -a -i -u www-data",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"lsof -a -i -u www-data",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}
