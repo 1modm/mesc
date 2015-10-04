@@ -1,0 +1,66 @@
+{
+	"check":"tripwire_check",
+	"returns":"Tripwire file integrity check",
+	"help_result":"Tripwire File Integrity Monitoring (FIM) is a file and directory integrity checker",
+	"command":"Tripwire file integrity check",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"/usr/sbin/tripwire --check",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"/usr/sbin/tripwire --check",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"/usr/sbin/tripwire --check",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"/usr/sbin/tripwire --check",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"/usr/sbin/tripwire --check",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Tripwire File integrity checked",
+			"check_html_message":"Tripwire File integrity checked"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is not possible to execute a file integrity check",
+			"check_html_message":"It is not possible to execute a file integrity check"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is not possible to execute a file integrity check",
+			"check_html_message":"It is not possible to execute a file integrity check"
+		},
+		"checkresulterror":
+		{
+			"check_message":"It is not possible to execute a file integrity check",
+			"check_html_message":"It is not possible to execute a file integrity check"
+		}
+	}
+}

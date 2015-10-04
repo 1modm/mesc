@@ -2,7 +2,7 @@
 	"check":"lsof_bash",
 	"returns":"lsof",
 	"help_result":"Lists all processes that use the bash shell",
-	"command":"Files opened by processes",
+	"command":"Files opened by bash shell",
 	"type":"execute_cmd",
 	"information":"",
 	"recommendations":"",

@@ -1,0 +1,66 @@
+{
+	"check":"aide_check",
+	"returns":"AIDE file integrity check",
+	"help_result":"AIDE (Advanced Intrusion Detection Environment) is a file and directory integrity checker",
+	"command":"AIDE file integrity check",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"aide.wrapper --check",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"aide.wrapper --check",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"aide.wrapper --check",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"aide.wrapper --check",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"aide.wrapper --check",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"AIDE File integrity checked",
+			"check_html_message":"AIDE File integrity checked"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"It is not possible to execute a file integrity check",
+			"check_html_message":"It is not possible to execute a file integrity check"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"It is not possible to execute a file integrity check",
+			"check_html_message":"It is not possible to execute a file integrity check"
+		},
+		"checkresulterror":
+		{
+			"check_message":"It is not possible to execute a file integrity check",
+			"check_html_message":"It is not possible to execute a file integrity check"
+		}
+	}
+}

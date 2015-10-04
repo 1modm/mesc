@@ -2,7 +2,7 @@
 	"check":"lsof_ipv6",
 	"returns":"lsof",
 	"help_result":"Lists ipv6-related files",
-	"command":"Files opened by processes",
+	"command":"ipv6-related files opened",
 	"type":"execute_cmd",
 	"information":"",
 	"recommendations":"",

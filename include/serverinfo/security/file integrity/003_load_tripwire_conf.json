@@ -1,0 +1,66 @@
+{
+	"check":"LoadTripwire",
+	"returns":"Load Tripwire configuration",
+	"help_result":"",
+	"command":"Load Tripwire configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/tripwire/twpol.txt",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/tripwire/twpol.txt",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/tripwire/twpol.txt",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/tripwire/twpol.txt",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/tripwire/twpol.txt",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"Tripwire configuration loaded",
+			"check_html_message":"Tripwire configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, Tripwire is not installed",
+			"check_html_message":"Unable to load configuration, Tripwire is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, Tripwire is not installed",
+			"check_html_message":"Unable to load configuration, Tripwire is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, Tripwire is not installed",
+			"check_html_message":"Unable to load configuration, Tripwire is not installed"
+		}
+	}
+}

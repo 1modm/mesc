@@ -2,7 +2,7 @@
 	"check":"lsof_root",
 	"returns":"lsof",
 	"help_result":"Lists all files that are opened by root",
-	"command":"Files opened by processes",
+	"command":"Files opened by root",
 	"type":"execute_cmd",
 	"information":"",
 	"recommendations":"",

@@ -1,0 +1,66 @@
+{
+	"check":"LoadAide",
+	"returns":"Load AIDE configuration",
+	"help_result":"",
+	"command":"Load AIDE configuration",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"8",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/aide/aide.conf",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/aide/aide.conf",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/aide/aide.conf",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/aide/aide.conf",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/aide/aide.conf",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"AIDE configuration loaded",
+			"check_html_message":"AIDE configuration loaded"
+		},
+		"checkresultwarning":
+		{
+			"check_message":"Unable to load configuration, AIDE is not installed",
+			"check_html_message":"Unable to load configuration, AIDE is not installed"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"Unable to load configuration, AIDE is not installed",
+			"check_html_message":"Unable to load configuration, AIDE is not installed"
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to load configuration, AIDE is not installed",
+			"check_html_message":"Unable to load configuration, AIDE is not installed"
+		}
+	}
+}

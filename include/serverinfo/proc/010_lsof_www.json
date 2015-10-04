@@ -2,7 +2,7 @@
 	"check":"lsof_www",
 	"returns":"lsof",
 	"help_result":"List all network files opened by the user www-data",
-	"command":"Files opened by processes by the user www-data",
+	"command":"Files opened by processes by www-data user",
 	"type":"execute_cmd",
 	"information":"",
 	"recommendations":"",

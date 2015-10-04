@@ -2,7 +2,7 @@
 	"check":"lsof_delete",
 	"returns":"lsof",
 	"help_result":"Lists all deleted files, that are still opened and use up disk space (files with less than one link)",
-	"command":"Files opened by processes",
+	"command":"Files deleted still opened",
 	"type":"execute_cmd",
 	"information":"",
 	"recommendations":"",
