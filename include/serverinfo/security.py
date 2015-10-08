@@ -16,7 +16,7 @@ Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2015, Miguel Morillo.
+Copyright (c) 2007-2015, Miguel Morillo.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

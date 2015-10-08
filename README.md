@@ -7,6 +7,7 @@ What's MESC?
 MESC is an open source tool for security testing and auditing systems.
 Performing simple checks and tests into the localhost or remote host through ssh.
 
+Based on https://bitbucket.org/mmorillo/serverinfo since 2006
 
 License
 =======
@@ -18,7 +19,7 @@ Author: 1_mod_m
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2015, Miguel Morillo.
+Copyright (c) 2007-2015, Miguel Morillo.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -46,6 +47,7 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 ```
+
 
 Installation
 ============

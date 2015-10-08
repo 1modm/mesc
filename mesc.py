@@ -16,7 +16,7 @@ Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2015, Miguel Morillo
+Copyright (c) 2007-2015, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -310,20 +310,9 @@ def main():
     os.makedirs(outputdirectory + '/html/reports')
     os.makedirs(outputdirectory + '/html/css')
     os.makedirs(outputdirectory + '/html/js')
-    os.makedirs(outputdirectory + '/html/css/plugins')
-    os.makedirs(outputdirectory + '/html/css/plugins/metisMenu')
-    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0')
-    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0/css')
-    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0/fonts')
-    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0/less')
-    os.makedirs(outputdirectory + '/html/font-awesome-4.1.0/scss')
     os.makedirs(outputdirectory + '/html/fonts')
-    os.makedirs(outputdirectory + '/html/js/plugins')
-    os.makedirs(outputdirectory + '/html/js/plugins/flot')
-    os.makedirs(outputdirectory + '/html/js/plugins/morris')
-    os.makedirs(outputdirectory + '/html/js/plugins/dataTables')
-    os.makedirs(outputdirectory + '/html/js/plugins/metisMenu')
-    os.makedirs(outputdirectory + '/html/less')
+    os.makedirs(outputdirectory + '/html/img')
+    os.makedirs(outputdirectory + '/html/img/icons')
     outputdirectorytxt = (outputdirectory + '/txt')
     outputdirectoryhtml = (outputdirectory + '/html')
 
@@ -711,7 +700,7 @@ def main():
                       'ftime': file_duration, 'btime': boot_duration,
                       'stime': sys_duration}
     #---------------------------------------------------------------------------
-    htmldatadashboard(results.html_file, outputdirectoryhtml, htmlreportstat)
+    htmldatadashboard(results.html_file, htmlAuditreport, outputdirectoryhtml, htmlreportstat)
     htmllast(results.html_file, outputdirectoryhtml)
     htmldatadashboardjs(results.html_file, outputdirectoryhtml, htmlreportstat)
     #--------------------------------------------------------------------------

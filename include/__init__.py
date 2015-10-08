@@ -16,7 +16,7 @@ Author: https://twitter.com/1_mod_m/
 
 Project site: https://github.com/1modm/mesc
 
-Copyright (c) 2015, Miguel Morillo
+Copyright (c) 2007-2015, Miguel Morillo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -63,11 +63,11 @@ __all__ = [
 #----------------------------------------------------------------------
 # Metadata
 
-__author__ = "Miguel Morillo Iruela"
-__copyright__ = "Copyright 2015-1_mod_m"
+__author__ = "Miguel Morillo"
+__copyright__ = "Copyright 2015 - 1_mod_m"
 __credits__ = ["https://github.com/1modm/mesc"]
 __twitter__ = "https://twitter.com/1_mod_m/"
-__version__ = "0.2"
+__version__ = "0.3"
 
 
 #----------------------------------------------------------------------
