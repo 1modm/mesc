@@ -165,7 +165,8 @@ def cmdline_parser():
 # Statistics
 #------------------------------------------------------------------------------
 
-def statistics(ccheck, section, totalchecks=[0], totalchecksok=[0],
+
+def statistics(ccheck, section, title, totalchecks=[0], totalchecksok=[0],
                totalcheckswarning=[0], totalcheckscritical=[0],
                totalcheckserror=[0], totalchecksystem=[0], totalchecksboot=[0],
                totalchecksfile=[0], totalchecksnet=[0], totalchecksproc=[0],
@@ -196,10 +197,12 @@ def statistics(ccheck, section, totalchecks=[0], totalchecksok=[0],
         if (section == 'security'):
             totalcheckssec[0] += 1
 
+        consoleoutput.append([title, ccheck, section])
+
     return (totalchecks[0], totalchecksok[0], totalcheckswarning[0],
             totalcheckscritical[0], totalcheckserror[0], totalchecksystem[0],
             totalchecksboot[0], totalchecksfile[0], totalchecksnet[0],
-            totalchecksproc[0], totalcheckssec[0])
+            totalchecksproc[0], totalcheckssec[0], consoleoutput)
 
 
 #------------------------------------------------------------------------------
@@ -277,6 +280,10 @@ def main():
     file_duration = 0
     boot_duration = 0
     sys_duration = 0
+
+    global consoleoutput 
+    consoleoutput = []
+
 
     # Fabric
     if results.port:
@@ -385,7 +392,7 @@ def main():
                               check_message, check_html_message, command, cmd, table1,
                               results.txt_file, html_file, outputdirectory)
 
-                statistics(command_check, href)  # Statistics
+                statistics(command_check, href, command)  # Statistics
 
         for rootfs, subFolders, files in os.walk(folder):
             for sf in subFolders:
@@ -400,7 +407,7 @@ def main():
                                       check_message, check_html_message, command, cmd, table1,
                                       results.txt_file, html_file, outputdirectory)
 
-                        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href, command)  # Statistics
 
 
         htmlend(html_file, outputdirectoryhtml)
@@ -436,7 +443,7 @@ def main():
                               check_message, check_html_message, command, cmd, table2,
                               results.txt_file, html_file, outputdirectory)
 
-                statistics(command_check, href)  # Statistics
+                statistics(command_check, href, command)  # Statistics
 
         for rootfs, subFolders, files in os.walk(folder):
             for sf in subFolders:
@@ -451,7 +458,7 @@ def main():
                                       check_message, check_html_message, command, cmd, table2,
                                       results.txt_file, html_file, outputdirectory)
 
-                        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href, command)  # Statistics
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -487,7 +494,7 @@ def main():
                               check_message, check_html_message, command, cmd, table3,
                               results.txt_file, html_file, outputdirectory)
 
-                statistics(command_check, href)  # Statistics
+                statistics(command_check, href, command)  # Statistics
 
         for rootfs, subFolders, files in os.walk(folder):
             for sf in subFolders:
@@ -502,7 +509,7 @@ def main():
                                       check_message, check_html_message, command, cmd, table3,
                                       results.txt_file, html_file, outputdirectory)
 
-                        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href, command)  # Statistics
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -536,7 +543,7 @@ def main():
                               check_message, check_html_message, command, cmd, table4,
                               results.txt_file, html_file, outputdirectory)
 
-                statistics(command_check, href)  # Statistics
+                statistics(command_check, href, command)  # Statistics
 
         for rootfs, subFolders, files in os.walk(folder):
             for sf in subFolders:
@@ -551,7 +558,7 @@ def main():
                                       check_message, check_html_message, command, cmd, table4,
                                       results.txt_file, html_file, outputdirectory)
 
-                        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href, command)  # Statistics
 
         htmlend(html_file, outputdirectoryhtml)
 
@@ -588,7 +595,7 @@ def main():
                               check_message, check_html_message, command, cmd, table5,
                               results.txt_file, html_file, outputdirectory)
 
-                statistics(command_check, href)  # Statistics
+                statistics(command_check, href, command)  # Statistics
 
         for rootfs, subFolders, files in os.walk(folder):
             for sf in subFolders:
@@ -603,7 +610,7 @@ def main():
                                       check_message, check_html_message, command, cmd, table5,
                                       results.txt_file, html_file, outputdirectory)
 
-                        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href, command)  # Statistics
 
         # psmem Author: P@draigBrady.com
         command_output, help_command, command_check, check_message,\
@@ -616,7 +623,7 @@ def main():
         print_results(help_command, command_output_str, command_check,
                       check_message, check_html_message, command, cmd, table5,
                       results.txt_file, html_file, outputdirectory)
-        statistics(command_check, href)  # Statistics
+        statistics(command_check, href, command)  # Statistics
         # psmem Author: P@draigBrady.com
 
         htmlend(html_file, outputdirectoryhtml)
@@ -652,7 +659,7 @@ def main():
                               check_message, check_html_message, command, cmd, table6,
                               results.txt_file, html_file, outputdirectory)
 
-                statistics(command_check, href)  # Statistics
+                statistics(command_check, href, command)  # Statistics
 
         for rootfs, subFolders, files in os.walk(folder):
             for sf in subFolders:
@@ -667,7 +674,7 @@ def main():
                                       check_message, check_html_message, command, cmd, table6,
                                       results.txt_file, html_file, outputdirectory)
 
-                        statistics(command_check, href)  # Statistics
+                        statistics(command_check, href, command)  # Statistics
 
         print((tabulate(table6, tablefmt="plain")))  # print out the results
 
@@ -679,7 +686,7 @@ def main():
 
     total, totalsok, totalwarning, totalcritical, totalserror,\
     totalsystem, totalboot, totalfile, totalnet, totalproc,\
-    totalsec = statistics("load", "null")
+    totalsec, consoleoutputreport = statistics("load", "null", "null")
     htmlend(html_file, outputdirectoryhtml)
 
     #---------------------------------------------------------------------------
@@ -700,7 +707,7 @@ def main():
                       'ftime': file_duration, 'btime': boot_duration,
                       'stime': sys_duration}
     #---------------------------------------------------------------------------
-    htmldatadashboard(results.html_file, htmlAuditreport, outputdirectoryhtml, htmlreportstat)
+    htmldatadashboard(results.html_file, htmlAuditreport, outputdirectoryhtml, htmlreportstat, consoleoutputreport)
     htmllast(results.html_file, outputdirectoryhtml)
     htmldatadashboardjs(results.html_file, outputdirectoryhtml, htmlreportstat)
     #--------------------------------------------------------------------------

@@ -255,12 +255,13 @@ def htmlend(file_name, outputdirectory):
 #------------------------------------------------------------------------------
 
 
-def htmldatadashboard(file_name, html_report, outputdirectory, htmlstat):
+def htmldatadashboard(file_name, html_report, outputdirectory, htmlstat, consolereport):
     __file__ = outputdirectory + '/' + file_name
     __htmFile__ = open(__file__, 'a')
     __htmFile__.write(datadashboard(htmlstat))
     __htmFile__.write(datadashboardtimeline(htmlstat))
     __htmFile__.write(datadashboardinfo(html_report))
+    __htmFile__.write(datadashboardinfoconsole(consolereport, file_name))
     __htmFile__.close
 
 #------------------------------------------------------------------------------
@@ -609,7 +610,6 @@ def bodydashboard(htmlfile):
     return (__body__)
 
 
-
 #------------------------------------------------------------------------------
 
 
@@ -705,6 +705,72 @@ def datadashboardinfo(htmldatareport):
             htmldatareport['Architecture'], htmldatareport['Processor'],
             htmldatareport['Platform'], htmldatareport['Release'],
             htmldatareport['Hostname'], htmldatareport['Python version'])
+
+    return (__body__)
+
+#------------------------------------------------------------------------------
+
+
+def datadashboardinfoconsole(consolereport, filename):
+
+    gen_html_file = 'reports/general_' + filename
+    boot_html_file = 'reports/boot_' + filename
+    file_html_file = 'reports/file_' + filename
+    net_html_file = 'reports/net_' + filename
+    proc_html_file = 'reports/proc_' + filename
+    sec_html_file = 'reports/security_' + filename
+
+    itemshtml = ['<table class=\"table\">']
+    itemshtml.append('<tbody>')
+
+    for key in consolereport:
+        if key is not "load":
+            if (key[1] == "CHECKED"):
+                itemshtml.append('<tr class="success">')
+            elif (key[1] == "WARNING"):
+                itemshtml.append('<tr class="warning">')
+            elif (key[1] == "CRITICAL"):
+                itemshtml.append('<tr class="danger">')
+            else:
+                itemshtml.append('<tr>')
+            if (key[2] == "general"):
+                itemshtml.append('<td><a href="%s">%s</td></a>' % (gen_html_file,key[0]))
+            if (key[2] == "boot"):
+                itemshtml.append('<td><a href="%s">%s</a></td>' % (boot_html_file,key[0]))
+            if (key[2] == "filesystem"):
+                itemshtml.append('<td><a href="%s">%s</a></td>' % (file_html_file,key[0]))
+            if (key[2] == "tcpip"):
+                itemshtml.append('<td><a href="%s">%s</a></td>' % (net_html_file,key[0]))
+            if (key[2] == "processes"):
+                itemshtml.append('<td><a href="%s">%s</a></td>' % (proc_html_file,key[0]))
+            if (key[2] == "security"):
+                itemshtml.append('<td><a href="%s">%s</a></td>' % (sec_html_file,key[0]))
+
+            #itemshtml.append('<td><a href="#">%s</a></td>' % key[0])
+            itemshtml.append('<td>%s</td>' % key[1])
+            #itemshtml.append('<td>%s</td>' % key[2])
+            itemshtml.append('</tr>')
+
+    itemshtml.append('</tbody>')
+    itemshtml.append('</table>')
+
+    htmllist = ''.join(itemshtml)
+
+    __body__ = ("""
+            <br>
+                    <div class="col-lg-12">
+                      <!--Project Activity start-->
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Checks
+                          </header>
+                            %s
+                      </section>
+                      <!--Project Activity end-->
+                    </div>
+            <br><br>
+
+    """) % (htmllist)
 
     return (__body__)
 
