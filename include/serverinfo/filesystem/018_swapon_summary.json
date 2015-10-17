@@ -1,0 +1,66 @@
+{
+	"check":"swapon_summary",
+	"returns":"Summary of swap space usage by device",
+	"help_result":"",
+	"command":"Summary of swap space usage by device",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"swapon --summary",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"swapon --summary",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"swapon --summary",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"swapon --summary",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"swapon --summary",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"You must be root",
+			"check_html_message":"You must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

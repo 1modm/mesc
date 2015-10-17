@@ -1,0 +1,66 @@
+{
+	"check":"proc_filesystem",
+	"returns":"Check swap usage information",
+	"help_result":"",
+	"command":"Check swap usage information",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"cat /proc/swaps",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"cat /proc/swaps",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"cat /proc/swaps",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"cat /proc/swaps",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"cat /proc/swaps",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"You must be root",
+			"check_html_message":"You must be root"
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}
