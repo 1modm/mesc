@@ -1,0 +1,66 @@
+{
+	"check":"activeconections_sockets_udp",
+	"returns":"Active Internet connections UDP (List Sockets which are in Listening State)",
+	"help_result":"List Socketslistening UDP Ports.",
+	"command":"List Sockets listening UDP Ports.",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"netstat -lu",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"netstat -lu",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"netstat -lu",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"netstat -lu",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"netstat -lu",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"check":"pid_process_port",
+	"returns":"PID and process port",
+	"help_result":"",
+	"command":"PID and process port",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"netstat -pt",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"netstat -pt",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"netstat -pt",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"netstat -pt",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"netstat -pt",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

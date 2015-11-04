@@ -1,0 +1,66 @@
+{
+	"check":"dns",
+	"returns":"DNS servers",
+	"help_result":"",
+	"command":"DNS servers",
+	"type":"exists_read_file",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"",
+			"file":"/etc/resolv.conf",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"",
+			"file":"/etc/resolv.conf",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"",
+			"file":"/etc/resolv.conf",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"",
+			"file":"/etc/resolv.conf",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"",
+			"file":"/etc/resolv.conf",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to read the file",
+			"check_html_message":"Unable to read the file"
+		}
+	}
+}

@@ -236,22 +236,22 @@ def main():
     # Sections
     #---------------------------------------------------------------------------
 
-    AUDIT = 'Auditor information            '
-    AUDIT_LINE = '-----------------------'
-    GENERAL = 'System information             '
-    GENERAL_LINE = '----------------------'
-    BOOT = 'Boot information               '
-    BOOT_LINE = '--------------------'
-    FILESYSTEM = 'Filesystem information         '
-    FILESYSTEM_LINE = '---------------------------'
-    TCPIP = 'Network information            '
-    TCPIP_LINE = '----------------------'
-    PROCESSES = 'Processes running in the system'
+    AUDIT = 'Auditor'
+    AUDIT_LINE = '-----------'
+    GENERAL = 'System                              '
+    GENERAL_LINE = '----------'
+    BOOT = 'Boot                                '
+    BOOT_LINE = '--------'
+    FILESYSTEM = 'Filesystem                          '
+    FILESYSTEM_LINE = '--------------'
+    TCPIP = 'Network                             '
+    TCPIP_LINE = '-----------'
+    PROCESSES = 'Processes running in the system     '
     PROCESSES_LINE = '-----------------------------------'
-    SECURITY = 'Security information           '
-    SECURITY_LINE = '------------------------'
-    REPORTS = 'Reports                        '
-    REPORTS_LINE = '-----------'
+    SECURITY = 'Security                            '
+    SECURITY_LINE = '------------'
+    REPORTS = 'Reports'
+    REPORTS_LINE = '---------------'
 
     #---------------------------------------------------------------------------
     # Global variables
@@ -682,7 +682,6 @@ def main():
     #---------------------------------------------------------------------------
     # Last statistics
     #---------------------------------------------------------------------------
-
 
     total, totalsok, totalwarning, totalcritical, totalserror,\
     totalsystem, totalboot, totalfile, totalnet, totalproc,\

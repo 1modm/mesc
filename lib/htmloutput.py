@@ -1125,6 +1125,8 @@ def bodyend():
 #------------------------------------------------------------------------------
 
 def bodyjsend(a, b, c, d, e, f):
+    aa = str(a)
+
     __bodyjsend__ = ("""
     <script src="js/d3.min.js"></script>
     <script src="js/d3pie.js"></script>
@@ -1161,12 +1163,12 @@ var pie2 = new d3pie("pie", {
     },
   data: {
     content: [
-      { label: "System", value: 26 },
-      { label: "Boot", value: 4 },
-      { label: "Filesystem", value: 17 },
-      { label: "Network", value: 7 },
-      { label: "Processes", value: 11 },
-      { label: "Security", value: 102 }
+      { label: "System", value: """ + str(a) + """ },
+      { label: "Boot", value: """ + str(b) + """ },
+      { label: "Filesystem", value: """ + str(c) + """ },
+      { label: "Network", value: """ + str(d) + """ },
+      { label: "Processes", value: """ + str(e) + """ },
+      { label: "Security", value: """ + str(f) + """ }
     ]
   },
       size: {
@@ -1206,12 +1208,12 @@ var pie = new d3pie("pie", {
     },
     data: {
         content: [
-          { label: "System", value: 26 },
-          { label: "Boot", value: 4 },
-          { label: "Filesystem", value: 17 },
-          { label: "Network", value: 7 },
-          { label: "Processes", value: 11 },
-          { label: "Security", value: 102 }
+            { label: "System", value: """ + str(a) + """ },
+            { label: "Boot", value: """ + str(b) + """ },
+            { label: "Filesystem", value: """ + str(c) + """ },
+            { label: "Network", value: """ + str(d) + """ },
+            { label: "Processes", value: """ + str(e) + """ },
+            { label: "Security", value: """ + str(f) + """ }
         ]
     }
 });
@@ -1220,6 +1222,7 @@ var pie = new d3pie("pie", {
 
 
     """)
+
     return (__bodyjsend__)
 
 #------------------------------------------------------------------------------

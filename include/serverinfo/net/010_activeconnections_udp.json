@@ -1,0 +1,66 @@
+{
+	"check":"activeconections_udp",
+	"returns":"Active Internet connections (UDP ports)",
+	"help_result":"List All UDP Ports. Network connections, routing tables, interface statistics, masquerade connections, and multicast memberships",
+	"command":"Active Internet connections (UDP ports)",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"netstat -ua",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"netstat -ua",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"netstat -ua",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"netstat -ua",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"netstat -ua",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

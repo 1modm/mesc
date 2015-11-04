@@ -1,0 +1,66 @@
+{
+	"check":"activeconections_sockets_tcp",
+	"returns":"Active Internet connections TCP (List Sockets which are in Listening State)",
+	"help_result":"List Sockets listening TCP Ports.",
+	"command":"List Sockets listening TCP Ports.",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"netstat -lt",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"netstat -lt",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"netstat -lt",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"netstat -lt",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"netstat -lt",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}

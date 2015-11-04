@@ -1,0 +1,66 @@
+{
+	"check":"ifconfig",
+	"returns":"Status of the currently active interfaces",
+	"help_result":"Check ip addr and ip link",
+	"command":"Status of the currently active interfaces",
+	"type":"execute_cmd",
+	"information":"",
+	"recommendations":"",
+	"level":"",
+	"distribution": 
+	{
+		"all":
+		{
+			"cmd":"ifconfig -a",
+			"file":"",
+			"chk":""
+		},
+		"RedHat":
+		{
+			"cmd":"ifconfig -a",
+			"file":"",
+			"chk":""
+		},
+		"SuSE":
+		{
+			"cmd":"ifconfig -a",
+			"file":"",
+			"chk":""
+		},
+		"debian":
+		{
+			"cmd":"ifconfig -a",
+			"file":"",
+			"chk":""
+		},
+		"mandrake":
+		{
+			"cmd":"ifconfig -a",
+			"file":"",
+			"chk":""
+		}
+	},
+	"result": 
+	{ 
+		"checkresultok":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultwarning":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresultcritical":
+		{
+			"check_message":"",
+			"check_html_message":""
+		},
+		"checkresulterror":
+		{
+			"check_message":"Unable to execute the command",
+			"check_html_message":"Unable to execute the command"
+		}
+	}
+}
