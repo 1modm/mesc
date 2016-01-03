@@ -56,13 +56,37 @@ import json
 from . import config
 from .operations import execute_cmd, OS_dist, exists_read_file
 
-
 __all__ = [
     "auditor_info",
-    "fire"
+    "fire",
+    "sysinfo"
 ]
 
+#------------------------------------------------------------------------------
+def sysinfo(__host__, __user__, __passwd__, __port__, __jsonfile__, __subfolder__):
+    if (__subfolder__ == "include/serverinfo/common/"):
+        __file__ = __subfolder__+__jsonfile__
+    else:
+        __file__ = __subfolder__+"/"+__jsonfile__
 
+    with open(__file__) as data_file:
+        data = json.loads(data_file.read())
+        __help_result__ = data["help_result"]
+        __command__ = data["command"]
+        __distribution__, __env_shell__ = OS_dist(__host__, __user__, __passwd__, __port__)
+        __osreport__ = {}
+        __cmd__ = data["distribution"][__distribution__]["cmd"]
+        __type__ = data["type"]
+
+        if __type__ == "execute_cmd":
+            __output__, __command_check__ = execute_cmd(__cmd__, __env_shell__, __host__, __user__, __passwd__, __port__)
+
+        if __type__ == "os_information":
+            __output__, __command_check__ = execute_cmd(__cmd__, __env_shell__, __host__, __user__, __passwd__, __port__)
+            __information__ = data["information"]
+            __osreport__ = {__information__: __output__}
+
+    return (__osreport__)
 
 #------------------------------------------------------------------------------
 def fire(__host__, __user__, __passwd__, __port__, __jsonfile__, __subfolder__):
@@ -80,36 +104,17 @@ def fire(__host__, __user__, __passwd__, __port__, __jsonfile__, __subfolder__):
         data = json.loads(data_file.read())
         __help_result__ = data["help_result"]
         __command__ = data["command"]
-        __distribution__ = OS_dist(__host__, __user__, __passwd__, __port__)
-        if (__distribution__ == "RedHat"):
-            __cmd__ = data["distribution"]["RedHat"]["cmd"]
-        elif (__distribution__ == "SuSE"):
-            __cmd__ = data["distribution"]["SuSE"]["cmd"]
-        elif (__distribution__ == "debian"):
-            __cmd__ = data["distribution"]["debian"]["cmd"]
-        elif (__distribution__ == "mandrake"):
-            __cmd__ = data["distribution"]["mandrake"]["cmd"]
-        else:
-            __cmd__ = data["distribution"]["all"]["cmd"]
+        __distribution__, __env_shell__ = OS_dist(__host__, __user__, __passwd__, __port__)
 
+        __cmd__ = data["distribution"][__distribution__]["cmd"]
         __type__ = data["type"]
 
         if __type__ == "execute_cmd":
-            __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+            __output__, __command_check__ = execute_cmd(__cmd__, __env_shell__, __host__, __user__, __passwd__, __port__)
 
         if __type__ == "exists_read_file":
-            if (__distribution__ == "RedHat"):
-                __file__ = data["distribution"]["RedHat"]["file"]
-            elif (__distribution__ == "SuSE"):
-                __file__ = data["distribution"]["SuSE"]["file"]
-            elif (__distribution__ == "debian"):
-                __file__ = data["distribution"]["debian"]["file"]
-            elif (__distribution__ == "mandrake"):
-                __file__ = data["distribution"]["mandrake"]["file"]
-            else:
-                __file__ = data["distribution"]["all"]["file"]
-
-            __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__, __passwd__, __port__)
+            __file__ = data["distribution"][__distribution__]["file"]
+            __cmd_check__, __output__ = exists_read_file(__file__, __env_shell__, __host__, __user__, __passwd__, __port__)
         
             if (__cmd_check__):
                 __command_check__ = config.CHECKRESULTOK
@@ -120,12 +125,14 @@ def fire(__host__, __user__, __passwd__, __port__, __jsonfile__, __subfolder__):
 
         if __type__ == "os_information":
             __osreport__ = {}
-            __output_os__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+            __output__, __command_check__ = execute_cmd(__cmd__, __env_shell__, __host__, __user__, __passwd__, __port__)
             __information__ = data["information"]
-            __osreport__ = {__information__: __output_os__}
-            __output__ = __osreport__[__information__]
+            __osreport__ = {__information__: __output__}
 
         if (data["check"] == "free"):
+            __check_message__ = ''
+            __check_html_message__ = ''
+
             if __command_check__ == config.CHECKRESULTOK:
                 pattern = re.compile(r'\s+')
                 sentence = re.sub(pattern, ' ', __output__)
@@ -145,8 +152,6 @@ def fire(__host__, __user__, __passwd__, __port__, __jsonfile__, __subfolder__):
                     percentage_swap_used = (int(swap_used) * 100) / (int(swap_total))
                 else:
                     percentage_swap_used = 0
-                __check_message__ = ''
-                __check_html_message__ = ''
                 if (percentage_used < config.RESULTOKTHRESHOLD):
                     __check_message__ = 'RAM memory used: ' + str(percentage_used) +\
                      '%' + os.linesep

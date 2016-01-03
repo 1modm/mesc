@@ -70,7 +70,7 @@ import string
 import sys
 
 from . import config
-from .operations import execute_cmd, ip4_addresses
+from .operations import execute_cmd, ip4_addresses, OS_dist
 
 __all__ = [
     "ps_mem"
@@ -90,7 +90,8 @@ def ps_mem(__host__, __user__, __passwd__, __port__):
     __help_result__ += os.linesep
     __command__ = 'Memory allocated being used per program'
     __cmd__ = "ps -e -o rss=,pid=,comm="
-    __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__,
+    __distribution__, __env_shell__ = OS_dist(__host__, __user__, __passwd__, __port__)
+    __output__, __command_check__ = execute_cmd(__cmd__, __env_shell__, __host__, __user__,
                                                 __passwd__, __port__)
 
     if __command_check__ == config.CHECKRESULTOK:

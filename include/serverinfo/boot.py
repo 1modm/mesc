@@ -78,35 +78,16 @@ def fire(__host__, __user__, __passwd__, __port__, __jsonfile__, __subfolder__):
         data = json.loads(data_file.read())
         __help_result__ = data["help_result"]
         __command__ = data["command"]
-        __distribution__ = OS_dist(__host__, __user__, __passwd__, __port__)
+        __distribution__, __env_shell__ = OS_dist(__host__, __user__, __passwd__, __port__)
         __type__ = data["type"]
 
         if __type__ == "execute_cmd":
-            if (__distribution__ == "RedHat"):
-                __cmd__ = data["distribution"]["RedHat"]["cmd"]
-            elif (__distribution__ == "SuSE"):
-                __cmd__ = data["distribution"]["SuSE"]["cmd"]
-            elif (__distribution__ == "debian"):
-                __cmd__ = data["distribution"]["debian"]["cmd"]
-            elif (__distribution__ == "mandrake"):
-                __cmd__ = data["distribution"]["mandrake"]["cmd"]
-            else:
-                __cmd__ = data["distribution"]["all"]["cmd"]
-            __output__, __command_check__ = execute_cmd(__cmd__, __host__, __user__, __passwd__, __port__)
+            __cmd__ = data["distribution"][__distribution__]["cmd"]
+            __output__, __command_check__ = execute_cmd(__cmd__, __env_shell__, __host__, __user__, __passwd__, __port__)
 
         if __type__ == "exists_read_file":
-            if (__distribution__ == "RedHat"):
-                __file__ = data["distribution"]["RedHat"]["file"]
-            elif (__distribution__ == "SuSE"):
-                __file__ = data["distribution"]["SuSE"]["file"]
-            elif (__distribution__ == "debian"):
-                __file__ = data["distribution"]["debian"]["file"]
-            elif (__distribution__ == "mandrake"):
-                __file__ = data["distribution"]["mandrake"]["file"]
-            else:
-                __file__ = data["distribution"]["all"]["file"]
-
-            __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__, __passwd__, __port__)
+            __file__ = data["distribution"][__distribution__]["file"]
+            __cmd_check__, __output__ = exists_read_file(__file__, __env_shell__, __host__, __user__, __passwd__, __port__)
         
             if (__cmd_check__):
                 __command_check__ = config.CHECKRESULTOK
@@ -116,30 +97,16 @@ def fire(__host__, __user__, __passwd__, __port__, __jsonfile__, __subfolder__):
                 __cmd__ = __file__
 
         if __type__ == "check_file_exact":
-            if (__distribution__ == "RedHat"):
-                __file__ = data["distribution"]["RedHat"]["file"]
-                __check__ = [data["distribution"]["RedHat"]["chk"]]
-            elif (__distribution__ == "SuSE"):
-                __file__ = data["distribution"]["SuSE"]["file"]
-                __check__ = [data["distribution"]["SuSE"]["chk"]]
-            elif (__distribution__ == "debian"):
-                __file__ = data["distribution"]["debian"]["file"]
-                __check__ = [data["distribution"]["all"]["chk"]]
-            elif (__distribution__ == "mandrake"):
-                __file__ = data["distribution"]["mandrake"]["file"]
-                __check__ = [data["distribution"]["mandrake"]["chk"]]
-            else:
-                __file__ = data["distribution"]["all"]["file"]
-                __check__ = [data["distribution"]["all"]["chk"]]
-
-            __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__, __passwd__, __port__)
+            __file__ = data["distribution"][__distribution__]["file"]
+            __check__ = [data["distribution"][__distribution__]["chk"]]
+            __cmd_check__, __output__ = exists_read_file(__file__, __env_shell__, __host__, __user__, __passwd__, __port__)
             
             if not __cmd_check__:
                 __command_check__ = config.CHECKRESULTERROR
                 __cmd__ = __file__
             else:
                 __command_check__, __line__, __linehtml__, __check_count__ =\
-                check_file_exact(__file__, __check__, __host__, __user__, __passwd__,
+                check_file_exact(__file__, __check__, __env_shell__, __host__, __user__, __passwd__,
                                  __port__)
                 if (data["level"] != ""):
                     __level__ = int(data["level"])  
@@ -156,30 +123,16 @@ def fire(__host__, __user__, __passwd__, __port__, __jsonfile__, __subfolder__):
                 __cmd__ = __file__
 
         if __type__ == "check_file_exact_load":
-            if (__distribution__ == "RedHat"):
-                __file__ = data["distribution"]["RedHat"]["file"]
-                __check__ = [data["distribution"]["RedHat"]["chk"]]
-            elif (__distribution__ == "SuSE"):
-                __file__ = data["distribution"]["SuSE"]["file"]
-                __check__ = [data["distribution"]["SuSE"]["chk"]]
-            elif (__distribution__ == "debian"):
-                __file__ = data["distribution"]["debian"]["file"]
-                __check__ = [data["distribution"]["all"]["chk"]]
-            elif (__distribution__ == "mandrake"):
-                __file__ = data["distribution"]["mandrake"]["file"]
-                __check__ = [data["distribution"]["mandrake"]["chk"]]
-            else:
-                __file__ = data["distribution"]["all"]["file"]
-                __check__ = [data["distribution"]["all"]["chk"]]
-
-            __cmd_check__, __output__ = exists_read_file(__file__, __host__, __user__, __passwd__, __port__)
+            __file__ = data["distribution"][__distribution__]["file"]
+            __check__ = [data["distribution"][__distribution__]["chk"]]
+            __cmd_check__, __output__ = exists_read_file(__file__, __env_shell__, __host__, __user__, __passwd__, __port__)
             
             if not __cmd_check__:
                 __command_check__ = config.CHECKRESULTERROR
                 __cmd__ = __file__
             else:
                 __command_check__, __line__, __linehtml__, __check_count__ =\
-                check_file_exact(__file__, __check__, __host__, __user__, __passwd__,
+                check_file_exact(__file__, __check__, __env_shell__, __host__, __user__, __passwd__,
                                  __port__)
                 __cmd__ = __file__
                 

@@ -18,13 +18,13 @@
 		"RedHat":
 		{
 			"cmd":"",
-			"file":"/boot/grub/grub.cfg",
+			"file":"/boot/grub2/grub.cfg",
 			"chk":""
 		},
 		"SuSE":
 		{
 			"cmd":"",
-			"file":"/boot/grub/grub.cfg",
+			"file":"/boot/grub2/grub.cfg",
 			"chk":""
 		},
 		"debian":
@@ -36,7 +36,7 @@
 		"mandrake":
 		{
 			"cmd":"",
-			"file":"/boot/grub/grub.cfg",
+			"file":"/boot/grub2/grub.cfg",
 			"chk":""
 		}
 	},

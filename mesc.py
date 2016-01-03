@@ -263,6 +263,7 @@ def main():
     table4 = []
     table5 = []
     table6 = []
+    table7 = []
 
     total = 0
     totalsok = 0
@@ -370,6 +371,25 @@ def main():
     print((colored(os_output + os.linesep, 'white')))
 
 ################################################################################
+    # System Information
+    sysreport = dict()
+    folder = "include/serverinfo/common/"
+    for jsonfile in sorted(os.listdir(folder)):
+        if jsonfile.endswith(".json") and ("_os_" in jsonfile):
+            osreport = common.sysinfo(results.host, fabric_user,
+                                        fabric_passwd, fabric_port, jsonfile, folder)
+            sysreport.update(osreport)
+
+    __output_sysinfo__ = ""
+    
+    for keys,values in sysreport.items():
+        __output_sysinfo__ += ' - ' + keys + ": " + values + os.linesep
+
+    print_title_console('Targeted System', "--------------", table7)
+    print((tabulate(table7, tablefmt="plain")))  # print out the results
+    print((colored(str(__output_sysinfo__) + os.linesep, 'white')))
+
+################################################################################
 
     if results.general or results.all:
         href = 'general'
@@ -380,7 +400,7 @@ def main():
                      results.txt_file, html_file, outputdirectory,
                      table1)
 
-        # System Information
+        # Common System Information
         folder = "include/serverinfo/common/"
         for jsonfile in sorted(os.listdir(folder)):
 

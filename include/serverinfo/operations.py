@@ -61,7 +61,7 @@ from netifaces import interfaces
 from fabric.api import settings
 from fabric.operations import run
 from fabric.contrib.files import exists, contains
-
+from fabric.api import env
 
 __all__ = [
     "execute_cmd",
@@ -114,16 +114,12 @@ def ip4_addresses():
 
 #------------------------------------------------------------------------------
 
-def execute_cmd(cmd, host, user_fabric, passwd_fabric, port_fabric):
+def execute_cmd(cmd, env_shell, host, user_fabric, passwd_fabric, port_fabric):
     if host == 'localhost':
-        #print "%s local IP" % host
         __cmd_local__ = True
     elif host not in ip4_addresses():
-        #print "%s NOT local IP --> SSH" % host
-        #__status__, __output_cmd__ = execute(do_something(cmd), hosts=[host])
         __cmd_local__ = False
     else:
-        #print "%s local IP" % host
         __cmd_local__ = True
     __output_cmd__ = cmd
     __command_check__ = config.CHECKRESULTERROR
@@ -145,7 +141,7 @@ def execute_cmd(cmd, host, user_fabric, passwd_fabric, port_fabric):
         else:
             __command_check__ = config.CHECKRESULTERROR
     elif __cmd_local__ is False:
-        with settings(host_string=host, user=user_fabric,
+        with settings(host_string=host, shell = env_shell, user=user_fabric,
                                             password=passwd_fabric,
                                             port=port_fabric):
             try:
@@ -162,7 +158,7 @@ def execute_cmd(cmd, host, user_fabric, passwd_fabric, port_fabric):
 #------------------------------------------------------------------------------
 
 
-def check_file(filecheck, check, host, user_fabric, passwd_fabric, port_fabric):
+def check_file(filecheck, check, env_shell, host, user_fabric, passwd_fabric, port_fabric):
 
     if host == 'localhost':
         __cmd_local__ = True
@@ -196,7 +192,7 @@ def check_file(filecheck, check, host, user_fabric, passwd_fabric, port_fabric):
         else:
             __command_check__ = config.CHECKRESULTWARNING
     elif __cmd_local__ is False:
-        with settings(host_string=host, user=user_fabric,
+        with settings(host_string=host, shell = env_shell, user=user_fabric,
                       password=passwd_fabric, port=port_fabric):
             try:
                 if (exists(__file__, use_sudo=False, verbose=False)):
@@ -226,7 +222,7 @@ def exact_Match(phrase, word):
     return bool(res)
 
 
-def check_file_exact(filecheck, check, host, user_fabric, passwd_fabric,
+def check_file_exact(filecheck, check, env_shell, host, user_fabric, passwd_fabric,
                      port_fabric):
 
     if host == 'localhost':
@@ -261,7 +257,7 @@ def check_file_exact(filecheck, check, host, user_fabric, passwd_fabric,
         else:
             __command_check__ = config.CHECKRESULTWARNING
     elif __cmd_local__ is False:
-        with settings(host_string=host, user=user_fabric,
+        with settings(host_string=host, shell = env_shell, user=user_fabric,
                       password=passwd_fabric, port=port_fabric):
             try:
                 if (exists(__file__, use_sudo=False, verbose=False)):
@@ -285,7 +281,7 @@ def check_file_exact(filecheck, check, host, user_fabric, passwd_fabric,
 #------------------------------------------------------------------------------
 
 
-def exists_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
+def exists_file(filecheck, env_shell, host, user_fabric, passwd_fabric, port_fabric):
     if host == 'localhost':
         __cmd_local__ = True
     elif host not in ip4_addresses():
@@ -301,7 +297,7 @@ def exists_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
         else:
             __command_check__ = False
     elif __cmd_local__ is False:
-        with settings(host_string=host, user=user_fabric,
+        with settings(host_string=host, shell = env_shell, user=user_fabric,
              password=passwd_fabric, port=port_fabric):
             try:
                 if (exists(__file__, use_sudo=False, verbose=False)):
@@ -316,7 +312,7 @@ def exists_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
 #------------------------------------------------------------------------------
 
 
-def exists_read_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
+def exists_read_file(filecheck, env_shell, host, user_fabric, passwd_fabric, port_fabric):
     if host == 'localhost':
         __cmd_local__ = True
     elif host not in ip4_addresses():
@@ -335,7 +331,7 @@ def exists_read_file(filecheck, host, user_fabric, passwd_fabric, port_fabric):
         else:
             __command_check__ = False
     elif __cmd_local__ is False:
-        with settings(host_string=host, user=user_fabric,
+        with settings(host_string=host, shell = env_shell, user=user_fabric,
              password=passwd_fabric, port=port_fabric):
             try:
                 if (exists(__file__, use_sudo=False, verbose=False)):
@@ -358,18 +354,31 @@ def OS_dist(host, user_fabric, passwd_fabric, port_fabric):
     SuSE = '/etc/SuSE-release'
     mandrake = '/etc/mandrake-release'
     debian = '/etc/debian_version'
+    FreeBSD = '/etc/pkg/FreeBSD.conf'
+    openBSD = '/etc/pkg.conf'
+    uname = 'uname'
 
-    if (exists_file(RedHat, host, user_fabric, passwd_fabric, port_fabric)):
+    env.shell = "/bin/bash -l -c" # default
+    if (exists_file(RedHat, env.shell, host, user_fabric, passwd_fabric, port_fabric)):
         __dist__ = "RedHat"
-    elif (exists_file(SuSE, host, user_fabric, passwd_fabric, port_fabric)):
+    elif (exists_file(SuSE, env.shell, host, user_fabric, passwd_fabric, port_fabric)):
         __dist__ = "SuSE"
-    elif (exists_file(debian, host, user_fabric, passwd_fabric, port_fabric)):
+    elif (exists_file(debian, env.shell, host, user_fabric, passwd_fabric, port_fabric)):
         __dist__ = "debian"
-    elif (exists_file(mandrake, host, user_fabric, passwd_fabric, port_fabric)):
+    elif (exists_file(mandrake, env.shell, host, user_fabric, passwd_fabric, port_fabric)):
         __dist__ = "mandrake"
     else:
-        __dist__ = "debian"
+        env.shell = "/usr/local/bin/bash -l -c" # BSD environments
+        __platform__, __command_check__ = execute_cmd(uname, env.shell, host, user_fabric, passwd_fabric, port_fabric)
+        if __platform__ in ('NetBSD', 'OpenBSD', 'QNX', 'FreeBSD'):
+            __dist__ = "BSD"
+        elif (exists_file(FreeBSD, env.shell, host, user_fabric, passwd_fabric, port_fabric)):
+            __dist__ = "BSD"
+        elif (exists_file(openBSD, env.shell, host, user_fabric, passwd_fabric, port_fabric)):
+            __dist__ = "BSD"
+        else:
+            __dist__ = "all"
 
-    return (__dist__)
+    return (__dist__, env.shell)
 
 #------------------------------------------------------------------------------

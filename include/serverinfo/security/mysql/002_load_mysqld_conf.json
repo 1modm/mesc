@@ -30,7 +30,7 @@
 		"debian":
 		{
 			"cmd":"",
-			"file":"/etc/mysql/mysql.conf.d/mysqld.cnf",
+			"file":"/etc/mysql/conf.d/mysqld.cnf",
 			"chk":""
 		},
 		"mandrake":
